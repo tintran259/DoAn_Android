@@ -1,0 +1,1 @@
+export { default as TYPE_ACTION } from './TYPE_ACTION'

@@ -7,14 +7,14 @@
  */
 
 import React from 'react';
-import { View, Text } from 'react-native';
-
+import { Provider } from 'react-redux'
 import AppRouter from './AppRouter'
+import Store from './Store'
 
 export default function App() {
   return (
-    <>
+    <Provider store={Store}>
       <AppRouter />
-    </>
+    </Provider>
   );
 }

@@ -1,0 +1,1 @@
+export { default as StylesHomeScreen } from './HomeStyle'
