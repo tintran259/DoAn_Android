@@ -118,6 +118,15 @@ const StylesHomeScreen = StyleSheet.create({
    dateLabel: {
       fontSize: hp("1.5%"),
       color: "#636e72"
+   },
+   EmptyView: {
+      width: "100%",
+      height: 200,
+      justifyContent: "center",
+      alignItems: "center",
+   },
+   textEmpty: {
+      color: "#636e72"
    }
 })
 

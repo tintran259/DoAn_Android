@@ -12,7 +12,8 @@ const StylesProfile = StyleSheet.create({
       height: 40,
       backgroundColor: "#E33B3B",
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
+      flexDirection: "row"
    },
    titleHeader: {
       color: "#fff",
@@ -56,5 +57,54 @@ const StylesProfile = StyleSheet.create({
       color: "#2d3436",
       fontSize: hp("2.2%"),
    },
+   btnDots: {
+      width: 50,
+      height: 40,
+      justifyContent: "center",
+      alignItems: "center",
+   },
+   viewBtnDots: {
+      position: "absolute",
+      top: 0,
+      right: "2%",
+   },
+   Modal: {
+      width: "100%",
+      height: 190,
+      backgroundColor: "#fff",
+      borderTopLeftRadius: 15,
+      borderTopRightRadius: 15
+   },
+   headerModal: {
+      width: "100%",
+      height: 40,
+      justifyContent: "center",
+      alignItems: "center"
+   },
+   labelHeaderModal: {
+      fontWeight: "bold",
+      color: "#2d3436"
+   },
+   controlModal: {
+      width: "100%",
+      paddingHorizontal: 20
+   },
+   btnModal: {
+      width: "100%",
+      height: 40,
+      marginBottom: 5,
+      paddingHorizontal: 20,
+      borderBottomWidth: 0.5,
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "row",
+      borderBottomColor: "#bdc3c7"
+   },
+   labelBtnModal: {
+      color: "#2d3436"
+   },
+   iconModal: {
+      marginRight: 10
+   }
 })
 export default StylesProfile

@@ -109,6 +109,38 @@ const StylesLoginScreen = StyleSheet.create({
    },
    textLine: {
       color: "#95a5a6"
+   },
+   QRcode: {
+      position: "absolute",
+      top: 0,
+      left: 0
+   },
+   headerQR: {
+      width: "100%",
+      height: 40,
+      backgroundColor: "#1abc9c00",
+   },
+   // cameraQR: {
+   //    width: "100%",
+   //    height: hp("50%")
+   // },
+   markerQR: {
+      borderColor: "#fff",
+      width: wp("60%"),
+      height: hp("35%")
+   },
+   topContentQR: {
+      width: "100%",
+      height: 40,
+      backgroundColor: "#2d3436",
+      alignItems: "flex-end",
+      justifyContent: "center"
+   },
+   btnCloseQR: {
+      width: 50,
+      height: 40,
+      justifyContent: "center",
+      alignItems: "center"
    }
 })
 

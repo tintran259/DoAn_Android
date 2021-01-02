@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
-import FastImage from 'react-native-fast-image'
+
 export default function SplashScreen() {
 
    return (

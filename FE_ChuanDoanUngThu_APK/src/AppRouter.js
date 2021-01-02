@@ -26,7 +26,7 @@ export default function AppRouter() {
             {
                isSplash ?
                   <Stack.Screen name="Splash" component={SplashScreen} /> :
-                  isLogin ?
+                  !isLogin ?
                      <Stack.Screen name="StackAuth" component={StackAuth} /> :
                      <Stack.Screen name="Tab" component={TabApp} />
 

@@ -8,6 +8,10 @@ target 'FE_ChuanDoanUngThu_APK' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
+  pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
+
   target 'FE_ChuanDoanUngThu_APKTests' do
     inherit! :complete
     # Pods for testing
