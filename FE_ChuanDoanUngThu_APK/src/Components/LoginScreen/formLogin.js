@@ -6,7 +6,13 @@ import { useNavigation } from '@react-navigation/native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import IconAntd from 'react-native-vector-icons/AntDesign'
 
-export default function FormLogin() {
+export default function FormLogin({
+   formLogin,
+   setFormLogin,
+   isOnPressLogin,
+   setIsOnPressLogin,
+   handleLoginSuccess,
+}) {
    const [isShowScanQR, setIsShowScanQR] = useState(false)
    const navigation = useNavigation()
    const onSuccess = e => {
@@ -17,6 +23,7 @@ export default function FormLogin() {
    };
 
    const handleLogin = () => {
+      handleLoginSuccess()
    }
    const handleRegister = () => {
       navigation.navigate('Register')
@@ -27,6 +34,10 @@ export default function FormLogin() {
    const handleHideScanQR = () => {
       setIsShowScanQR(false)
    }
+   const handleValidateUsername = (e) => {
+      const value = e.nativeEvent.text
+      console.log("value:", value);
+   }
    return (
       <>
          <View style={StylesLoginScreen.formLogin}>
@@ -34,16 +45,34 @@ export default function FormLogin() {
                <Text style={StylesLoginScreen.labelForm}>Username</Text>
                <TextInput
                   placeholder="Username ..."
-                  style={StylesLoginScreen.inputForm}
+                  style={[StylesLoginScreen.inputForm, formLogin.username === "" && isOnPressLogin ? { backgroundColor: "#fff", borderColor: "#e74c3c" } : ""]}
+                  value={formLogin.username}
+                  onChangeText={text => setFormLogin({ ...formLogin, username: text })}
+                  onEndEditing={e => handleValidateUsername(e)}
                ></TextInput>
+               {
+                  formLogin.username === "" && isOnPressLogin ?
+                     <Text style={StylesLoginScreen.validate}>Enter username please !</Text>
+                     :
+                     <Text style={{ display: "none" }}></Text>
+               }
             </View>
             <View style={StylesLoginScreen.formPassword}>
                <Text style={StylesLoginScreen.labelForm}>Password </Text>
                <TextInput
                   placeholder="Password ..."
                   secureTextEntry={true}
-                  style={StylesLoginScreen.inputForm}>
+                  style={[StylesLoginScreen.inputForm, formLogin.password === "" && isOnPressLogin ? { backgroundColor: "#fff", borderColor: "#e74c3c" } : ""]}
+                  value={formLogin.password}
+                  onChangeText={text => setFormLogin({ ...formLogin, password: text })}
+               >
                </TextInput>
+               {
+                  formLogin.password === "" && isOnPressLogin ?
+                     <Text style={StylesLoginScreen.validate}>Enter password please !</Text>
+                     :
+                     <Text style={{ display: "none" }}></Text>
+               }
             </View>
             <View style={StylesLoginScreen.controlForm}>
                <View style={StylesLoginScreen.formBtnLogin}>

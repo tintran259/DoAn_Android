@@ -141,6 +141,55 @@ const StylesLoginScreen = StyleSheet.create({
       height: 40,
       justifyContent: "center",
       alignItems: "center"
+   },
+   validate: {
+      position: "absolute",
+      top: "100%",
+      right: 0,
+      color: "#e74c3c",
+      fontWeight: "bold",
+      fontSize: 13
+   },
+   toastFail: {
+      width: 200,
+      height: 60,
+      backgroundColor: "#e74c3c",
+      borderColor: "#FFF",
+      position: "absolute",
+      borderWidth: 1,
+      right: 0,
+      top: "5%",
+      borderTopLeftRadius: 10,
+      borderBottomLeftRadius: 10,
+      flexDirection: "row",
+      justifyContent: "space-around",
+      alignItems: "center"
+   },
+   toastSccess: {
+      width: 200,
+      height: 60,
+      backgroundColor: "#2ecc71",
+      borderColor: "#FFF",
+      borderWidth: 1,
+      position: "absolute",
+      right: 0,
+      top: "5%",
+      borderTopLeftRadius: 10,
+      borderBottomLeftRadius: 10,
+      flexDirection: "row",
+      justifyContent: "space-around",
+      alignItems: "center"
+   },
+   iconFail: {
+      fontSize: 20,
+      color: "#fff",
+      marginLeft: 10
+   },
+   textFail: {
+      width: 150,
+      textAlign: "center",
+      color: "#fff",
+      fontWeight: "bold"
    }
 })
 

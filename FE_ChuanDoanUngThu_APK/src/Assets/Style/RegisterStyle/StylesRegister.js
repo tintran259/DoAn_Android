@@ -52,8 +52,7 @@ const StylesRegister = StyleSheet.create({
    formRegister: {
       padding: 10,
       width: "100%",
-      marginBottom: 65,
-      marginTop: "3%"
+      marginTop: "3%",
    },
    labelFormItem: {
       fontSize: hp("2.25%"),
@@ -80,13 +79,13 @@ const StylesRegister = StyleSheet.create({
       paddingHorizontal: 20
    },
    formItem: {
-      marginBottom: 10
+      marginBottom: hp("3%")
    },
    formItemRow: {
       flexDirection: "row",
       justifyContent: "space-between",
       width: "100%",
-      marginBottom: 10
+      marginBottom: hp("3%")
    },
    formRowLeft: {
       width: "70%",
@@ -128,6 +127,14 @@ const StylesRegister = StyleSheet.create({
       height: "100%",
       justifyContent: "center",
       alignItems: "center"
+   },
+   textValidate: {
+      fontSize: 13,
+      fontWeight: "bold",
+      position: "absolute",
+      top: "100%",
+      right: 0,
+      color: "#e74c3c"
    }
 })
 

@@ -19,17 +19,16 @@ export default function AppRouter() {
          dispatch(actHideSplashScreen())
       }, 2000)
    }, [])
-   const isLogin = false;
+   const token = useSelector(state => state.User.ACCESS_TOKEN);
    return (
       <NavigationContainer>
          <Stack.Navigator screenOptions={{ headerShown: false }} >
             {
                isSplash ?
                   <Stack.Screen name="Splash" component={SplashScreen} /> :
-                  !isLogin ?
-                     <Stack.Screen name="StackAuth" component={StackAuth} /> :
-                     <Stack.Screen name="Tab" component={TabApp} />
-
+                  token !== null ?
+                     <Stack.Screen name="Tab" component={TabApp} /> :
+                     <Stack.Screen name="StackAuth" component={StackAuth} />
             }
          </Stack.Navigator>
       </NavigationContainer>
