@@ -5,6 +5,7 @@ import HomeScreen from '../../Screens/Home_Screen'
 import ProfileScreen from '../../Screens/Profile_Screen'
 import TestCancer from '../../Screens/TestCancer_Screen'
 import StackHome from '../Stack/StackHome'
+import StackProfile from '../Stack/StackProfile'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import IconFont from 'react-native-vector-icons/FontAwesome5'
 const Tab = createBottomTabNavigator();
@@ -50,8 +51,8 @@ export default function TabApp() {
             }}
          />
          <Tab.Screen
-            name="Settings"
-            component={ProfileScreen}
+            name="StackProfile"
+            component={StackProfile}
             options={{
                tabBarLabel: 'Profile',
                tabBarIcon: ({ color, size }) => (

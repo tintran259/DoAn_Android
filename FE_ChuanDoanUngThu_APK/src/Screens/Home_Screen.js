@@ -13,7 +13,7 @@ export default function HomeScreen() {
    const navigation = useNavigation()
 
    const moveProfileScreen = () => {
-      navigation.navigate('Profile')
+      navigation.navigate('StackProfile')
    }
    const moveHistoryScreen = () => {
       navigation.navigate('History')

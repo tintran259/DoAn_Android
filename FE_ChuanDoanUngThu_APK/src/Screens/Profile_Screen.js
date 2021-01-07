@@ -1,61 +1,114 @@
 import React, { useState } from 'react'
-import { View, Text, StatusBar, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, StatusBar, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { StylesProfile } from '../Assets/Style/ProfileStyle'
 import IconEntyno from 'react-native-vector-icons/Entypo'
 import IconAntd from 'react-native-vector-icons/AntDesign'
-import { InforProfileUser } from '../Components/ProfileScreen'
 import Modal from 'react-native-modal'
-
+import { useNavigation } from '@react-navigation/native'
+import { TextInput } from 'react-native-gesture-handler'
 export default function ProfileScreen() {
-   const [isShowModal, setIsShowModal] = useState(false)
-   const handleShowModal = () => {
-      setIsShowModal(true)
-   }
+   const navigation = useNavigation()
+   const [isShowModal, setIsShowModal] = useState(true)
    const handleHideModal = () => {
       setIsShowModal(false)
    }
+   const moveEditProfile = () => {
+      navigation.navigate('EditProfile')
+   }
+   const moveChangePassword = () => {
+      setIsShowModal(true)
+      // navigation.navigate('ChangePass')
+   }
+   const checkPasswordToChange = () => {
+
+   }
+
 
    return (
-      <View style={StylesProfile.container}>
+      <ScrollView style={StylesProfile.container}>
          <StatusBar barStyle="light-content" translucent={true} backgroundColor="#E33B3B" />
          <View style={StylesProfile.header}>
-            <Text style={StylesProfile.titleHeader}>Cá nhân</Text>
-            <View style={StylesProfile.viewBtnDots}>
-               <TouchableOpacity style={StylesProfile.btnDots} onPress={handleShowModal}>
-                  <IconEntyno name="dots-three-vertical" size={17} color="#000" />
-               </TouchableOpacity>
-            </View>
+            <Text style={StylesProfile.titleHeader}>Trang cá nhân</Text>
          </View>
-         <ScrollView style={StylesProfile.body}>
-            <InforProfileUser />
-         </ScrollView>
+         <View style={StylesProfile.body}>
+            <TouchableOpacity style={StylesProfile.itemInfor} onPress={moveEditProfile}>
+               <View style={StylesProfile.ViewAvatar}>
+                  <Image style={StylesProfile.avatarUser} source={{ uri: "https://lh3.googleusercontent.com/proxy/QdxzU8bMRhl1ksOzKQ4Pj1WHzJvfBDVk13KcI7kHZO56X-c3Igh9VISdsPSRM1dIGdVA0H5fz0cYoJAPo1LN8WlJKNYP_fSffEqfZ5wyPBq0hK4EtFp0jHsXFTCIC3bXDmgHiw" }} />
+               </View>
+               <View style={StylesProfile.viewName}>
+                  <Text style={StylesProfile.textLabel}>Nguyễn Thanh Hào</Text>
+                  <Text style={StylesProfile.textSetting}>Thông tin tài khoản, cài đặt</Text>
+               </View>
+               <IconAntd name="right" size={15} />
+            </TouchableOpacity>
+            <TouchableOpacity style={StylesProfile.item}>
+               <Image style={StylesProfile.icon} source={require('../Assets/Image/history.png')} />
+               <Text style={StylesProfile.titleText}>Lịch sử hoạt động</Text>
+               <IconAntd name="right" size={13} style={StylesProfile.iconRight} />
+            </TouchableOpacity>
+            <TouchableOpacity style={StylesProfile.item}>
+               <Image style={StylesProfile.icon} source={require('../Assets/Image/card.png')} />
+               <Text style={StylesProfile.titleText}>Thông tin thanh toán</Text>
+               <IconAntd name="right" size={13} style={StylesProfile.iconRight} />
+            </TouchableOpacity>
+
+
+         </View>
+         <View style={StylesProfile.space}></View>
+         <View style={StylesProfile.accoutSetting}>
+            <Text style={StylesProfile.titleaccout} >Thông tin tài khoản</Text>
+            <TouchableOpacity style={StylesProfile.item} onPress={moveChangePassword}>
+               <Image style={StylesProfile.icon} source={require('../Assets/Image/padlock.png')} />
+               <Text style={StylesProfile.titleText}>Thay đổi mật khẩu</Text>
+               <IconAntd name="right" size={13} style={StylesProfile.iconRight} />
+            </TouchableOpacity>
+         </View>
+         <View style={StylesProfile.space}></View>
+         <View style={StylesProfile.accoutSetting}>
+            <Text style={StylesProfile.titleaccout} >Về chúng tôi</Text>
+            <TouchableOpacity style={StylesProfile.item}>
+               <Image style={StylesProfile.icon} source={require('../Assets/Image/headphones.png')} />
+               <View style={StylesProfile.hotline}>
+                  <Text style={StylesProfile.titleText}>HOTLINE:</Text>
+                  <Text style={StylesProfile.phoneHotline}>0392340756</Text>
+               </View>
+               <IconAntd name="right" size={13} style={StylesProfile.iconRight} />
+            </TouchableOpacity>
+            <TouchableOpacity style={StylesProfile.item}>
+               <Image style={StylesProfile.icon} source={require('../Assets/Image/comment.png')} />
+               <Text style={StylesProfile.titleText}>Phản hồi</Text>
+               <IconAntd name="right" size={13} style={StylesProfile.iconRight} />
+            </TouchableOpacity>
+         </View>
+         <View style={StylesProfile.space}></View>
+         <View style={StylesProfile.ViewLogout}>
+            <TouchableOpacity style={StylesProfile.item}>
+               <Image style={StylesProfile.icon} source={require('../Assets/Image/log-out.png')} />
+               <Text style={StylesProfile.titleText}>Đăng xuất</Text>
+               {/* <IconAntd name="right" size={13} style={StylesProfile.iconRight} /> */}
+            </TouchableOpacity>
+         </View>
          <Modal
-            backdropTransitionOutTiming={700}
-            onBackdropPress={handleHideModal}
             isVisible={isShowModal}
-            style={{ alignItems: "center", justifyContent: "flex-end", margin: 0 }}
+            onBackdropPress={handleHideModal}
+            style={{ alignItems: "center" }}
          >
             <View style={StylesProfile.Modal}>
-               <View style={StylesProfile.headerModal}>
-                  <Text style={StylesProfile.labelHeaderModal}>Settings</Text>
-               </View>
-               <View style={StylesProfile.controlModal}>
-
-                  <TouchableOpacity style={StylesProfile.btnModal}>
-                     <IconAntd name="edit" style={StylesProfile.iconModal} />
-                     <Text style={StylesProfile.labelBtnModal}>Edit </Text>
+               <Text style={StylesProfile.titleModal}>Mời bạn nhập mật khẩu hiện tại </Text>
+               <TextInput
+                  secureTextEntry={true}
+                  style={StylesProfile.inputModal}
+               />
+               <View style={StylesProfile.footerModal}>
+                  <TouchableOpacity style={StylesProfile.btn} onPress={handleHideModal}>
+                     <Text>Thoát</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={StylesProfile.btnModal}>
-                     <IconAntd style={StylesProfile.iconModal} name="edit" />
-                     <Text style={StylesProfile.labelBtnModal}>Change password</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={StylesProfile.btnModal}>
-                     <IconAntd style={StylesProfile.iconModal} name="logout" />
-                     <Text style={StylesProfile.labelBtnModal}>Log out</Text>
+                  <TouchableOpacity style={StylesProfile.btn} onPress={checkPasswordToChange}>
+                     <Text style={StylesProfile.textBtnOk}>OK</Text>
                   </TouchableOpacity>
                </View>
             </View>
          </Modal>
-      </View>
+      </ScrollView>
    )
 }
