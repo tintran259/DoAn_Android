@@ -6,9 +6,6 @@ import { StylesProfile } from '../../Assets/Style/ProfileStyle'
 export default function InforProfileUser() {
    return (
       <>
-         <View style={StylesProfile.ViewAvatar}>
-            <Image style={StylesProfile.avatarUser} resizeMode="cover" source={require("../../Assets/Image/avatar.jpg")} />
-         </View>
          <View style={StylesProfile.bodyProfile}>
             <View style={StylesProfile.textInfor}>
                <Text style={StylesProfile.title}>Fullname :</Text>

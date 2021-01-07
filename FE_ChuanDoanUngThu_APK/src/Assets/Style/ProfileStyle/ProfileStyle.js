@@ -9,16 +9,18 @@ const StylesProfile = StyleSheet.create({
    },
    header: {
       width: '100%',
-      height: 40,
-      backgroundColor: "#E33B3B",
-      justifyContent: "center",
+      height: 100,
+      backgroundColor: "#fff",
+      // justifyContent: "center",
       alignItems: "center",
       flexDirection: "row"
    },
    titleHeader: {
-      color: "#fff",
-      fontSize: 15,
-      fontWeight: "bold"
+      color: "#000",
+      fontSize: 20,
+      fontWeight: 600,
+      fontFamily: "Rokkitt",
+      marginLeft: 20
    },
    body: {
       width: "100%",
@@ -51,7 +53,8 @@ const StylesProfile = StyleSheet.create({
       fontWeight: "bold",
       fontSize: hp("2.3%"),
       letterSpacing: 0.5,
-      marginRight: 5
+      marginRight: 5,
+      fontFamily: "Rokkitt",
    },
    labeText: {
       color: "#2d3436",

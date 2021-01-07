@@ -19,10 +19,10 @@ export default function ProfileScreen() {
       <View style={StylesProfile.container}>
          <StatusBar barStyle="light-content" translucent={true} backgroundColor="#E33B3B" />
          <View style={StylesProfile.header}>
-            <Text style={StylesProfile.titleHeader}>Profile</Text>
+            <Text style={StylesProfile.titleHeader}>Cá nhân</Text>
             <View style={StylesProfile.viewBtnDots}>
                <TouchableOpacity style={StylesProfile.btnDots} onPress={handleShowModal}>
-                  <IconEntyno name="dots-three-vertical" size={17} color="#fff" />
+                  <IconEntyno name="dots-three-vertical" size={17} color="#000" />
                </TouchableOpacity>
             </View>
          </View>

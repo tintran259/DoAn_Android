@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../../Screens/Home_Screen'
 import ProfileScreen from '../../Screens/Profile_Screen'
 import TestCancer from '../../Screens/TestCancer_Screen'
+import StackHome from '../Stack/StackHome'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import IconFont from 'react-native-vector-icons/FontAwesome5'
 const Tab = createBottomTabNavigator();
@@ -29,8 +30,8 @@ export default function TabApp() {
 
       >
          <Tab.Screen
-            name="Home"
-            component={HomeScreen}
+            name="StackHome"
+            component={StackHome}
             options={{
                tabBarLabel: 'Home',
                tabBarIcon: ({ color, size }) => (
