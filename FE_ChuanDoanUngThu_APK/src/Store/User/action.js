@@ -3,11 +3,12 @@ import { TYPE_ACTION } from '../../Contants'
 
 
 
-export const loginSuccess = (token) => {
+export const loginSuccess = (token, dataUser) => {
    return {
       type: TYPE_ACTION.LOGIN_SUCCESS,
       payload: {
-         token
+         token,
+         dataUser
       }
    }
 }
@@ -39,7 +40,11 @@ export const asyncLogin = ({ username, password }) => {
          console.log("response", response.data);
          if (response.data.status === 200) {
             const token = response.data.data[0].id;
-            dispatch(loginSuccess(token))
+            const dataUser = response.data.data[0];
+            console.log('====================================');
+            console.log("dataUser:", dataUser);
+            console.log('====================================');
+            dispatch(loginSuccess(token, dataUser))
             return {
                ok: true
             }

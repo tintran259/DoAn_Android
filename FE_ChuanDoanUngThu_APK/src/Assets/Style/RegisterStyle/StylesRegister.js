@@ -135,6 +135,15 @@ const StylesRegister = StyleSheet.create({
       top: "100%",
       right: 0,
       color: "#e74c3c"
+   },
+   btnBirthDay: {
+      width: "100%",
+      height: "100%",
+      justifyContent: "center",
+      alignItems: "center"
+   },
+   textBirthday: {
+      color: "#7f8c8d"
    }
 })
 

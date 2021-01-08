@@ -1,17 +1,18 @@
 import React from 'react'
 import { View, Text, StatusBar, ScrollView, Image, FlatList, StyleSheet } from 'react-native'
 import { StylesHomeScreen } from '../Assets/Style/HomeStyle'
-import { ListHistory, UserInfor } from '../Components/HomeScreen'
 import { useNavigation } from '@react-navigation/native'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import IconFontisto from 'react-native-vector-icons/Fontisto'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Swiper from "react-native-web-swiper";
+import { useSelector } from 'react-redux'
 
 export default function HomeScreen() {
 
    const navigation = useNavigation()
-
+   const dataUser = useSelector(state => state.User.dataUser);
+   console.log("dataUser Home:", dataUser);
    const moveProfileScreen = () => {
       navigation.navigate('StackProfile')
    }
@@ -33,8 +34,8 @@ export default function HomeScreen() {
                      <Image style={StylesHomeScreen.avatarImage} source={{ uri: "https://pbs.twimg.com/media/EcJgt56U4AEzvel.jpg" }} />
                   </View>
                   <View style={StylesHomeScreen.inforUser}>
-                     <Text style={StylesHomeScreen.textName}>Nguyen Thanh Hao</Text>
-                     <Text style={StylesHomeScreen.textAddress}>6/7dasdsa</Text>
+                     <Text style={StylesHomeScreen.textName}>{dataUser && dataUser.fullname}</Text>
+                     <Text style={StylesHomeScreen.textAddress}>{dataUser && dataUser.address}</Text>
                   </View>
                   <View style={StylesHomeScreen.viewBtn}>
                      <TouchableOpacity style={StylesHomeScreen.btnProfile} onPress={moveProfileScreen}>

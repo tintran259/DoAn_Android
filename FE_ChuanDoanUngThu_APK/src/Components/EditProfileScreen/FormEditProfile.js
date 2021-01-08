@@ -5,7 +5,11 @@ import { StylesEditProfile } from '../../Assets/Style/EditProfileStyle'
 import IconEntypo from 'react-native-vector-icons/Entypo'
 
 
-export default function FormEditProfile({ handleOpenGender }) {
+export default function FormEditProfile({
+   handleOpenGender,
+   userProfile,
+   setUseProfile
+}) {
 
 
    return (
@@ -22,6 +26,8 @@ export default function FormEditProfile({ handleOpenGender }) {
             <View style={StylesEditProfile.itemForm}>
                <Text style={StylesEditProfile.titleItem}>Họ và tên</Text>
                <TextInput
+                  value={userProfile.fullname}
+                  onChangeText={text => setUseProfile({ ...userProfile, fullname: text })}
                   placeholder="Họ và tên ..."
                   style={StylesEditProfile.inputEdit}
                />
@@ -29,6 +35,8 @@ export default function FormEditProfile({ handleOpenGender }) {
             <View style={StylesEditProfile.itemForm}>
                <Text style={StylesEditProfile.titleItem}>Địa chỉ</Text>
                <TextInput
+                  value={userProfile.address}
+                  onChangeText={text => setUseProfile({ ...userProfile, address: text })}
                   placeholder="Địa chỉ ..."
                   style={StylesEditProfile.inputEdit}
                />
@@ -36,7 +44,12 @@ export default function FormEditProfile({ handleOpenGender }) {
             <View style={StylesEditProfile.itemForm}>
                <Text style={StylesEditProfile.titleItem}>Giới tính</Text>
                <View style={StylesEditProfile.inputEdit}>
-                  <Text style={StylesEditProfile.textLabel}>Nam</Text>
+                  {
+                     userProfile.gender === "1" ?
+                        <Text style={StylesEditProfile.textLabel}>Nam</Text>
+                        :
+                        <Text style={StylesEditProfile.textLabel}>Nữ</Text>
+                  }
                </View>
                <View style={StylesEditProfile.btnDropdownView}>
                   <TouchableOpacity style={StylesEditProfile.btnDropdown} onPress={handleOpenGender}>
@@ -58,6 +71,28 @@ export default function FormEditProfile({ handleOpenGender }) {
             <View style={StylesEditProfile.itemForm}>
                <Text style={StylesEditProfile.titleItem}>Số điện thoại</Text>
                <TextInput
+                  value={userProfile.phone}
+                  onChangeText={text => setUseProfile({ ...userProfile, phone: text })}
+                  placeholder="Số điện thoại ..."
+                  keyboardType={'numeric'}
+                  style={StylesEditProfile.inputEdit}
+               />
+            </View>
+            <View style={StylesEditProfile.itemForm}>
+               <Text style={StylesEditProfile.titleItem}>Họ và tên người giám hộ</Text>
+               <TextInput
+                  value={userProfile.nameGuardian}
+                  onChangeText={text => setUseProfile({ ...userProfile, nameGuardian: text })}
+                  placeholder="Số điện thoại ..."
+                  keyboardType={'numeric'}
+                  style={StylesEditProfile.inputEdit}
+               />
+            </View>
+            <View style={StylesEditProfile.itemForm}>
+               <Text style={StylesEditProfile.titleItem}>Số điện thoại người giám hộ</Text>
+               <TextInput
+                  value={userProfile.phoneGuardian}
+                  onChangeText={text => setUseProfile({ ...userProfile, phoneGuardian: text })}
                   placeholder="Số điện thoại ..."
                   keyboardType={'numeric'}
                   style={StylesEditProfile.inputEdit}

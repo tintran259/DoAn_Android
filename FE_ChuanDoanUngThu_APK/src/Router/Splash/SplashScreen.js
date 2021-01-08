@@ -1,8 +1,12 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
-
+import { useDispatch } from 'react-redux'
+import { actHideSplashScreen } from '../../Store/App/action'
 export default function SplashScreen() {
-
+   const dispatch = useDispatch();
+   setTimeout(() => {
+      dispatch(actHideSplashScreen())
+   }, 3000)
    return (
       <View style={stylesSplash.container}>
          <Image style={stylesSplash.logo} source={require("../../Assets/Image/logo.png")} />

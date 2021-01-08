@@ -8,16 +8,46 @@ const StylesTestCancer = StyleSheet.create({
    },
    header: {
       width: '100%',
-      height: 40,
-      backgroundColor: "#E33B3B",
-      justifyContent: "center",
-      alignItems: "center",
-      flexDirection: "row"
+      height: 70,
    },
    titleHeader: {
-      color: "#fff",
-      fontSize: 15,
+      color: "#2d3436",
+      fontSize: 25,
+      fontWeight: "800",
+      marginTop: 20,
+      marginLeft: 20,
+      fontFamily: "Rokkitt"
+   },
+   btnSaveView: {
+      position: "absolute",
+      right: "2%",
+      top: 20,
+      width: 80,
+      height: 40,
+   },
+   btnSave: {
+      width: "100%",
+      height: "100%",
+      justifyContent: "center",
+      alignItems: "center"
+   },
+   textBtnSave: {
+      color: "#3498db",
+      fontWeight: "800"
+   },
+   body: {
+      marginHorizontal: 20
+   },
+   titleFormItem: {
       fontWeight: "bold"
    },
+   input: {
+      borderBottomWidth: 1,
+      borderBottomColor: "#bdc3c7",
+      color: "#2d3436"
+   },
+   itemForm: {
+      marginTop: 10,
+   }
 })
 export default StylesTestCancer

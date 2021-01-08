@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, Dimensions } from 'react-native'
-import { TextInput } from 'react-native-gesture-handler'
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import { StylesRegisterScreen } from '../../Assets/Style/RegisterStyle'
 import DropDownPicker from 'react-native-dropdown-picker';
-import { useState } from 'react';
+
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 export default function FormRegiser({
@@ -14,11 +15,32 @@ export default function FormRegiser({
 }) {
 
    const [checkRePassword, setCheckRePassword] = useState(false)
-
    const StylesValidate = {
       backgroundColor: "#FFF",
       borderColor: "#e74c3c"
    }
+   const [date, setDate] = useState(new Date(1598051730000));
+   const [mode, setMode] = useState('date');
+   const [show, setShow] = useState(false);
+
+   const onChange = (event, selectedDate) => {
+      const currentDate = selectedDate || date;
+      setShow(Platform.OS === 'ios');
+      setDate(currentDate);
+   };
+
+   const showMode = (currentMode) => {
+      setShow(true);
+      setMode(currentMode);
+   };
+
+   const showDatepicker = () => {
+      showMode('date');
+   };
+
+   const showTimepicker = () => {
+      showMode('time');
+   };
 
    const onBlurRe_passord = (e) => {
       const repassword = e.nativeEvent.text
@@ -31,8 +53,19 @@ export default function FormRegiser({
 
 
 
+
    return (
       <View style={StylesRegisterScreen.formRegister}>
+         {show && (
+            <DateTimePicker
+               testID="dateTimePicker"
+               value={date}
+               mode={mode}
+               is24Hour={true}
+               display="default"
+               onChange={onChange}
+            />
+         )}
          <View style={StylesRegisterScreen.formItem}>
             <Text style={StylesRegisterScreen.labelFormItem}>Fullname</Text>
             <TextInput
@@ -154,7 +187,7 @@ export default function FormRegiser({
             </View>
          </View>
          <View style={StylesRegisterScreen.formItemRow}>
-            <View style={StylesRegisterScreen.formRowLeft}>
+            <View style={[StylesRegisterScreen.formRowLeft, { width: "60%" }]}>
                <Text style={StylesRegisterScreen.labelFormItem}>Indentify</Text>
                <TextInput
                   keyboardType={'numeric'}
@@ -169,15 +202,13 @@ export default function FormRegiser({
                      <Text style={{ display: "none" }}></Text>
                }
             </View>
-            <View style={StylesRegisterScreen.formRowRight}>
-               <Text style={StylesRegisterScreen.labelFormItem}>Age</Text>
-               <TextInput
-                  keyboardType={'numeric'}
-                  style={[StylesRegisterScreen.inputRow, isHandleRegister && formRegister.age === "" ? StylesValidate : ""]}
-                  placeholder="Age .."
-                  value={formRegister.age}
-                  onChangeText={text => setFormRegister({ ...formRegister, age: text })}
-               />
+            <View style={[StylesRegisterScreen.formRowRight, { width: "38%" }]}>
+               <Text style={StylesRegisterScreen.labelFormItem}>Birthday</Text>
+               <View style={[StylesRegisterScreen.inputRow, isHandleRegister && formRegister.age === "" ? StylesValidate : ""]}>
+                  <TouchableOpacity style={StylesRegisterScreen.btnBirthDay} onPress={showDatepicker}>
+                     <Text style={StylesRegisterScreen.textBirthday}>Age</Text>
+                  </TouchableOpacity>
+               </View>
             </View>
          </View>
          <View style={StylesRegisterScreen.formItem}>
@@ -209,6 +240,7 @@ export default function FormRegiser({
                   <Text style={{ display: "none" }}></Text>
             }
          </View>
+
 
       </View>
    )

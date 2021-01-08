@@ -6,8 +6,11 @@ import IconAntd from 'react-native-vector-icons/AntDesign'
 import Modal from 'react-native-modal'
 import { useNavigation } from '@react-navigation/native'
 import { TextInput } from 'react-native-gesture-handler'
+import { useSelector } from 'react-redux'
 export default function ProfileScreen() {
    const navigation = useNavigation()
+   const dataUser = useSelector(state => state.User.dataUser);
+   console.log("dataUser Profile:", dataUser);
    const [isShowModal, setIsShowModal] = useState(true)
    const handleHideModal = () => {
       setIsShowModal(false)
@@ -36,7 +39,7 @@ export default function ProfileScreen() {
                   <Image style={StylesProfile.avatarUser} source={{ uri: "https://lh3.googleusercontent.com/proxy/QdxzU8bMRhl1ksOzKQ4Pj1WHzJvfBDVk13KcI7kHZO56X-c3Igh9VISdsPSRM1dIGdVA0H5fz0cYoJAPo1LN8WlJKNYP_fSffEqfZ5wyPBq0hK4EtFp0jHsXFTCIC3bXDmgHiw" }} />
                </View>
                <View style={StylesProfile.viewName}>
-                  <Text style={StylesProfile.textLabel}>Nguyễn Thanh Hào</Text>
+                  <Text style={StylesProfile.textLabel}>{dataUser && dataUser.fullname}</Text>
                   <Text style={StylesProfile.textSetting}>Thông tin tài khoản, cài đặt</Text>
                </View>
                <IconAntd name="right" size={15} />

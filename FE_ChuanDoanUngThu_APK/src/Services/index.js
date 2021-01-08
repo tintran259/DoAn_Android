@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://192.168.0.10:433/intelcons-api/v1/user/';
+const BASE_URL = 'http://10.10.65.101:433/intelcons-api/v1/user/';
 
 const api = {
    call() {
