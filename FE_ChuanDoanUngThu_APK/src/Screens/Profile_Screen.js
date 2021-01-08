@@ -6,24 +6,23 @@ import IconAntd from 'react-native-vector-icons/AntDesign'
 import Modal from 'react-native-modal'
 import { useNavigation } from '@react-navigation/native'
 import { TextInput } from 'react-native-gesture-handler'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../Store/User/action'
+
 export default function ProfileScreen() {
+   const dispatch = useDispatch()
    const navigation = useNavigation()
    const dataUser = useSelector(state => state.User.dataUser);
    console.log("dataUser Profile:", dataUser);
-   const [isShowModal, setIsShowModal] = useState(true)
-   const handleHideModal = () => {
-      setIsShowModal(false)
-   }
+
    const moveEditProfile = () => {
       navigation.navigate('EditProfile')
    }
    const moveChangePassword = () => {
-      setIsShowModal(true)
-      // navigation.navigate('ChangePass')
+      navigation.navigate('ChangePass')
    }
-   const checkPasswordToChange = () => {
-
+   const handleLogout = () => {
+      dispatch(logout())
    }
 
 
@@ -85,33 +84,12 @@ export default function ProfileScreen() {
          </View>
          <View style={StylesProfile.space}></View>
          <View style={StylesProfile.ViewLogout}>
-            <TouchableOpacity style={StylesProfile.item}>
+            <TouchableOpacity style={StylesProfile.item} onPress={handleLogout}>
                <Image style={StylesProfile.icon} source={require('../Assets/Image/log-out.png')} />
                <Text style={StylesProfile.titleText}>Đăng xuất</Text>
                {/* <IconAntd name="right" size={13} style={StylesProfile.iconRight} /> */}
             </TouchableOpacity>
          </View>
-         <Modal
-            isVisible={isShowModal}
-            onBackdropPress={handleHideModal}
-            style={{ alignItems: "center" }}
-         >
-            <View style={StylesProfile.Modal}>
-               <Text style={StylesProfile.titleModal}>Mời bạn nhập mật khẩu hiện tại </Text>
-               <TextInput
-                  secureTextEntry={true}
-                  style={StylesProfile.inputModal}
-               />
-               <View style={StylesProfile.footerModal}>
-                  <TouchableOpacity style={StylesProfile.btn} onPress={handleHideModal}>
-                     <Text>Thoát</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={StylesProfile.btn} onPress={checkPasswordToChange}>
-                     <Text style={StylesProfile.textBtnOk}>OK</Text>
-                  </TouchableOpacity>
-               </View>
-            </View>
-         </Modal>
       </ScrollView>
    )
 }

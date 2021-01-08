@@ -4,11 +4,12 @@ import { StylesEditProfile } from '../Assets/Style/EditProfileStyle'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
 import { FormEditProfile } from '../Components/EditProfileScreen'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-native-modal'
-
+import { asyncEditInforUser } from '../Store/User/action'
 
 export default function HistoryScreen() {
+   const dispatch = useDispatch()
    const dataUser = useSelector(state => state.User.dataUser)
    console.log("dataUser EditProfile:", dataUser);
    const navigation = useNavigation()
@@ -19,7 +20,7 @@ export default function HistoryScreen() {
       address: dataUser.address,
       gender: dataUser.gender,
       phone: dataUser.phone,
-      birthday: "",
+      birthday: dataUser.age,
       nameGuardian: dataUser.gaurdian,
       phoneGuardian: dataUser.gaurdian_phone
    })
@@ -34,9 +35,13 @@ export default function HistoryScreen() {
       navigation.goBack()
    }
    const handleSaveEdit = () => {
-      console.log('====================================');
-      console.log("Luu:", userProfile);
-      console.log('====================================');
+      let { userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian } = userProfile
+      dispatch(asyncEditInforUser({ userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian }))
+         .then((res) => {
+            if (res.ok) {
+               navigation.goBack()
+            }
+         })
    }
    const handleChooseMale = () => {
       setUseProfile({

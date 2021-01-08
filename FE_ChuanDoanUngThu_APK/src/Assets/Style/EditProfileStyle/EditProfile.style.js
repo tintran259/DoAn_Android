@@ -132,6 +132,29 @@ const StylesEditProfile = StyleSheet.create({
       fontWeight: "bold",
       position: "absolute",
       top: "43%"
+   },
+   ViewChangePass: {
+      marginTop: "7%",
+      width: "100%",
+      height: "100%",
+      backgroundColor: "#fff"
+   },
+   titleChange: {
+      fontSize: 25,
+      fontFamily: 'Rokkitt',
+      marginTop: 20,
+      marginLeft: 20
+   },
+   ViewHeaderChange: {
+      flexDirection: "row",
+      width: "100%",
+      height: 75
+   },
+   checkRePassword: {
+      position: "absolute",
+      bottom: "15%",
+      right: "2%",
+      color: "#e74c3c"
    }
 })
 

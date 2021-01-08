@@ -7,10 +7,12 @@ import Modal from 'react-native-modal'
 import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { asyncRegister } from '../Store/User/action'
+import { getDateByTimeZoneDay } from '../Contants'
 
 export default function RegisterScreen() {
    const dispatch = useDispatch();
    const navigation = useNavigation();
+   const dateNow = getDateByTimeZoneDay(new Date())
 
    const [isShowModal, setIsShowModal] = useState(false)
    const [isHandleRegister, setIsHandleRegister] = useState(false)
@@ -23,7 +25,7 @@ export default function RegisterScreen() {
       phone: "",
       indentify: "",
       gender: "0",
-      age: "",
+      age: dateNow,
       fullnameGuardian: "",
       phoneGuardian: ""
    })

@@ -143,7 +143,7 @@ const StylesRegister = StyleSheet.create({
       alignItems: "center"
    },
    textBirthday: {
-      color: "#7f8c8d"
+      color: "#2d3436"
    }
 })
 

@@ -3,7 +3,7 @@ import { View, Text, Dimensions } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import { StylesRegisterScreen } from '../../Assets/Style/RegisterStyle'
 import DropDownPicker from 'react-native-dropdown-picker';
-
+import { getDateByTimeZoneDay } from '../../Contants'
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
@@ -19,28 +19,20 @@ export default function FormRegiser({
       backgroundColor: "#FFF",
       borderColor: "#e74c3c"
    }
-   const [date, setDate] = useState(new Date(1598051730000));
-   const [mode, setMode] = useState('date');
+   const [date, setDate] = useState(new Date());
    const [show, setShow] = useState(false);
 
-   const onChange = (event, selectedDate) => {
-      const currentDate = selectedDate || date;
-      setShow(Platform.OS === 'ios');
-      setDate(currentDate);
-   };
 
-   const showMode = (currentMode) => {
-      setShow(true);
-      setMode(currentMode);
+   const onChange = (event, selectedDate) => {
+      let dateShow = getDateByTimeZoneDay(selectedDate, null);
+      setShow(Platform.OS === 'ios');
+      setFormRegister({ ...formRegister, age: dateShow });
    };
 
    const showDatepicker = () => {
-      showMode('date');
+      setShow(true);
    };
 
-   const showTimepicker = () => {
-      showMode('time');
-   };
 
    const onBlurRe_passord = (e) => {
       const repassword = e.nativeEvent.text
@@ -60,9 +52,8 @@ export default function FormRegiser({
             <DateTimePicker
                testID="dateTimePicker"
                value={date}
-               mode={mode}
-               is24Hour={true}
-               display="default"
+               mode={"date"}
+               display="spinner"
                onChange={onChange}
             />
          )}
@@ -176,7 +167,7 @@ export default function FormRegiser({
                      { label: 'Female', value: '1' },
                   ]}
                   containerStyle={{ height: 50 }}
-                  style={{ backgroundColor: '#C4C4C4', marginTop: 10, width: "100%" }}
+                  style={{ backgroundColor: '#fff', marginTop: 10, width: "100%" }}
                   defaultValue={formRegister.gender}
                   onChangeItem={text => { setFormRegister({ ...formRegister, gender: text.value }) }}
                   itemStyle={{
@@ -202,11 +193,11 @@ export default function FormRegiser({
                      <Text style={{ display: "none" }}></Text>
                }
             </View>
-            <View style={[StylesRegisterScreen.formRowRight, { width: "38%" }]}>
+            <View style={[StylesRegisterScreen.formRowRight, { width: "38%", backgroundColor: "#fff" }]}>
                <Text style={StylesRegisterScreen.labelFormItem}>Birthday</Text>
-               <View style={[StylesRegisterScreen.inputRow, isHandleRegister && formRegister.age === "" ? StylesValidate : ""]}>
+               <View style={[StylesRegisterScreen.inputRow, { backgroundColor: "#fff" }]}>
                   <TouchableOpacity style={StylesRegisterScreen.btnBirthDay} onPress={showDatepicker}>
-                     <Text style={StylesRegisterScreen.textBirthday}>Age</Text>
+                     <Text style={StylesRegisterScreen.textBirthday}>{formRegister.age}</Text>
                   </TouchableOpacity>
                </View>
             </View>

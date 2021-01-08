@@ -31,5 +31,16 @@ export const PostLoginandRegister = {
                   "gaurdian_phone": phoneGuardian
                })
       )
-   }
+   },
+   ChangePassword: ({ idUser, old_password, new_password }) => {
+      return (
+         api
+            .call()
+            .post('/changePassword.php', {
+               "user_id": idUser,
+               "oldPassword": old_password,
+               "newPassword": new_password
+            })
+      )
+   },
 }

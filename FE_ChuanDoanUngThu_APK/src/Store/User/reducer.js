@@ -14,6 +14,12 @@ const Reducer = (state = initialState, action) => {
             ACCESS_TOKEN: action.payload.token,
             dataUser: action.payload.dataUser
          }
+      case TYPE_ACTION.LOG_OUT:
+         return {
+            ...state,
+            ACCESS_TOKEN: null,
+            dataUser: null
+         }
       default:
          return state
    }
