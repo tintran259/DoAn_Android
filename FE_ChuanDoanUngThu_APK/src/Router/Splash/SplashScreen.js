@@ -14,7 +14,6 @@ export default function SplashScreen() {
          <View style={stylesSplash.container}>
             <Image style={stylesSplash.logo} source={require("../../Assets/Image/logo3.png")} />
          </View>
-
       </>
    )
 }
