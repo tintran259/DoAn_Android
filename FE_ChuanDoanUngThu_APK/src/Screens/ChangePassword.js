@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { StylesEditProfile } from '../Assets/Style/EditProfileStyle'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { asyncChangePassword, logout } from '../Store/User/action'
+import Modal from 'react-native-modal'
 
 export default function HistoryScreen() {
    const dispatch = useDispatch()
@@ -15,6 +15,8 @@ export default function HistoryScreen() {
    const [isConfirm, setIsConfirm] = useState(false)
    const [checkRePassword, setCheckRePassword] = useState(false)
    const [ShowTrueOrFalse, setShowTrueOrFalse] = useState(false)
+   const [isShowFail, setIsShowFail] = useState(false)
+   const [isShowSuccess, setIsShowSuccess] = useState(false)
    const [changePass, setChangePass] = useState({
       old_password: "",
       new_password: "",
@@ -36,7 +38,15 @@ export default function HistoryScreen() {
             .then((res) => {
                console.log("res:", res);
                if (res.ok) {
-                  dispatch(logout())
+                  setIsShowSuccess(true)
+               } else {
+                  setIsShowFail(true)
+                  setChangePass({
+                     old_password: "",
+                     new_password: "",
+                     re_password: ""
+                  })
+                  setIsConfirm(false)
                }
             })
       }
@@ -64,9 +74,6 @@ export default function HistoryScreen() {
 
    const onBlurRe_passord = (e) => {
       const repassword = e.nativeEvent.text
-      console.log('====================================');
-      console.log("repassword:", repassword);
-      console.log('====================================');
       if (repassword !== changePass.new_password) {
          setCheckRePassword(true)
          setShowTrueOrFalse(false)
@@ -76,6 +83,14 @@ export default function HistoryScreen() {
          setCheckRePassword(true)
          setShowTrueOrFalse(true)
       }
+   }
+
+   const handleCanCelModalFail = () => {
+      setIsShowFail(false)
+   }
+   const handleOkModalSuccess = () => {
+      setIsShowSuccess(false)
+      dispatch(logout())
    }
 
    return (
@@ -156,6 +171,31 @@ export default function HistoryScreen() {
                </View>
             </View>
          </View>
+         <Modal
+            onBackdropPress={handleCanCelModalFail}
+            isVisible={isShowFail}
+            style={{ margin: 0, alignItems: "center" }}
+         >
+            <View style={StylesEditProfile.modalFail}>
+               <Text style={StylesEditProfile.titleModal}>Thông báo</Text>
+               <Text style={StylesEditProfile.contentModal}>Mật khẩu củ không chính sác</Text>
+               <TouchableOpacity style={StylesEditProfile.btnCancel} onPress={handleCanCelModalFail}>
+                  <Text style={StylesEditProfile.textbtnCancle}>Thoát</Text>
+               </TouchableOpacity>
+            </View>
+         </Modal>
+         <Modal
+            isVisible={isShowSuccess}
+            style={{ margin: 0, alignItems: "center" }}
+         >
+            <View style={StylesEditProfile.modalFail}>
+               <Text style={StylesEditProfile.titleModal}>Thông báo</Text>
+               <Text style={[StylesEditProfile.contentModal, { width: 200 }]}>Mật khẩu thay đổi thành công, ấn OK để đăng nhập lại</Text>
+               <TouchableOpacity style={[StylesEditProfile.btnCancel, { marginTop: 10 }]} onPress={handleOkModalSuccess}>
+                  <Text style={[StylesEditProfile.textbtnCancle]}>OK</Text>
+               </TouchableOpacity>
+            </View>
+         </Modal>
       </View>
    )
 }

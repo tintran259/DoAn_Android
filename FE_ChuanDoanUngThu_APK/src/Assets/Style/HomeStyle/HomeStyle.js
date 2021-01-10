@@ -4,21 +4,63 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 const StylesHomeScreen = StyleSheet.create({
    container: {
+      backgroundColor: "#dcdde1",
+      flex: 1,
+   },
+   iconRight: {
+      fontSize: 16,
+      position: "absolute",
+      right: "2%"
+   },
+   nameLocation: {
+      color: "#fff",
+      marginLeft: 20
+   },
+   btnLocation: {
+      flexDirection: "row",
+      width: 180,
+      height: 35,
       backgroundColor: "#E33B3B",
-      marginTop: "7%"
+      borderRadius: 15,
+      alignItems: "center",
+      marginLeft: 10,
+      borderColor: "#ecf0f1",
+      borderWidth: 1,
+      opacity: 0.9,
+      shadowColor: "#000",
+      shadowOffset: {
+         width: 0,
+         height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
+   },
+   iamgeLocation: {
+      width: 20,
+      height: 20,
+      marginLeft: 10
+   },
+   logo: {
+      width: 200,
+      height: 40
    },
    header: {
       width: "100%",
-      height: 70,
+      height: 90,
       justifyContent: "center",
       alignItems: "center",
       paddingHorizontal: 10,
+      backgroundColor: "#E33B3B",
+      paddingTop: 10,
+      marginBottom: 20
    },
    btnIcon: {
       width: 60,
-      height: 50,
+      height: 40,
       backgroundColor: "#E33B3B",
-      justifyContent: "flex-start",
+      justifyContent: "center",
       alignItems: "center"
    },
    textControl: {
@@ -28,9 +70,10 @@ const StylesHomeScreen = StyleSheet.create({
    notification: {
       width: "100%",
       height: 40,
-      marginBottom: 10,
       flexDirection: "row",
-      justifyContent: "flex-end"
+      justifyContent: "space-between",
+      backgroundColor: "#E33B3B",
+      marginTop: 10
    },
    iconBell: {
       fontSize: 20,
@@ -39,14 +82,23 @@ const StylesHomeScreen = StyleSheet.create({
    ViewUser: {
       width: "100%",
       height: "100%",
-      backgroundColor: "#f55252",
+      backgroundColor: "#fff",
       borderRadius: 10,
       borderWidth: 1,
-      borderColor: "#f37079",
-      flexDirection: "row"
+      borderColor: "#ecf0f1",
+      flexDirection: "row",
+      shadowColor: "#000",
+      shadowOffset: {
+         width: 0,
+         height: 7,
+      },
+      shadowOpacity: 0.41,
+      shadowRadius: 9.11,
+
+      elevation: 14,
    },
    avatarUser: {
-      width: "30%",
+      width: "20%",
       height: "100%",
       justifyContent: "center",
       alignItems: "center"
@@ -61,13 +113,13 @@ const StylesHomeScreen = StyleSheet.create({
       marginTop: 5
    },
    inforUser: {
-      width: "60%",
+      width: "70%",
       height: "100%",
       padding: 10,
       justifyContent: "space-around"
    },
    ViewCard: {
-      width: "48%",
+      width: "47%",
       height: 90,
    },
    card: {
@@ -82,10 +134,12 @@ const StylesHomeScreen = StyleSheet.create({
    bannerView: {
       width: "100%",
       height: 180,
-      backgroundColor: "red"
+      backgroundColor: "red",
+      borderRadius: 10,
+      backgroundColor: "#dcdde1"
    },
    textName: {
-      color: "#fff",
+      color: "#2d3436",
       fontWeight: "bold",
       fontSize: 17
    },
@@ -99,20 +153,18 @@ const StylesHomeScreen = StyleSheet.create({
       height: "100%",
    },
    textAddress: {
-      color: "#fff"
+      color: "#2d3436"
    },
    avatarImage: {
       width: 45,
       height: 45,
       borderRadius: 100,
       borderWidth: 1,
-      borderColor: "#f37079",
+      borderColor: "#ecf0f1",
    },
    body: {
-      width: "100%",
-      height: hp("90%"),
+      flex: 1,
       backgroundColor: "#E33B3B",
-      marginTop: 10
    },
    card1: {
       width: "100%",
@@ -121,18 +173,62 @@ const StylesHomeScreen = StyleSheet.create({
       justifyContent: "space-around",
    },
    bodyContent: {
-      marginTop: 20,
       width: "100%",
-      height: hp("68%"),
-      backgroundColor: "#dcdde1",
-      borderTopLeftRadius: 15,
-      borderTopRightRadius: 15,
-      padding: 10
+      height: "100%",
+      backgroundColor: "#f1f2f6",
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      padding: 6
    },
    iconRight: {
       color: "#ecf0f1",
       fontSize: 17
    },
+   titleDanhSach: {
+      fontSize: wp("4%"),
+      marginTop: 20,
+      marginBottom: 10,
+      fontWeight: "bold"
+   },
+   ModalLocation: {
+      width: "100%",
+      height: 350,
+      backgroundColor: "#fff",
+      borderTopLeftRadius: 15,
+      borderTopRightRadius: 15,
+      alignItems: "center",
+      paddingHorizontal: 20
+   },
+   locationModal: {
+      width: 30,
+      height: 30,
+      marginTop: 10
+   },
+   contentModal: {
+      textAlign: "center",
+      fontSize: 17,
+      marginTop: 20,
+      color: "#2d3436"
+   },
+   btnSelectLocation: {
+      width: "100%",
+      height: 40,
+      borderBottomWidth: 0.5,
+      justifyContent: "center",
+      alignItems: "center",
+      borderBottomColor: "#ecf0f1",
+      marginBottom: 5
+   },
+   LocationName: {
+      width: "100%",
+      height: 200,
+      marginTop: 20
+   },
+   textNameLocation: {
+      fontSize: 16,
+      color: "#2d3436",
+      fontWeight: "bold"
+   }
 })
 
 export default StylesHomeScreen

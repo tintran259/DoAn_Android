@@ -2,7 +2,8 @@ import { TYPE_ACTION } from '../../Contants'
 
 
 const initialState = {
-   isSplash: true
+   isSplash: true,
+   isLoading: false
 }
 
 const Reducer = (state = initialState, action) => {
@@ -12,7 +13,16 @@ const Reducer = (state = initialState, action) => {
             ...state,
             isSplash: false
          }
-
+      case TYPE_ACTION.SHOW_LOADING:
+         return {
+            ...state,
+            isLoading: true
+         }
+      case TYPE_ACTION.HIDE_LOADING:
+         return {
+            ...state,
+            isLoading: false
+         }
       default:
          return state;
    }

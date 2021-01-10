@@ -18,4 +18,13 @@ export const UserChangeInfor = {
             })
       )
    },
+   GetuserByID: ({ userId }) => {
+      return (
+         api
+            .call()
+            .post('/getUserId.php', {
+               "user_id": userId
+            })
+      )
+   }
 }

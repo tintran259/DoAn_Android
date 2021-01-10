@@ -23,6 +23,10 @@ const StylesLoginScreen = StyleSheet.create({
       width: 100,
       height: 100
    },
+   logo2: {
+      width: 200,
+      height: 50
+   },
    textLogo: {
       fontSize: hp("3%"),
       letterSpacing: 1,

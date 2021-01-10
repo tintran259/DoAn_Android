@@ -60,14 +60,14 @@ export default function LoginScreen() {
       <View style={StylesLoginScreen.container}>
          <ScrollView >
             <View style={StylesLoginScreen.header}>
-               <Image style={StylesLoginScreen.logo} source={require("../Assets/Image/logo.png")} />
-               <Text style={StylesLoginScreen.textLogo}>INTELCONS</Text>
+               {/* <Image style={StylesLoginScreen.logo} source={require("../Assets/Image/logo.png")} /> */}
+               <Image style={StylesLoginScreen.logo2} resizeMode="cover" source={require("../Assets/Image/logo2.png")} />
             </View>
             {
                isShowToast ?
                   <View style={StylesLoginScreen.toastFail}>
                      <IconAntd name="frowno" style={StylesLoginScreen.iconFail} />
-                     <Text style={StylesLoginScreen.textFail}>Wrong password or username</Text>
+                     <Text style={StylesLoginScreen.textFail}>Sai tên tài khoản hoặc mật khẩu</Text>
                   </View> :
                   <Text style={{ display: "none" }}></Text>
             }

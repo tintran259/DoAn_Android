@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 const StylesTestCancer = StyleSheet.create({
    container: {
-      marginTop: "7%"
+      backgroundColor: "#fff"
    },
    header: {
       width: '100%',

@@ -42,7 +42,7 @@ export default function FormLogin({
       <>
          <View style={StylesLoginScreen.formLogin}>
             <View style={StylesLoginScreen.formUsername}>
-               <Text style={StylesLoginScreen.labelForm}>Username</Text>
+               <Text style={StylesLoginScreen.labelForm}>Tài khoản</Text>
                <TextInput
                   placeholder="Username ..."
                   style={[StylesLoginScreen.inputForm, formLogin.username === "" && isOnPressLogin ? { backgroundColor: "#fff", borderColor: "#e74c3c" } : ""]}
@@ -52,13 +52,13 @@ export default function FormLogin({
                ></TextInput>
                {
                   formLogin.username === "" && isOnPressLogin ?
-                     <Text style={StylesLoginScreen.validate}>Enter username please !</Text>
+                     <Text style={StylesLoginScreen.validate}>Vui lòng nhập tài khoản !</Text>
                      :
                      <Text style={{ display: "none" }}></Text>
                }
             </View>
             <View style={StylesLoginScreen.formPassword}>
-               <Text style={StylesLoginScreen.labelForm}>Password </Text>
+               <Text style={StylesLoginScreen.labelForm}>Mật khẩu </Text>
                <TextInput
                   placeholder="Password ..."
                   secureTextEntry={true}
@@ -69,7 +69,7 @@ export default function FormLogin({
                </TextInput>
                {
                   formLogin.password === "" && isOnPressLogin ?
-                     <Text style={StylesLoginScreen.validate}>Enter password please !</Text>
+                     <Text style={StylesLoginScreen.validate}>Vui lòng nhập mật khẩu !</Text>
                      :
                      <Text style={{ display: "none" }}></Text>
                }
@@ -78,7 +78,7 @@ export default function FormLogin({
                <View style={StylesLoginScreen.formBtnLogin}>
                   <View style={StylesLoginScreen.btnLoginView}>
                      <TouchableOpacity style={StylesLoginScreen.btnLogin} onPress={handleLogin}>
-                        <Text style={StylesLoginScreen.labelLogin}>Login</Text>
+                        <Text style={StylesLoginScreen.labelLogin}>Đăng nhập</Text>
                      </TouchableOpacity>
                   </View>
                   <View style={StylesLoginScreen.btnScanView}>
@@ -90,7 +90,7 @@ export default function FormLogin({
                <Text style={StylesLoginScreen.textLine}>--------------------Or--------------------</Text>
                <View style={StylesLoginScreen.btnRegisterView}>
                   <TouchableOpacity style={StylesLoginScreen.btnRegister} onPress={handleRegister}>
-                     <Text style={StylesLoginScreen.labelRegiter}>Register</Text>
+                     <Text style={StylesLoginScreen.labelRegiter}>Đăng kí</Text>
                   </TouchableOpacity>
                </View>
             </View>

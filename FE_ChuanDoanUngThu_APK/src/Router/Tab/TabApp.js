@@ -34,7 +34,7 @@ export default function TabApp() {
             name="StackHome"
             component={StackHome}
             options={{
-               tabBarLabel: 'Home',
+               tabBarLabel: 'Trang chủ',
                tabBarIcon: ({ color, size }) => (
                   <IconAntd name="home" color={color} size={20} />
                ),
@@ -44,7 +44,7 @@ export default function TabApp() {
             name="TestCancer"
             component={TestCancer}
             options={{
-               tabBarLabel: 'TestCancer',
+               tabBarLabel: 'Xét Nghiệm',
                tabBarIcon: ({ color, size }) => (
                   <IconFont name="clipboard-list" color={color} size={20} />
                ),
@@ -54,7 +54,7 @@ export default function TabApp() {
             name="StackProfile"
             component={StackProfile}
             options={{
-               tabBarLabel: 'Profile',
+               tabBarLabel: 'Cá nhân',
                tabBarIcon: ({ color, size }) => (
                   <IconAntd name="user" color={color} size={20} />
                ),

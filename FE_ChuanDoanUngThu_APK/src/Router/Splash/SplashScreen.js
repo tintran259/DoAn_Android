@@ -2,16 +2,20 @@ import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { actHideSplashScreen } from '../../Store/App/action'
+import AnimatedLoader from "react-native-animated-loader";
+
 export default function SplashScreen() {
    const dispatch = useDispatch();
    setTimeout(() => {
       dispatch(actHideSplashScreen())
-   }, 3000)
+   }, 4000)
    return (
-      <View style={stylesSplash.container}>
-         <Image style={stylesSplash.logo} source={require("../../Assets/Image/logo.png")} />
-         <Text style={stylesSplash.textTile}>Wellcome</Text>
-      </View>
+      <>
+         <View style={stylesSplash.container}>
+            <Image style={stylesSplash.logo} source={require("../../Assets/Image/logo3.png")} />
+         </View>
+
+      </>
    )
 }
 
@@ -24,8 +28,8 @@ const stylesSplash = StyleSheet.create({
       backgroundColor: "#E33B3B"
    },
    logo: {
-      width: 100,
-      height: 100,
+      width: 200,
+      height: 120,
    },
    textTile: {
       fontSize: 17,

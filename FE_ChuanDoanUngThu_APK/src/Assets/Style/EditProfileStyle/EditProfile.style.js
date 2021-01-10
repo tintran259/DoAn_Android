@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native'
 const StylesEditProfile = StyleSheet.create({
    container: {
       flex: 1,
-      marginTop: "7%",
       backgroundColor: "#fff"
    },
    header: {
@@ -134,7 +133,6 @@ const StylesEditProfile = StyleSheet.create({
       top: "43%"
    },
    ViewChangePass: {
-      marginTop: "7%",
       width: "100%",
       height: "100%",
       backgroundColor: "#fff"
@@ -155,6 +153,28 @@ const StylesEditProfile = StyleSheet.create({
       bottom: "15%",
       right: "2%",
       color: "#e74c3c"
+   },
+   modalFail: {
+      width: "70%",
+      height: 150,
+      backgroundColor: "#fff",
+      borderRadius: 10,
+      alignItems: "center"
+   },
+   contentModal: {
+      textAlign: "center",
+      marginTop: 30,
+      color: "#2d3436"
+   },
+   btnCancel: {
+      width: "100%",
+      height: 40,
+      justifyContent: "center",
+      alignItems: "center",
+      marginTop: 30
+   },
+   textbtnCancle: {
+      color: "#2d3436"
    }
 })
 

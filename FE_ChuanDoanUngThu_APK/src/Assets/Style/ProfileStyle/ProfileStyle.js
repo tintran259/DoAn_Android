@@ -5,7 +5,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const StylesProfile = StyleSheet.create({
    container: {
       backgroundColor: "#fff",
-      marginTop: "7%"
    },
    icon: {
       width: 20,

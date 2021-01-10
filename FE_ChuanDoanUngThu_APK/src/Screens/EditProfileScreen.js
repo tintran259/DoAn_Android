@@ -6,7 +6,10 @@ import { useNavigation } from '@react-navigation/native'
 import { FormEditProfile } from '../Components/EditProfileScreen'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-native-modal'
-import { asyncEditInforUser } from '../Store/User/action'
+import { asyncEditInforUser, EditInforSuccessed } from '../Store/User/action'
+
+
+
 
 export default function HistoryScreen() {
    const dispatch = useDispatch()
@@ -40,6 +43,7 @@ export default function HistoryScreen() {
          .then((res) => {
             if (res.ok) {
                navigation.goBack()
+               dispatch(EditInforSuccessed())
             }
          })
    }

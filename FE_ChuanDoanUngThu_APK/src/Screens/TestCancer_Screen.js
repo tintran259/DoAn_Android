@@ -8,7 +8,7 @@ export default function TestCancerScreen() {
    return (
       <ScrollView style={StylesTestCancer.container}>
          <View style={StylesTestCancer.header}>
-            <Text style={StylesTestCancer.titleHeader}>Tư Vấn</Text>
+            <Text style={StylesTestCancer.titleHeader}>Xét Nghiệm</Text>
          </View>
          <View style={StylesTestCancer.btnSaveView}>
             <TouchableOpacity style={StylesTestCancer.btnSave}>
