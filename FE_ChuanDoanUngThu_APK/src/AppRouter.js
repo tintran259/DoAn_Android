@@ -35,7 +35,7 @@ export default function AppRouter() {
          </NavigationContainer>
          <AnimatedLoader
             visible={isLoading}
-            overlayColor="#E33B3B"
+            overlayColor="#00cec9"
             source={require("./Assets/loading/hospital.json")}
             animationStyle={styles.lottie}
             speed={1}

@@ -12,7 +12,7 @@ export default function SplashScreen() {
    return (
       <>
          <View style={stylesSplash.container}>
-            <Image style={stylesSplash.logo} source={require("../../Assets/Image/logo3.png")} />
+            <Image style={stylesSplash.logo} source={require("../../Assets/Image/logo7.png")} />
          </View>
       </>
    )
@@ -24,10 +24,10 @@ const stylesSplash = StyleSheet.create({
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#E33B3B"
+      backgroundColor: "#00cec9"
    },
    logo: {
-      width: 200,
+      width: 210,
       height: 120,
    },
    textTile: {

@@ -36,7 +36,6 @@ export default function FormLogin({
    }
    const handleValidateUsername = (e) => {
       const value = e.nativeEvent.text
-      console.log("value:", value);
    }
    return (
       <>
@@ -44,7 +43,7 @@ export default function FormLogin({
             <View style={StylesLoginScreen.formUsername}>
                <Text style={StylesLoginScreen.labelForm}>Tài khoản</Text>
                <TextInput
-                  placeholder="Username ..."
+                  placeholder="Tài khoản ..."
                   style={[StylesLoginScreen.inputForm, formLogin.username === "" && isOnPressLogin ? { backgroundColor: "#fff", borderColor: "#e74c3c" } : ""]}
                   value={formLogin.username}
                   onChangeText={text => setFormLogin({ ...formLogin, username: text })}
@@ -60,7 +59,7 @@ export default function FormLogin({
             <View style={StylesLoginScreen.formPassword}>
                <Text style={StylesLoginScreen.labelForm}>Mật khẩu </Text>
                <TextInput
-                  placeholder="Password ..."
+                  placeholder="Mật khẩu ..."
                   secureTextEntry={true}
                   style={[StylesLoginScreen.inputForm, formLogin.password === "" && isOnPressLogin ? { backgroundColor: "#fff", borderColor: "#e74c3c" } : ""]}
                   value={formLogin.password}

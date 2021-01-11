@@ -11,8 +11,8 @@ const StylesCVScreen = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       width: "100%",
-      height: 50,
-      backgroundColor: "#E33B3B"
+      height: "8%",
+      backgroundColor: "#00cec9"
    },
    btnBack: {
       width: 60,
@@ -29,26 +29,25 @@ const StylesCVScreen = StyleSheet.create({
    },
    body: {
       width: "100%",
-      height: "100%",
-      backgroundColor: "#E33B3B",
+      height: "92%",
+      backgroundColor: "#00cec9",
    },
    bodyHeader: {
       width: "100%",
-      height: "30%",
-      paddingHorizontal: 20
+      height: "25%",
+      paddingHorizontal: 20,
    },
    bodyContent: {
       width: "100%",
-      height: "70%",
+      height: "75%",
       backgroundColor: "#f1f2f6",
    },
    inforView: {
       width: "100%",
       height: 150,
       position: "absolute",
-      top: "-15%",
+      top: "-12%",
       paddingHorizontal: 20,
-      zIndex: 200
    },
    inforContent: {
       width: "100%",
@@ -120,8 +119,9 @@ const StylesCVScreen = StyleSheet.create({
       fontWeight: "bold"
    },
    ViewHistory: {
+      width: "100%",
       marginTop: 120,
-      paddingHorizontal: 20
+      paddingHorizontal: 20,
    },
    titleViewHistory: {
       fontFamily: 'Quicksand',
@@ -129,14 +129,13 @@ const StylesCVScreen = StyleSheet.create({
       fontWeight: "bold"
    },
    emptyHistory: {
-      paddingHorizontal: 20,
       width: "100%",
       marginTop: 20,
-      marginBottom: 100
+      marginBottom: 200
    },
    ViewEmpty: {
       width: "100%",
-      height: 200,
+      height: hp("40%"),
       backgroundColor: "#fff",
       borderRadius: 15,
       alignItems: "center",
@@ -157,6 +156,31 @@ const StylesCVScreen = StyleSheet.create({
       textAlign: "center",
       color: '#636e72',
       marginTop: 5
+   },
+   cardItem: {
+      width: "100%",
+      height: 200,
+      backgroundColor: "#fff",
+      marginTop: 20,
+      borderRadius: 10,
+   },
+   timeHistory: {
+      width: "100%",
+      height: 30,
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      alignItems: "center",
+   },
+   textTime: {
+      fontWeight: "bold",
+      fontSize: 13,
+      marginLeft: 5
+   },
+   timeTest: {
+      marginRight: "5%",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center"
    }
 })
 

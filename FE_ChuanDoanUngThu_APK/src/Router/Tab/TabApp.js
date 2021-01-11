@@ -8,6 +8,7 @@ import StackHome from '../Stack/StackHome'
 import StackProfile from '../Stack/StackProfile'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import IconFont from 'react-native-vector-icons/FontAwesome5'
+import StackTestCancer from '../Stack/StackTestCancer'
 const Tab = createBottomTabNavigator();
 
 export default function TabApp() {
@@ -15,8 +16,8 @@ export default function TabApp() {
       <Tab.Navigator
          tabBarOptions={{
             activeTintColor: '#fff',
-            inactiveTintColor: '#E33B3B',
-            activeBackgroundColor: "#E33B3B",
+            inactiveTintColor: '#00cec9',
+            activeBackgroundColor: "#00cec9",
             inactiveBackgroundColor: "#ffff",
             style: {
                borderTopLeftRadius: 10,
@@ -41,8 +42,8 @@ export default function TabApp() {
             }}
          />
          <Tab.Screen
-            name="TestCancer"
-            component={TestCancer}
+            name="StackTestCancer"
+            component={StackTestCancer}
             options={{
                tabBarLabel: 'Xét Nghiệm',
                tabBarIcon: ({ color, size }) => (

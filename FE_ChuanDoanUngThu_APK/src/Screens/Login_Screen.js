@@ -12,7 +12,6 @@ import IconAntd from 'react-native-vector-icons/AntDesign'
 
 export default function LoginScreen() {
    const dispatch = useDispatch()
-   const navigation = useNavigation()
    const [isOnPressLogin, setIsOnPressLogin] = useState(false)
    const [isShowToast, setIsShowToast] = useState(false)
    const [formLogin, setFormLogin] = useState({
@@ -60,8 +59,7 @@ export default function LoginScreen() {
       <View style={StylesLoginScreen.container}>
          <ScrollView >
             <View style={StylesLoginScreen.header}>
-               {/* <Image style={StylesLoginScreen.logo} source={require("../Assets/Image/logo.png")} /> */}
-               <Image style={StylesLoginScreen.logo2} resizeMode="cover" source={require("../Assets/Image/logo2.png")} />
+               <Image style={StylesLoginScreen.logo2} resizeMode="cover" source={require("../Assets/Image/logo8.png")} />
             </View>
             {
                isShowToast ?

@@ -31,24 +31,24 @@ export default function HomeScreen() {
       {
          name: "Trần Như Tín",
          option: "Đa Khoa",
-         image: "https://img.medlatec.vn/ImagePath/imagesDoctor/20190909/20190909_BS-nguyen-cong-duy-C%C4%90HA.jpg"
+         image: "https://cdn.benhvienthucuc.vn/wp-content/uploads/2012/06/bs-nguyen-hong-nhung.jpg"
 
       },
       {
          name: "Nguyễn Khánh Duy",
          option: "Khoa Sản",
-         image: "https://tamanhhospital.vn/wp-content/uploads/2020/01/bac-si-hoang-anh-dung.jpg"
+         image: "https://lh3.googleusercontent.com/proxy/JHj5cSqwgwtNHs80ujWYcQiWBjolH4-nl6WUvx8i4bC9opX2wTgEMNyXQWzo3bbDla08GFe9ymkF74AT-zhcxdv86saHtq5Y2QDcFJl2tqfnu7F_NxLHCw"
 
       },
       {
          name: "Nguyễn Quốc Anh",
          option: "Khoa Sản",
-         image: "https://www.fvhospital.com/wp-content/uploads/2020/06/bs-nguyen-thi-thanh-tam.jpg"
+         image: "https://benhvienthucuc.vn/wp-content/uploads/2016/03/bs-vu-quoc-dong.jpg"
       },
       {
          name: "Long",
          option: "Khoa Sản",
-         image: "https://benhvienthucuc.vn/wp-content/uploads/2016/03/bs-do-hong-son.jpg"
+         image: "https://benhvienthucuc.vn/wp-content/uploads/2019/04/nguyen-van-doanh.jpg"
       }
    ]
    const location = [
@@ -61,7 +61,7 @@ export default function HomeScreen() {
    ]
    useEffect(() => {
       dispatch(asyncGetUserById({ userId }))
-   }, [EditUserSuccessed])
+   }, [EditUserSuccessed === true])
    const handleShowLocation = () => {
       setIsShowLocation(true)
    }
@@ -96,7 +96,7 @@ export default function HomeScreen() {
          <View style={StylesHomeScreen.header}>
             <View style={StylesHomeScreen.ViewUser}>
                <View style={StylesHomeScreen.avatarUser}>
-                  <Image style={StylesHomeScreen.avatarImage} source={{ uri: "https://pbs.twimg.com/media/EcJgt56U4AEzvel.jpg" }} />
+                  <Image style={StylesHomeScreen.avatarImage} source={{ uri: "https://thethao99.com/wp-content/uploads/2020/05/gai-xinh-372.jpg" }} />
                </View>
                <View style={StylesHomeScreen.inforUser}>
                   <Text style={StylesHomeScreen.textName}>{dataUser && dataUser.fullname}</Text>

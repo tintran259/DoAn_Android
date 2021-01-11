@@ -20,7 +20,7 @@ const StylesHomeScreen = StyleSheet.create({
       flexDirection: "row",
       width: 180,
       height: 35,
-      backgroundColor: "#E33B3B",
+      backgroundColor: "#00cec9",
       borderRadius: 15,
       alignItems: "center",
       marginLeft: 10,
@@ -52,14 +52,14 @@ const StylesHomeScreen = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       paddingHorizontal: 10,
-      backgroundColor: "#E33B3B",
+      backgroundColor: "#00cec9",
       paddingTop: 10,
       marginBottom: 20
    },
    btnIcon: {
       width: 60,
       height: 40,
-      backgroundColor: "#E33B3B",
+      backgroundColor: "#00cec9",
       justifyContent: "center",
       alignItems: "center"
    },
@@ -72,7 +72,7 @@ const StylesHomeScreen = StyleSheet.create({
       height: 40,
       flexDirection: "row",
       justifyContent: "space-between",
-      backgroundColor: "#E33B3B",
+      backgroundColor: "#00cec9",
       marginTop: 10
    },
    iconBell: {
@@ -164,7 +164,7 @@ const StylesHomeScreen = StyleSheet.create({
    },
    body: {
       flex: 1,
-      backgroundColor: "#E33B3B",
+      backgroundColor: "#00cec9",
    },
    card1: {
       width: "100%",
