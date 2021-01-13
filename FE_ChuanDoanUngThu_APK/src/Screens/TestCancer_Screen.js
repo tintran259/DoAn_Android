@@ -52,7 +52,6 @@ export default function TestCancerScreen() {
       }
       return [{ Desc: "" }]
    }, [result])
-   console.log("ShowResult", ShowResult);
    const validate = () => {
       if (formTestCancer.baso === "" ||
          formTestCancer.eos === "" ||
@@ -79,7 +78,9 @@ export default function TestCancerScreen() {
    }
    const hanleSaveTestCancer = () => {
       setIsSubmit(true)
-
+      setTimeout(() => {
+         setIsSubmit(false)
+      }, 4000);
       if (validate()) {
          setIsSubmit(false)
          const { baso, eos, mono, neu, lym, wbc, hct, hgb, rbc, mch, mchc, mcv, mpv, rdw, pdw, plt, tpttbm, pct,
@@ -221,7 +222,6 @@ export default function TestCancerScreen() {
          }
          <Modal
             isVisible={isShowModalResult}
-         // onBackdropPress={handleHideModal}
          >
             <View style={StylesTestCancer.ViewModal}>
                <Text style={StylesTestCancer.titleHeaderModal}>Kết Quả</Text>

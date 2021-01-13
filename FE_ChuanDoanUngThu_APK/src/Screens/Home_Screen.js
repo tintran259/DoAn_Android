@@ -86,16 +86,16 @@ export default function HomeScreen() {
       <ScrollView style={StylesHomeScreen.body}>
          <View style={StylesHomeScreen.notification}>
             <TouchableOpacity style={StylesHomeScreen.btnLocation} onPress={handleShowLocation}>
-               <Image style={StylesHomeScreen.iamgeLocation} source={require("../Assets/Image/location.png")} />
+               <Image style={StylesHomeScreen.iamgeLocation} source={require("../Assets/Image/location1.png")} />
                <Text style={StylesHomeScreen.nameLocation}>{locationSelected}</Text>
-               <IconAntd name="right" color="#fff" style={{ position: "absolute", right: "4%" }} />
+               <IconAntd name="right" color="#2d3436" style={{ position: "absolute", right: "4%" }} />
             </TouchableOpacity>
             <TouchableOpacity style={StylesHomeScreen.btnIcon}>
                <IconFontisto name="bell" style={StylesHomeScreen.iconBell} />
             </TouchableOpacity>
          </View>
          <View style={StylesHomeScreen.header}>
-            <View style={StylesHomeScreen.ViewUser}>
+            <TouchableOpacity style={StylesHomeScreen.ViewUser} onPress={moveProfileScreen}>
                <View style={StylesHomeScreen.avatarUser}>
                   <Image style={StylesHomeScreen.avatarImage} source={{ uri: "https://thethao99.com/wp-content/uploads/2020/05/gai-xinh-372.jpg" }} />
                </View>
@@ -104,38 +104,38 @@ export default function HomeScreen() {
                   <Text style={StylesHomeScreen.textAddress}>{dataUser && dataUser.address}</Text>
                </View>
                <View style={StylesHomeScreen.viewBtn}>
-                  <TouchableOpacity style={StylesHomeScreen.btnProfile} onPress={moveProfileScreen}>
+                  <TouchableOpacity style={StylesHomeScreen.btnProfile}>
                      <IconAntd name="right" color="#2d3436" size={20} />
                   </TouchableOpacity>
                </View>
-            </View>
+            </TouchableOpacity>
          </View>
          <View style={StylesHomeScreen.bodyContent}>
             <View style={StylesHomeScreen.Control}>
                <View style={StylesHomeScreen.card1}>
                   <View style={StylesHomeScreen.ViewCard}>
-                     <TouchableOpacity style={StylesHomeScreen.card} onPress={moveCVScreen}>
-                        <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/pharmacy.png')} />
-                        <Text style={StylesHomeScreen.textControl}>Hồ sơ sức khỏe</Text>
+                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#74b9ff" }]} onPress={moveCVScreen}>
+                        <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/pharmacy1.png')} />
+                        <Text style={[StylesHomeScreen.textControl, { color: "#fff" }]}>Hồ sơ sức khỏe</Text>
                      </TouchableOpacity>
                   </View>
                   <View style={StylesHomeScreen.ViewCard}>
-                     <TouchableOpacity style={StylesHomeScreen.card} onPress={moveHistoryScreen}>
-                        <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/information.png')} />
-                        <Text style={StylesHomeScreen.textControl}>Lịch sử tư vấn</Text>
+                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#fdcb6e" }]} onPress={moveHistoryScreen}>
+                        <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/question.png')} />
+                        <Text style={[StylesHomeScreen.textControl, { color: "#fff" }]}>Lịch sử tư vấn</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={StylesHomeScreen.card1}>
                   <View style={StylesHomeScreen.ViewCard}>
-                     <TouchableOpacity style={StylesHomeScreen.card}>
-                        <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/hert.png')} />
+                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#54a0ff" }]}>
+                        <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/health.png')} />
                         <Text style={StylesHomeScreen.textControl}>Theo dõi sức khỏe</Text>
                      </TouchableOpacity>
                   </View>
                   <View style={StylesHomeScreen.ViewCard}>
-                     <TouchableOpacity style={StylesHomeScreen.card}>
-                        <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/clock.png')} />
+                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#ff6b6b" }]}>
+                        <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/alar.png')} />
                         <Text style={StylesHomeScreen.textControl}>Lịch nhắc sức khỏe</Text>
                      </TouchableOpacity>
                   </View>

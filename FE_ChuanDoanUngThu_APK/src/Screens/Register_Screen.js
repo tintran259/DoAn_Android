@@ -110,16 +110,15 @@ export default function RegisterScreen() {
          <View style={StylesRegisterScreen.header}>
             <View style={StylesRegisterScreen.btnBackView}>
                <TouchableOpacity style={StylesRegisterScreen.btnBack} onPress={handleBack}>
-                  <Icon name="left" size={20} color="#E33B3B" />
+                  <Icon name="arrowleft" size={25} color="#2d3436" />
                </TouchableOpacity>
             </View>
             <View style={StylesRegisterScreen.titleHeader}>
-               <Image style={StylesRegisterScreen.logo} source={require('../Assets/Image/logo.png')} />
-               <Text style={StylesRegisterScreen.labelHeader}>Register</Text>
+               <Text style={StylesRegisterScreen.labelHeader}>Đăng kí</Text>
             </View>
             <View style={StylesRegisterScreen.btnSubmit}>
-               <TouchableOpacity style={StylesRegisterScreen.btnBack} onPress={handleSubmitFormRegister}>
-                  <Icon name="check" size={20} color="#E33B3B" />
+               <TouchableOpacity style={StylesRegisterScreen.btnSave} onPress={handleSubmitFormRegister}>
+                  <Text style={StylesRegisterScreen.labelSave}>Lưu</Text>
                </TouchableOpacity>
             </View>
          </View>

@@ -128,6 +128,9 @@ export default function HistoryScreen() {
                                  </View>
                                  <Text>{item.history}</Text>
                               </View>
+                              <View style={StylesCVScreen.textView}>
+                                 <Text style={StylesCVScreen.textLabel}>Benhj</Text>
+                              </View>
                            </TouchableOpacity>
                         )
                      }}

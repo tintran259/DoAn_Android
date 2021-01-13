@@ -84,10 +84,9 @@ const StylesProfile = StyleSheet.create({
       marginBottom: 30,
    },
    titleHeader: {
-      color: "#000",
+      color: "#2d3436",
       fontSize: 25,
-      fontWeight: "900",
-      fontFamily: "Rokkitt",
+      fontWeight: "bold",
       marginLeft: 20
    },
    body: {

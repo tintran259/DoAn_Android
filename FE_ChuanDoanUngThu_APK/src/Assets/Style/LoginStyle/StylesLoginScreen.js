@@ -7,6 +7,20 @@ const StylesLoginScreen = StyleSheet.create({
       flex: 1,
       backgroundColor: "#fff"
    },
+   formUsername: {
+      borderWidth: 1,
+      padding: 10,
+      borderColor: "#ecf0f1",
+      borderRadius: 10,
+      marginBottom: 10
+   },
+   formPassword: {
+      borderWidth: 1,
+      padding: 10,
+      borderColor: "#ecf0f1",
+      borderRadius: 10
+   },
+
    header: {
       width: "100%",
       height: hp("35%"),
@@ -17,7 +31,7 @@ const StylesLoginScreen = StyleSheet.create({
    formLogin: {
       width: "100%",
       height: hp("61%"),
-      padding: 10,
+      paddingHorizontal: 20,
    },
    logo: {
       width: 100,
@@ -35,20 +49,20 @@ const StylesLoginScreen = StyleSheet.create({
    labelForm: {
       fontWeight: "bold",
       fontSize: hp("2.2%"),
-      letterSpacing: 0.5
+      letterSpacing: 0.5,
+      marginLeft: 10,
+      marginBottom: 5
    },
    inputForm: {
       width: "100%",
-      height: 40,
+      // height: 30,
       borderBottomWidth: 1,
-      marginTop: 10,
       borderBottomColor: "#00cec9",
       color: "#2d3436",
-      paddingHorizontal: 20
+      paddingHorizontal: 10,
+      paddingTop: 5,
    },
-   formPassword: {
-      marginTop: 20
-   },
+
    formBtnLogin: {
       flexDirection: "row",
       width: "100%",
@@ -75,10 +89,10 @@ const StylesLoginScreen = StyleSheet.create({
    controlForm: {
       width: "100%",
       marginTop: "20%",
-      alignItems: "center"
+      alignItems: "center",
    },
    btnLoginView: {
-      width: "75%"
+      width: "100%"
    },
    btnScanView: {
       width: "20%",
@@ -99,7 +113,7 @@ const StylesLoginScreen = StyleSheet.create({
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 10,
-      backgroundColor: "#00cec9"
+      backgroundColor: "#e74c3c"
    },
    btnRegisterView: {
       width: "100%",

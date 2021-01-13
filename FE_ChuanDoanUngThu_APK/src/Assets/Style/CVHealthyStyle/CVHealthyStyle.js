@@ -249,6 +249,14 @@ const StylesCVScreen = StyleSheet.create({
    textBtnModal: {
       color: "#fff",
       fontWeight: "bold"
+   },
+   textView: {
+      width: "100%",
+   },
+   textLabel: {
+      fontWeight: "bold",
+      marginLeft: 20,
+      width: "90%"
    }
 })
 

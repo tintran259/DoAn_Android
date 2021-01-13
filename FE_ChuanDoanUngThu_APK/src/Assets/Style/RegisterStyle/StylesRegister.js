@@ -4,30 +4,18 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const StylesRegister = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: "#FFFFFF"
+      backgroundColor: "#fff"
    },
    header: {
       width: "100%",
-      height: hp("8%"),
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      borderBottomWidth: 0.5,
-      borderBottomColor: "#E33B3B"
+      height: 80
    },
    titleHeader: {
-      height: 40,
-      flexDirection: "row",
-      alignItems: "center"
-   },
-   logo: {
-      width: 30,
-      height: 30,
-      marginRight: 10
+      marginLeft: 10,
    },
    labelHeader: {
-      fontSize: 17,
-      color: "#E33B3B",
+      fontSize: 20,
+      color: "#2d3436",
       fontWeight: "bold"
    },
    btnBack: {
@@ -35,18 +23,22 @@ const StylesRegister = StyleSheet.create({
       height: 50,
       justifyContent: "center",
       alignItems: "center",
+   },
+   btnSave: {
+      width: 50,
+      height: 35,
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: 10,
+      borderWidth: 0.5,
+      marginTop: 10,
+      backgroundColor: "#00cec9",
+      borderColor: "#ecf0f1"
+   },
 
-   },
-   btnBackView: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      zIndex: 2
-   },
    btnSubmit: {
       position: "absolute",
-      top: 0,
-      right: 0,
+      right: "2%",
       zIndex: 2
    },
    formRegister: {
@@ -61,10 +53,10 @@ const StylesRegister = StyleSheet.create({
    input: {
       width: "100%",
       height: 40,
-      borderWidth: 1,
+      borderBottomWidth: 1,
       borderRadius: 10,
-      backgroundColor: "#C4C4C4",
-      borderColor: "#C4C4C4",
+      backgroundColor: "#fff",
+      borderColor: "#ecf0f1",
       marginTop: 10,
       paddingHorizontal: 20
    },
@@ -73,13 +65,17 @@ const StylesRegister = StyleSheet.create({
       height: 40,
       borderWidth: 1,
       borderRadius: 10,
-      backgroundColor: "#C4C4C4",
-      borderColor: "#C4C4C4",
+      backgroundColor: "#fff",
+      borderColor: "#ecf0f1",
       marginTop: 10,
       paddingHorizontal: 20
    },
    formItem: {
-      marginBottom: hp("3%")
+      marginBottom: hp("3%"),
+      padding: 10,
+      borderWidth: 1,
+      borderColor: "#ecf0f1",
+      borderRadius: 10
    },
    formItemRow: {
       flexDirection: "row",
@@ -132,8 +128,8 @@ const StylesRegister = StyleSheet.create({
       fontSize: 13,
       fontWeight: "bold",
       position: "absolute",
-      top: "100%",
-      right: 0,
+      top: "85%",
+      right: "5%",
       color: "#e74c3c"
    },
    btnBirthDay: {
@@ -144,6 +140,10 @@ const StylesRegister = StyleSheet.create({
    },
    textBirthday: {
       color: "#2d3436"
+   },
+   labelSave: {
+      color: "#fff",
+      fontWeight: "bold"
    }
 })
 

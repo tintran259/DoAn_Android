@@ -13,15 +13,15 @@ const StylesHomeScreen = StyleSheet.create({
       right: "2%"
    },
    nameLocation: {
-      color: "#fff",
+      color: "#2d3436",
       marginLeft: 20
    },
    btnLocation: {
       flexDirection: "row",
       width: 180,
       height: 35,
-      backgroundColor: "#00cec9",
-      borderRadius: 15,
+      backgroundColor: "#fff",
+      borderRadius: 10,
       alignItems: "center",
       marginLeft: 10,
       borderColor: "#ecf0f1",
@@ -65,7 +65,7 @@ const StylesHomeScreen = StyleSheet.create({
    },
    textControl: {
       fontWeight: "bold",
-      color: "#2d3436"
+      color: "#fff"
    },
    notification: {
       width: "100%",
@@ -81,7 +81,7 @@ const StylesHomeScreen = StyleSheet.create({
    },
    ViewUser: {
       width: "100%",
-      height: "100%",
+      height: "90%",
       backgroundColor: "#fff",
       borderRadius: 10,
       borderWidth: 1,
@@ -125,7 +125,7 @@ const StylesHomeScreen = StyleSheet.create({
    card: {
       width: "100%",
       height: "100%",
-      backgroundColor: "#fff",
+      backgroundColor: "#3498db",
       borderRadius: 10,
       paddingVertical: 10,
       paddingHorizontal: 20,
@@ -136,12 +136,14 @@ const StylesHomeScreen = StyleSheet.create({
       height: 180,
       backgroundColor: "red",
       borderRadius: 10,
-      backgroundColor: "#dcdde1"
+      backgroundColor: "#ecf0f1",
+      paddingHorizontal: 5
    },
    textName: {
       color: "#2d3436",
       fontWeight: "bold",
-      fontSize: 17
+      fontSize: 17,
+      textTransform: "capitalize"
    },
    btnProfile: {
       width: "100%",
@@ -153,7 +155,8 @@ const StylesHomeScreen = StyleSheet.create({
       height: "100%",
    },
    textAddress: {
-      color: "#2d3436"
+      color: "#2d3436",
+      textTransform: "capitalize"
    },
    avatarImage: {
       width: 45,

@@ -7,10 +7,10 @@ const StylesTestCancer = StyleSheet.create({
       backgroundColor: "#fff"
    },
    textEmpty: {
-      color: "#d63031",
+      color: "#e74c3c",
       position: "absolute",
-      bottom: "10%",
-      right: "2%"
+      bottom: "18%",
+      right: "5%"
    },
    iconQR: {
       width: 20,

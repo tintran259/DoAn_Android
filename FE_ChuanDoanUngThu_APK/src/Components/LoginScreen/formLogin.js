@@ -40,8 +40,9 @@ export default function FormLogin({
    return (
       <>
          <View style={StylesLoginScreen.formLogin}>
+            <Text style={StylesLoginScreen.labelForm}>Tài khoản</Text>
+
             <View style={StylesLoginScreen.formUsername}>
-               <Text style={StylesLoginScreen.labelForm}>Tài khoản</Text>
                <TextInput
                   placeholder="Tài khoản ..."
                   style={[StylesLoginScreen.inputForm, formLogin.username === "" && isOnPressLogin ? { backgroundColor: "#fff", borderColor: "#e74c3c" } : ""]}
@@ -56,8 +57,8 @@ export default function FormLogin({
                      <Text style={{ display: "none" }}></Text>
                }
             </View>
+            <Text style={StylesLoginScreen.labelForm}>Mật khẩu </Text>
             <View style={StylesLoginScreen.formPassword}>
-               <Text style={StylesLoginScreen.labelForm}>Mật khẩu </Text>
                <TextInput
                   placeholder="Mật khẩu ..."
                   secureTextEntry={true}
@@ -78,11 +79,6 @@ export default function FormLogin({
                   <View style={StylesLoginScreen.btnLoginView}>
                      <TouchableOpacity style={StylesLoginScreen.btnLogin} onPress={handleLogin}>
                         <Text style={StylesLoginScreen.labelLogin}>Đăng nhập</Text>
-                     </TouchableOpacity>
-                  </View>
-                  <View style={StylesLoginScreen.btnScanView}>
-                     <TouchableOpacity style={StylesLoginScreen.btnScan} onPress={handleShowScanQR}>
-                        <Image style={StylesLoginScreen.imageScan} source={require("../../Assets/Image/qr-code-scan.png")} />
                      </TouchableOpacity>
                   </View>
                </View>

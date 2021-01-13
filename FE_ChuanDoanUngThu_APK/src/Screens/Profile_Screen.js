@@ -49,12 +49,12 @@ export default function ProfileScreen() {
                <IconAntd name="right" size={15} />
             </TouchableOpacity>
             <TouchableOpacity style={StylesProfile.item}>
-               <Image style={StylesProfile.icon} source={require('../Assets/Image/history.png')} />
+               <Image style={StylesProfile.icon} source={require('../Assets/Image/history1.png')} />
                <Text style={StylesProfile.titleText}>Lịch sử hoạt động</Text>
                <IconAntd name="right" size={13} style={StylesProfile.iconRight} />
             </TouchableOpacity>
             <TouchableOpacity style={StylesProfile.item}>
-               <Image style={StylesProfile.icon} source={require('../Assets/Image/card.png')} />
+               <Image style={StylesProfile.icon} source={require('../Assets/Image/card1.png')} />
                <Text style={StylesProfile.titleText}>Thông tin thanh toán</Text>
                <IconAntd name="right" size={13} style={StylesProfile.iconRight} />
             </TouchableOpacity>
@@ -65,7 +65,7 @@ export default function ProfileScreen() {
          <View style={StylesProfile.accoutSetting}>
             <Text style={StylesProfile.titleaccout} >Thông tin tài khoản</Text>
             <TouchableOpacity style={StylesProfile.item} onPress={moveChangePassword}>
-               <Image style={StylesProfile.icon} source={require('../Assets/Image/padlock.png')} />
+               <Image style={StylesProfile.icon} source={require('../Assets/Image/padlock1.png')} />
                <Text style={StylesProfile.titleText}>Thay đổi mật khẩu</Text>
                <IconAntd name="right" size={13} style={StylesProfile.iconRight} />
             </TouchableOpacity>
@@ -74,7 +74,7 @@ export default function ProfileScreen() {
          <View style={StylesProfile.accoutSetting}>
             <Text style={StylesProfile.titleaccout} >Về chúng tôi</Text>
             <TouchableOpacity style={StylesProfile.item} onPress={callHotLine}>
-               <Image style={StylesProfile.icon} source={require('../Assets/Image/headphones.png')} />
+               <Image style={StylesProfile.icon} source={require('../Assets/Image/headphones1.png')} />
                <View style={StylesProfile.hotline}>
                   <Text style={StylesProfile.titleText}>HOTLINE:</Text>
                   <Text style={StylesProfile.phoneHotline}>0392340756</Text>
@@ -82,7 +82,7 @@ export default function ProfileScreen() {
                <IconAntd name="right" size={13} style={StylesProfile.iconRight} />
             </TouchableOpacity>
             <TouchableOpacity style={StylesProfile.item} onPress={handleFeedback}>
-               <Image style={StylesProfile.icon} source={require('../Assets/Image/comment.png')} />
+               <Image style={StylesProfile.icon} source={require('../Assets/Image/message.png')} />
                <Text style={StylesProfile.titleText}>Phản hồi</Text>
                <IconAntd name="right" size={13} style={StylesProfile.iconRight} />
             </TouchableOpacity>
