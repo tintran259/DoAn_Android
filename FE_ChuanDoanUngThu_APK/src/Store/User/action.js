@@ -116,14 +116,15 @@ export const asyncChangePassword = ({ idUser, old_password, new_password }) => {
    }
 }
 
-export const asyncEditInforUser = ({ userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian }) => {
+export const asyncEditInforUser = ({ userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian, blood, height, weight }) => {
+   console.log("userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian, blood, height, weight", userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian, blood, height, weight);
    return async (dispatch) => {
       try {
          dispatch(actShowLoading())
-         const response = await UserChangeInfor.EditInforUser({ userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian })
+         const response = await UserChangeInfor.EditInforUser({ userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian, blood, height, weight })
          console.log("response", response.data);
          if (response.status === 200) {
-            dispatch(actHideLoading())
+            dispatch(asyncGetUserById({ userId }))
             return {
                ok: true
             }

@@ -115,7 +115,9 @@ const StylesLoginScreen = StyleSheet.create({
    QRcode: {
       position: "absolute",
       top: 0,
-      left: 0
+      left: 0,
+      bottom: 0,
+      right: 0
    },
    headerQR: {
       width: "100%",
@@ -133,8 +135,8 @@ const StylesLoginScreen = StyleSheet.create({
    },
    topContentQR: {
       width: "100%",
-      height: 40,
-      backgroundColor: "#2d3436",
+      height: 35,
+      backgroundColor: "#ecf0f1",
       alignItems: "flex-end",
       justifyContent: "center"
    },

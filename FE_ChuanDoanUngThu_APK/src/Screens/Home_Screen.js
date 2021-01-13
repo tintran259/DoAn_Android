@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, Text, StatusBar, ScrollView, Image, FlatList, TouchableOpacity } from 'react-native'
+import { LogBox, View, Text, StatusBar, ScrollView, Image, FlatList, TouchableOpacity } from 'react-native'
 import { StylesHomeScreen } from '../Assets/Style/HomeStyle'
 import { useNavigation } from '@react-navigation/native'
 import IconAntd from 'react-native-vector-icons/AntDesign'
@@ -13,8 +13,9 @@ import { useState } from 'react'
 
 
 
-
 export default function HomeScreen() {
+   LogBox.ignoreAllLogs();
+
    const dispatch = useDispatch()
    const navigation = useNavigation()
    const userId = useSelector(state => state.User.ACCESS_TOKEN);
@@ -61,7 +62,7 @@ export default function HomeScreen() {
    ]
    useEffect(() => {
       dispatch(asyncGetUserById({ userId }))
-   }, [EditUserSuccessed === true])
+   }, [])
    const handleShowLocation = () => {
       setIsShowLocation(true)
    }

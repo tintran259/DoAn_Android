@@ -25,7 +25,10 @@ export default function HistoryScreen() {
       phone: dataUser.phone,
       birthday: dataUser.age,
       nameGuardian: dataUser.gaurdian,
-      phoneGuardian: dataUser.gaurdian_phone
+      phoneGuardian: dataUser.gaurdian_phone,
+      height: dataUser.height,
+      weight: dataUser.weight,
+      blood: dataUser.blood_type
    })
    const handleOpenGender = () => {
       setIsShowGender(true)
@@ -38,8 +41,8 @@ export default function HistoryScreen() {
       navigation.goBack()
    }
    const handleSaveEdit = () => {
-      let { userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian } = userProfile
-      dispatch(asyncEditInforUser({ userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian }))
+      let { userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian, blood, height, weight } = userProfile
+      dispatch(asyncEditInforUser({ userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian, blood, height, weight }))
          .then((res) => {
             if (res.ok) {
                navigation.goBack()

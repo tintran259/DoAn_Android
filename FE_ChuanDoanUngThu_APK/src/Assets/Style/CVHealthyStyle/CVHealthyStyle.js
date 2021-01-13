@@ -99,11 +99,13 @@ const StylesCVScreen = StyleSheet.create({
    textItem: {
       fontWeight: "bold",
       fontSize: wp("4%"),
-      marginTop: 10
+      marginTop: 10,
+      color: "#2d3436"
    },
    numberHight: {
       fontWeight: "bold",
-      marginBottom: 10
+      marginBottom: 10,
+      color: "#2d3436"
    },
    btnUpdate: {
       width: "80%",
@@ -120,6 +122,7 @@ const StylesCVScreen = StyleSheet.create({
    },
    ViewHistory: {
       width: "100%",
+      height: 500,
       marginTop: 120,
       paddingHorizontal: 20,
    },
@@ -159,7 +162,7 @@ const StylesCVScreen = StyleSheet.create({
    },
    cardItem: {
       width: "100%",
-      height: 200,
+      height: 80,
       backgroundColor: "#fff",
       marginTop: 20,
       borderRadius: 10,
@@ -181,6 +184,71 @@ const StylesCVScreen = StyleSheet.create({
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center"
+   },
+   ModalUpdate: {
+      width: "100%",
+      height: 250,
+      backgroundColor: "#fff",
+      borderRadius: 10,
+      paddingHorizontal: 10
+   },
+   titleModalHeader: {
+      fontWeight: "bold",
+      color: "#2d3436",
+      fontSize: wp("4%"),
+      textAlign: "center",
+      marginTop: 10
+   },
+   viewControl: {
+      width: "100%",
+      height: "100%",
+      alignItems: "center"
+   },
+   itemControl: {
+      flexDirection: "row",
+      marginBottom: 5
+   },
+   inputControl: {
+      width: 50,
+      borderBottomWidth: 1,
+      height: 40,
+      position: "absolute",
+      left: "60%",
+      borderBottomColor: "#bdc3c7"
+   },
+   bodyModdal: {
+      width: "100%",
+      height: 160,
+      flexDirection: "row",
+      justifyContent: "space-around",
+      alignItems: "center"
+   },
+   viewControl: {
+      width: "45%",
+   },
+   imgModal: {
+      width: "40%",
+      height: 150
+   },
+   ViewFooter: {
+      width: "100%",
+      height: 40,
+      justifyContent: "center",
+      alignItems: "center"
+   },
+   btnUpdateModal: {
+      width: "70%",
+      height: "100%",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#00cec9",
+      borderWidth: 1,
+      borderColor: "#81ecec",
+      borderRadius: 15
+   },
+   textBtnModal: {
+      color: "#fff",
+      fontWeight: "bold"
    }
 })
 

@@ -19,6 +19,8 @@ const StylesTestCancer = StyleSheet.create({
    header: {
       width: '100%',
       height: 70,
+      flexDirection: "row",
+      justifyContent: "space-between"
    },
    btnQR: {
       position: "absolute",
@@ -28,17 +30,20 @@ const StylesTestCancer = StyleSheet.create({
    titleHeader: {
       color: "#2d3436",
       fontSize: 25,
-      fontWeight: "800",
       marginTop: 20,
       marginLeft: 20,
-      fontFamily: "Rokkitt"
+      fontWeight: "bold"
    },
    btnSaveView: {
-      position: "absolute",
-      right: "2%",
-      top: 20,
-      width: 80,
+      marginTop: 14,
+      marginRight: 10,
+      width: 50,
       height: 40,
+      borderRadius: 10,
+      backgroundColor: "#00cec9",
+      justifyContent: "center",
+      alignItems: "center",
+      borderColor: "#fff"
    },
    btnShowQr: {
       width: 40,
@@ -55,7 +60,7 @@ const StylesTestCancer = StyleSheet.create({
       alignItems: "center",
    },
    textBtnSave: {
-      color: "#3498db",
+      color: "#fff",
       fontWeight: "800"
    },
    body: {
@@ -76,6 +81,10 @@ const StylesTestCancer = StyleSheet.create({
    },
    itemForm: {
       marginTop: 10,
+      borderWidth: 1,
+      borderRadius: 10,
+      padding: 10,
+      borderColor: "#ecf0f1"
    },
    ViewModal: {
       width: "100%",
@@ -139,6 +148,70 @@ const StylesTestCancer = StyleSheet.create({
       width: "100%",
       flexDirection: "row",
       justifyContent: "space-around",
+   },
+   ModalFailQR: {
+      width: "80%",
+      height: 120,
+      backgroundColor: "#fff",
+      borderRadius: 10,
+      alignItems: "center"
+   },
+   titleContent: {
+      fontSize: wp("4%"),
+      marginTop: 10
+   },
+   btnOK: {
+      width: 200,
+      height: 40,
+      justifyContent: "center",
+      alignItems: "center",
+      marginTop: 10
+   },
+   textUseful: {
+      position: "absolute",
+      bottom: "7%",
+      fontStyle: "italic"
+   },
+   markerStyle: {
+      width: 180,
+      height: 180,
+      justifyContent: "space-between"
+   },
+   line1: {
+      width: 30,
+      height: 30,
+      borderTopWidth: 4,
+      borderLeftWidth: 4,
+      borderColor: "#fff",
+      borderTopLeftRadius: 10
+   },
+   line2: {
+      width: 30,
+      height: 30,
+      borderTopWidth: 4,
+      borderRightWidth: 4,
+      borderColor: "#fff",
+      borderTopRightRadius: 10
+   },
+   linefirst: {
+      flexDirection: "row",
+      justifyContent: "space-between"
+   },
+   line3: {
+      width: 30,
+      height: 30,
+      borderBottomWidth: 4,
+      borderLeftWidth: 4,
+      borderColor: "#fff",
+      borderBottomLeftRadius: 10
+   },
+   line4: {
+      width: 30,
+      height: 30,
+      borderBottomWidth: 4,
+      borderRightWidth: 4,
+      borderColor: "#fff",
+      borderBottomRightRadius: 10
    }
 })
 export default StylesTestCancer

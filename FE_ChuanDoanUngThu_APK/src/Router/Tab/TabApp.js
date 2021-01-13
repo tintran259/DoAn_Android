@@ -15,10 +15,10 @@ export default function TabApp() {
    return (
       <Tab.Navigator
          tabBarOptions={{
-            activeTintColor: '#fff',
-            inactiveTintColor: '#00cec9',
-            activeBackgroundColor: "#00cec9",
-            inactiveBackgroundColor: "#ffff",
+            activeTintColor: '#00cec9',
+            inactiveTintColor: '#dfe6e9',
+            // activeBackgroundColor: "#00cec9",
+            // inactiveBackgroundColor: "#ffff",
             style: {
                borderTopLeftRadius: 10,
                borderTopRightRadius: 10,

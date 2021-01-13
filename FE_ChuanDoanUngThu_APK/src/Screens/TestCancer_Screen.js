@@ -10,13 +10,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ICD } from '../mock'
 import { useNavigation } from '@react-navigation/native'
 import Modal from 'react-native-modal'
+import getDateByTimeZoneDay from '../Contants/FORMAT_DATE'
 
 export default function TestCancerScreen() {
    const dispatch = useDispatch()
    const navigation = useNavigation()
+   const dateNow = getDateByTimeZoneDay(new Date());
    const [isShowQR, setIsShowQR] = useState(false)
    const [isShowModalResult, setIsShowModalResult] = useState(false)
    const [isSubmit, setIsSubmit] = useState(false)
+   const [isShowModalFailQR, setIsShowModalFailQR] = useState(false)
    const [formTestCancer, setFormTestCancer] = useState({
       baso: "",
       eos: "",
@@ -36,6 +39,7 @@ export default function TestCancerScreen() {
       plt: "",
       tpttbm: "",
       pct: "",
+      dateTest: dateNow
    })
    const result = useSelector(state => state.Result.ResultTest)
    console.log("result:", result);
@@ -122,11 +126,38 @@ export default function TestCancerScreen() {
    const handleHideScanQR = () => {
       setIsShowQR(false)
    }
+   const handleHideQRFail = () => {
+      setIsShowModalFailQR(false)
+   }
    const onSuccess = e => {
-      console.log('====================================');
-      console.log("E:", e);
-      console.log('====================================');
-      setIsShowScanQR(false)
+
+      const valueQR = e.data;
+      if (valueQR.indexOf("baso") !== -1 && valueQR.indexOf("eos") !== -1 && valueQR.indexOf("mono") !== -1) {
+         const dataR = JSON.parse(valueQR);
+         setIsShowQR(false)
+         setFormTestCancer({
+            baso: dataR.baso,
+            eos: dataR.eos,
+            mono: dataR.mono,
+            neu: dataR.neu,
+            lym: dataR.lym,
+            wbc: dataR.wbc,
+            hct: dataR.hct,
+            hgb: dataR.hgb,
+            rbc: dataR.rbc,
+            mch: dataR.mch,
+            mchc: dataR.mchc,
+            mcv: dataR.mcv,
+            mpv: dataR.mpv,
+            rdw: dataR.rdw,
+            pdw: dataR.pdw,
+            plt: dataR.plt,
+            tpttbm: dataR.tpttbm,
+            pct: dataR.pct,
+         })
+      } else {
+         setIsShowModalFailQR(true)
+      }
    };
    const handleHideModal = () => {
       setIsShowModalResult(false)
@@ -140,12 +171,13 @@ export default function TestCancerScreen() {
       <View style={StylesTestCancer.container}>
          <View style={StylesTestCancer.header}>
             <Text style={StylesTestCancer.titleHeader}>Xét Nghiệm</Text>
+            <View style={StylesTestCancer.btnSaveView}>
+               <TouchableOpacity style={StylesTestCancer.btnSave} onPress={hanleSaveTestCancer}>
+                  <Text style={StylesTestCancer.textBtnSave}>Lưu</Text>
+               </TouchableOpacity>
+            </View>
          </View>
-         <View style={StylesTestCancer.btnSaveView}>
-            <TouchableOpacity style={StylesTestCancer.btnSave} onPress={hanleSaveTestCancer}>
-               <Text style={StylesTestCancer.textBtnSave}>Lưu</Text>
-            </TouchableOpacity>
-         </View>
+
          <View style={StylesTestCancer.btnQR}>
             <TouchableOpacity style={StylesTestCancer.btnShowQr} onPress={handleShowQRCode}>
                <Image style={StylesTestCancer.iconQR} source={require("../Assets/Image/qr-code-scan.png")} />
@@ -165,10 +197,24 @@ export default function TestCancerScreen() {
                   topContent={
                      <View style={StylesLoginScreen.topContentQR}>
                         <TouchableOpacity style={StylesLoginScreen.btnCloseQR} onPress={handleHideScanQR}>
-                           <IconAntd name="close" size={25} color="#fff" />
+                           <IconAntd name="close" size={23} color="#2d3436" />
                         </TouchableOpacity>
                      </View>
                   }
+                  customMarker={() => {
+                     return (
+                        <View style={StylesTestCancer.markerStyle}>
+                           <View style={StylesTestCancer.linefirst}>
+                              <View style={StylesTestCancer.line1}></View>
+                              <View style={StylesTestCancer.line2}></View>
+                           </View>
+                           <View style={StylesTestCancer.linefirst}>
+                              <View style={StylesTestCancer.line3}></View>
+                              <View style={StylesTestCancer.line4}></View>
+                           </View>
+                        </View>
+                     )
+                  }}
                   markerStyle={StylesLoginScreen.markerQR}
                />
             </View>
@@ -181,8 +227,9 @@ export default function TestCancerScreen() {
                <Text style={StylesTestCancer.titleHeaderModal}>Kết Quả</Text>
                <View style={StylesTestCancer.bodyModal}>
                   <View style={StylesTestCancer.ContentBody}>
-                     <Text style={StylesTestCancer.textName} >Bạn có thể bị:</Text>
+                     <Text style={StylesTestCancer.textName} >Bạn có liên quan đến:</Text>
                      <Text style={StylesTestCancer.textRe}>{ShowResult && ShowResult[0].Desc}</Text>
+                     <Text style={StylesTestCancer.textUseful}>Hãy đến các bệnh viện để chuẩn đoán chính xác hơn. </Text>
                   </View>
                   <Image style={StylesTestCancer.iamgeModal} source={{ uri: "https://freepngimg.com/thumb/hammer/80451-physician-product-khan-attock-ismail-urdu-dera.png" }} />
                </View>
@@ -194,6 +241,19 @@ export default function TestCancerScreen() {
                      <Text style={[StylesTestCancer.textBtnOut, { color: "#3498db" }]}>Xem tư vấn</Text>
                   </TouchableOpacity>
                </View>
+            </View>
+         </Modal>
+         <Modal
+            onBackdropPress={handleHideQRFail}
+            isVisible={isShowModalFailQR}
+            style={{ alignItems: "center" }}
+         >
+            <View style={StylesTestCancer.ModalFailQR}>
+               <Text style={StylesTestCancer.titleHeaderModal}>Thông báo</Text>
+               <Text style={StylesTestCancer.titleContent}>Mã QR sai hoặc không có !</Text>
+               <TouchableOpacity style={StylesTestCancer.btnOK} onPress={handleHideQRFail}>
+                  <Text>OK</Text>
+               </TouchableOpacity>
             </View>
          </Modal>
       </View>

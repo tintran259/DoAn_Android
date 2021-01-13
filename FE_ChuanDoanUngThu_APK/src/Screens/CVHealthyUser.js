@@ -1,21 +1,64 @@
-import React from 'react'
-import { View, Text, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, TouchableOpacity, Image, ScrollView, FlatList, TextInput } from 'react-native'
 import { StylesCVScreen } from '../Assets/Style/CVHealthyStyle/CVHealthyStyle'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector, useDispatch } from 'react-redux'
+import Modal from 'react-native-modal'
+import { asyncEditInforUser, EditInforSuccessed } from '../Store/User/action'
+import { asyncGetListHistoryUser, actGetListHistoryDetail } from '../Store/History/action'
+
 
 export default function HistoryScreen() {
+   const dispatch = useDispatch()
    const navigation = useNavigation()
    const dataUser = useSelector(state => state.User.dataUser)
-
+   const listHistory = useSelector(state => state.History.listHistory)
+   console.log("listHistory roi ne", listHistory);
+   const userId = dataUser && dataUser.id
+   useEffect(() => {
+      dispatch(asyncGetListHistoryUser({ userId }))
+   }, [])
+   const [formHealthy, setFormHealthy] = useState({
+      userId: dataUser && dataUser.id,
+      fullname: dataUser && dataUser.fullname,
+      address: dataUser && dataUser.address,
+      gender: dataUser && dataUser.gender,
+      phone: dataUser && dataUser.phone,
+      birthday: dataUser && dataUser.age,
+      nameGuardian: dataUser && dataUser.gaurdian,
+      phoneGuardian: dataUser && dataUser.gaurdian_phone,
+      height: dataUser && dataUser.height,
+      weight: dataUser && dataUser.weight,
+      blood: dataUser && dataUser.blood_type
+   })
+   const [isShowModal, setIsSHowModal] = useState(false)
    const handleBack = () => {
       navigation.goBack()
    }
-   const handleDetailTest = () => {
+   const handleDetailTest = (item) => {
+      dispatch(actGetListHistoryDetail(item))
+      console.log("Clieckkkkkkk:", item);
       navigation.navigate('HistoryDetail')
    }
-   const data = [{ history: "" }, { history: "s" }]
+   const handleHideModal = () => {
+      setIsSHowModal(false)
+   }
+   const handleUpdate = () => {
+      setIsSHowModal(true)
+   }
+   const handleUpdateNow = () => {
+      console.log("formHealthy:", formHealthy);
+      let { userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian, blood, height, weight } = formHealthy
+      dispatch(asyncEditInforUser({ userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian, blood, height, weight }))
+         .then((res) => {
+            if (res.ok) {
+               dispatch(EditInforSuccessed())
+               setIsSHowModal(false)
+            }
+         })
+   }
+
    const Empty = () => {
       return (
          <View style={StylesCVScreen.emptyHistory}>
@@ -51,19 +94,19 @@ export default function HistoryScreen() {
                      <View style={StylesCVScreen.inforHight}>
                         <View style={StylesCVScreen.itemHight}>
                            <Text style={StylesCVScreen.textItem}>Cân nặng</Text>
-                           <Text style={StylesCVScreen.numberHight}>--</Text>
+                           <Text style={StylesCVScreen.numberHight}>{dataUser && dataUser.weight ? dataUser.weight : "--"}</Text>
                         </View>
                         <View style={StylesCVScreen.itemHight}>
                            <Text style={StylesCVScreen.textItem}>Chiều cao</Text>
-                           <Text style={StylesCVScreen.numberHight}>--</Text>
+                           <Text style={StylesCVScreen.numberHight}>{dataUser && dataUser.height ? dataUser.height : "--"}</Text>
                         </View>
                         <View style={StylesCVScreen.itemHight}>
                            <Text style={StylesCVScreen.textItem}>Nhóm máu</Text>
-                           <Text style={StylesCVScreen.numberHight}>--</Text>
+                           <Text style={StylesCVScreen.numberHight}>{dataUser && dataUser.blood_type ? dataUser.blood_type : "--"}</Text>
                         </View>
                      </View>
                      <View style={StylesCVScreen.BtnUpdate}>
-                        <TouchableOpacity style={StylesCVScreen.btnUpdate}>
+                        <TouchableOpacity style={StylesCVScreen.btnUpdate} onPress={handleUpdate}>
                            <Text style={StylesCVScreen.textBtnUpdate}>Cập nhật hồ sơ sức khỏe</Text>
                         </TouchableOpacity>
                      </View>
@@ -72,16 +115,16 @@ export default function HistoryScreen() {
                <View style={StylesCVScreen.ViewHistory}>
                   <Text style={StylesCVScreen.titleViewHistory}>Lịch sử khám & xét nghiệm</Text>
                   <FlatList
-                     data={data}
-                     keyExtractor={item => item.history.toString()}
-                     contentContainerStyle={{ paddingBottom: 150 }}
+                     data={listHistory}
+                     keyExtractor={item => item.toString()}
+                     contentContainerStyle={{ paddingBottom: 200 }}
                      renderItem={({ item, index }) => {
                         return (
-                           <TouchableOpacity style={StylesCVScreen.cardItem} onPress={handleDetailTest}>
+                           <TouchableOpacity style={StylesCVScreen.cardItem} onPress={() => handleDetailTest(item)}>
                               <View style={StylesCVScreen.timeHistory}>
                                  <View style={StylesCVScreen.timeTest}>
                                     <IconAntd name="clockcircleo" />
-                                    <Text style={StylesCVScreen.textTime}>20-12-2020</Text>
+                                    <Text style={StylesCVScreen.textTime}>{item.timestamp}</Text>
                                  </View>
                                  <Text>{item.history}</Text>
                               </View>
@@ -93,6 +136,50 @@ export default function HistoryScreen() {
                </View>
             </View>
          </ScrollView>
+         <Modal
+            isVisible={isShowModal}
+            style={{ alignItems: "center" }}
+            onBackdropPress={handleHideModal}
+         >
+
+            <View style={StylesCVScreen.ModalUpdate}>
+               <Text style={StylesCVScreen.titleModalHeader}>Cập nhật hồ sơ</Text>
+               <View style={StylesCVScreen.bodyModdal}>
+                  <View style={StylesCVScreen.viewControl}>
+                     <View style={StylesCVScreen.itemControl}>
+                        <Text style={StylesCVScreen.textItem}>Cân nặng</Text>
+                        <TextInput
+                           value={formHealthy.weight}
+                           onChangeText={text => setFormHealthy({ ...formHealthy, weight: text })}
+                           style={StylesCVScreen.inputControl}
+                        />
+                     </View>
+                     <View style={StylesCVScreen.itemControl}>
+                        <Text style={StylesCVScreen.textItem}>Chiều cao</Text>
+                        <TextInput
+                           style={StylesCVScreen.inputControl}
+                           value={formHealthy.height}
+                           onChangeText={text => setFormHealthy({ ...formHealthy, height: text })}
+                        />
+                     </View>
+                     <View style={StylesCVScreen.itemControl}>
+                        <Text style={StylesCVScreen.textItem}>Nhóm máu</Text>
+                        <TextInput
+                           style={StylesCVScreen.inputControl}
+                           value={formHealthy.blood}
+                           onChangeText={text => setFormHealthy({ ...formHealthy, blood: text })}
+                        />
+                     </View>
+                  </View>
+                  <Image style={StylesCVScreen.imgModal} source={require("../Assets/Image/hel.png")} />
+               </View>
+               <View style={StylesCVScreen.ViewFooter}>
+                  <TouchableOpacity style={StylesCVScreen.btnUpdateModal} onPress={handleUpdateNow}>
+                     <Text style={StylesCVScreen.textBtnModal}>Cập nhật hồ sơ</Text>
+                  </TouchableOpacity>
+               </View>
+            </View>
+         </Modal>
       </View>
    )
 }

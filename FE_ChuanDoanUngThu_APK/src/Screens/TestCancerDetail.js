@@ -1,13 +1,29 @@
-import React, { useMemo } from 'react'
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
+import React, { useMemo, useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import { StylesTestCancerDetail } from '../Assets/Style/TestCancerDetail'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { ICD } from '../mock'
+import { asyncGetListDoctor } from '../Store/Doctor/action'
+import { asyncGetListHospital } from '../Store/Hospital/action'
+import { FlatList } from 'react-native-gesture-handler'
+import Communications from 'react-native-communications';
+import { asyncPostTestHistory } from '../Store/History/action'
+import getDateByTimeZoneDay from '../Contants/FORMAT_DATE'
+
 export default function TestCancer() {
+   const dispatch = useDispatch()
    const result = useSelector(state => state.Result.ResultTest)
    const formTest = useSelector(state => state.Result.formTest)
+   const listDoctor = useSelector(state => state.Doctor.listDoctor)
+   const listHospital = useSelector(state => state.Hospital.listHospital)
+   const dataUser = useSelector(state => state.User.dataUser)
+   console.log("listDoctor", listDoctor);
+   console.log("listHospital", listHospital);
+   console.log("formTest:", formTest);
+   const dateNow = new Date();
+   const dateFormat = getDateByTimeZoneDay(dateNow)
    const navigation = useNavigation()
    const handleBack = () => {
       navigation.goBack()
@@ -21,6 +37,58 @@ export default function TestCancer() {
       }
       return [{ Desc: "" }]
    }, [result])
+   const [dataPostHistory, setDataPostHistory] = useState({
+      baso: formTest && formTest.baso,
+      eos: formTest && formTest.eos,
+      hct: formTest && formTest.hct,
+      hgb: formTest && formTest.hgb,
+      lym: formTest && formTest.lym,
+      mch: formTest && formTest.mch,
+      mchc: formTest && formTest.mchc,
+      mcv: formTest && formTest.mch,
+      mono: formTest && formTest.mono,
+      mpv: formTest && formTest.mpv,
+      neu: formTest && formTest.neu,
+      pct: formTest && formTest.pct,
+      pdw: formTest && formTest.pdw,
+      plt: formTest && formTest.plt,
+      rbc: formTest && formTest.rbc,
+      rdw: formTest && formTest.rdw,
+      tpttbm: formTest && formTest.tpttbm,
+      wbc: formTest && formTest.wbc,
+      userId: dataUser && dataUser.id,
+      doctorId: '',
+      hospitalId: "1",
+      timestamp: dateFormat,
+      test: ShowResult[0].Desc
+   })
+
+   console.log("dataPostHistory:", dataPostHistory);
+
+   useEffect(() => {
+      dispatch(asyncGetListDoctor())
+      dispatch(asyncGetListHospital())
+         .then((res) => {
+            if (res.ok) {
+               const { baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp } = dataPostHistory
+               dispatch(asyncPostTestHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp }))
+            }
+         })
+   }, [])
+
+   useEffect(() => {
+      const { baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp } = dataPostHistory
+      dispatch(asyncPostTestHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp }))
+   }, [handleCall])
+
+
+
+   const handleCall = (doctor) => {
+      console.log("doctor:", doctor);
+      setDataPostHistory({ ...dataPostHistory, doctorId: doctor.id })
+      const phoneNumber = doctor.phone
+      Communications.phonecall(phoneNumber, true)
+   }
    return (
       <View style={StylesTestCancerDetail.container}>
          <View style={StylesTestCancerDetail.header}>
@@ -29,91 +97,65 @@ export default function TestCancer() {
             </TouchableOpacity>
             <Text style={StylesTestCancerDetail.titleHeader}>Tư vấn</Text>
          </View>
-         <View style={StylesTestCancerDetail.body}>
-            <View style={StylesTestCancerDetail.labelHeaderBody}>
-               <Text style={StylesTestCancerDetail.titleBody}>Bạn có thể đã bị :</Text>
-               <Text style={StylesTestCancerDetail.textBody}>{ShowResult[0].Desc}</Text>
+         <ScrollView style={StylesTestCancerDetail.body}>
+            <View style={StylesTestCancerDetail.ViewInforTest}>
+               <Text style={StylesTestCancerDetail.titleInfor}>
+                  Bạn có thể liên quan đến:
+                  </Text>
+               <View style={StylesTestCancerDetail.ViewTestText}>
+                  <Text style={StylesTestCancerDetail.textCancer}>{`" ${ShowResult[0].Desc} "`}</Text>
+               </View>
+               <Text style={[StylesTestCancerDetail.titleInfor, { marginTop: 20 }]}>Thông tin tham khảo:</Text>
+               <View style={StylesTestCancerDetail.contentView}>
+                  <Text style={StylesTestCancerDetail.textDoc}>Những bác sĩ liên quan:</Text>
+                  <FlatList
+                     horizontal
+                     data={listDoctor}
+                     keyExtractor={item => item.id.toString()}
+                     renderItem={({ item }) => {
+                        return (
+                           <View style={StylesTestCancerDetail.inforDoctor}>
+                              <Image style={StylesTestCancerDetail.iamgeAvatar} source={{ uri: "https://cdn.benhvienthucuc.vn/wp-content/uploads/2012/06/bs-nguyen-hong-nhung.jpg" }} />
+                              <View style={StylesTestCancerDetail.viewInfor}>
+                                 <Text style={StylesTestCancerDetail.textNameDoctor}>{`Ths ${item.fullname}`}</Text>
+                                 <Text style={[StylesTestCancerDetail.textNameDoctor, { color: "#3498db" }]}>{item.department}</Text>
+                                 <TouchableOpacity style={StylesTestCancerDetail.btnContact} onPress={() => handleCall(item)}>
+                                    <Text style={[StylesTestCancerDetail.textNameDoctor, { color: "#ffff", marginTop: 0 }]}>Liên hệ bác sĩ</Text>
+                                 </TouchableOpacity>
+                              </View>
+                           </View>
+                        )
+                     }}
+                  />
+                  <Text style={StylesTestCancerDetail.textDoc}>Những bệnh viện liên quan:</Text>
+                  <View style={StylesTestCancerDetail.ViewHospital}>
+                     <FlatList
+                        data={listHospital}
+                        keyExtractor={item => item.id.toString()}
+                        renderItem={({ item }) => {
+                           return (
+                              <View style={StylesTestCancerDetail.HospitalView}>
+                                 <View style={StylesTestCancerDetail.listHospital}>
+                                    <Image style={StylesTestCancerDetail.imageHospital} source={{ uri: "https://thuocdantoc.vn/wp-content/uploads/2018/12/benh-vien-tu-du.jpg" }} />
+                                    <View style={StylesTestCancerDetail.viewInforHos}>
+                                       <Text style={StylesTestCancerDetail.textNameHos}>{item.name}</Text>
+                                       <Text style={StylesTestCancerDetail.textotLine}>Liên hệ:</Text>
+                                       <Text style={StylesTestCancerDetail.textPhone}>{item.hotline}</Text>
+                                    </View>
+                                 </View>
+                                 <View style={StylesTestCancerDetail.viewAdd}>
+                                    <Text style={StylesTestCancerDetail.titleAddress}>Địa chỉ:</Text>
+                                    <Text>{item.address}</Text>
+                                 </View>
+                              </View>
+                           )
+                        }}
+
+                     />
+                  </View>
+               </View>
             </View>
-            <View style={StylesTestCancerDetail.sectionDetail}>
-               <Text style={StylesTestCancerDetail.titleBody}>Thông số chi tiết</Text>
-               <ScrollView
-                  horizontal={true}
-                  style={StylesTestCancerDetail.section}>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>baso</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.baso}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>eos</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.eos}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>Mono</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.mono}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>neu</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.neu}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>lym</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.lym}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>wbc</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.wbc}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>hct</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.hct}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>hgb</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.hgb}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>rbc</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.rbc}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>mch</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.mch}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>mchc</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.mchc}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>mcv</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.mcv}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>mpv</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.mpv}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>rdw</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.rdw}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>pdw</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.pdw}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>plt</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.plt}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>tpttbm</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.tpttbm}</Text>
-                  </View>
-                  <View style={StylesTestCancerDetail.item}>
-                     <Text style={StylesTestCancerDetail.nameTest}>pct</Text>
-                     <Text style={StylesTestCancerDetail.inforText}>{formTest && formTest.pct}</Text>
-                  </View>
-               </ScrollView>
-            </View>
-         </View>
+         </ScrollView>
       </View>
    )
 }
