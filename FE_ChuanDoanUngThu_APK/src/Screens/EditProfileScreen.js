@@ -53,14 +53,14 @@ export default function HistoryScreen() {
    const handleChooseMale = () => {
       setUseProfile({
          ...userProfile,
-         gender: "1"
+         gender: "0"
       })
       setIsShowGender(false)
    }
    const handleChooseFeMale = () => {
       setUseProfile({
          ...userProfile,
-         gender: "0"
+         gender: "1"
       })
       setIsShowGender(false)
    }
@@ -83,7 +83,9 @@ export default function HistoryScreen() {
          <ScrollView>
             <FormEditProfile {...initialProps} />
          </ScrollView>
-         <Modal style={{ justifyContent: "flex-end", margin: 0 }}
+         <Modal
+            animationOutTiming={1000}
+            style={{ justifyContent: "flex-end", margin: 0 }}
             isVisible={isShowModalGender}
             onBackdropPress={handleCloseGender}
          >

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import { StylesTestCancerDetail } from '../Assets/Style/TestCancerDetail/'
 import { StylesHisToryScreen } from '../Assets/Style/HistoryStyle/HistoryScreenStyles'
@@ -7,8 +7,10 @@ import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { asyncGetListDoctor } from '../Store/Doctor/action'
 import { asyncGetListHospital } from '../Store/Hospital/action'
+import Communications from 'react-native-communications';
 
-export default function HistoryTestCancer({ formTest }) {
+
+export default function HistoryTestCancer() {
    const navigation = useNavigation()
    const dispatch = useDispatch()
    const itemDetail = useSelector(state => state.History.itemHistory)
@@ -20,10 +22,14 @@ export default function HistoryTestCancer({ formTest }) {
    const handleBack = () => {
       navigation.goBack()
    }
-   useEffect(() => {
-      dispatch(asyncGetListDoctor())
-      dispatch(asyncGetListHospital())
-   }, [])
+   const inforDoctor = useMemo(() => {
+      return listDoctor.filter((item) => {
+         return item.id === itemDetail.doctor_id
+      })
+   }, [itemDetail])
+   const handleContact = () => {
+      Communications.phonecall("0838995564", true)
+   }
    return (
       <View>
          <View style={StylesHisToryScreen.header}>
@@ -225,6 +231,29 @@ export default function HistoryTestCancer({ formTest }) {
             </View>
             <View style={StylesHisToryScreen.viewTest}>
                <Text style={StylesHisToryScreen.titleBS}>Bác sĩ bạn đã tư vấn</Text>
+               <View style={StylesHisToryScreen.cardDoctor}>
+                  <View style={StylesHisToryScreen.headerCard}>
+                     <Image style={StylesHisToryScreen.avatarBS} source={{ uri: "https://cdn.benhvienthucuc.vn/wp-content/uploads/2012/06/bs-nguyen-hong-nhung.jpg" }} />
+                     <View>
+                        <View style={StylesHisToryScreen.itemText}>
+                           <Text style={StylesHisToryScreen.titleNmae}>Ths.</Text>
+                           <Text style={StylesTestCancerDetail.labelNmae}>{inforDoctor && inforDoctor[0].fullname}</Text>
+                        </View>
+                        <View style={StylesHisToryScreen.itemText}>
+                           <Text style={StylesHisToryScreen.titleNmae}>Chuyên khoa:</Text>
+                           <Text style={StylesTestCancerDetail.labelNmae}>{inforDoctor && inforDoctor[0].department}</Text>
+                        </View>
+                        <View style={StylesHisToryScreen.itemText}>
+                           <Text style={StylesHisToryScreen.titleNmae}>Địa chỉ:<Text style={StylesTestCancerDetail.labelNmae}>{inforDoctor && inforDoctor[0].address}</Text></Text>
+                        </View>
+                     </View>
+                  </View>
+                  <View style={StylesHisToryScreen.bottom}>
+                     <TouchableOpacity style={StylesHisToryScreen.btnContact} onPress={handleContact}>
+                        <Text style={StylesHisToryScreen.textContact}>Liên hệ lại</Text>
+                     </TouchableOpacity>
+                  </View>
+               </View>
             </View>
          </ScrollView>
       </View>

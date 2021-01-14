@@ -252,6 +252,11 @@ const StylesTestCanCerDetail = StyleSheet.create({
    titleAddress: {
       fontWeight: "bold",
       color: "#2d3436"
+   },
+   labelNmae: {
+      color: "#2d3436",
+      width: "50%",
+      fontWeight: "normal"
    }
 })
 

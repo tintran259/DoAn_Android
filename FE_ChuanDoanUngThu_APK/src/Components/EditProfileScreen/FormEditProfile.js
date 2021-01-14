@@ -36,7 +36,7 @@ export default function FormEditProfile({
             )
          }
          <View style={StylesEditProfile.changeAvatar}>
-            <Image style={StylesEditProfile.avatar} source={{ uri: "https://img.over-blog-kiwi.com/2/41/15/86/20181231/ob_1ad1e0_anh-girl-xinh-bikini-goi-cam-4.jpg" }} />
+            <Image style={StylesEditProfile.avatar} source={{ uri: "https://thethao99.com/wp-content/uploads/2020/05/gai-xinh-372.jpg" }} />
             <Text style={StylesEditProfile.nameAvatar}> Ảnh đại diện </Text>
             <TouchableOpacity style={StylesEditProfile.btnChange}>
                <Text style={StylesEditProfile.textChange}> Thay đổi </Text>
@@ -66,7 +66,7 @@ export default function FormEditProfile({
                <Text style={StylesEditProfile.titleItem}>Giới tính</Text>
                <View style={StylesEditProfile.inputEdit}>
                   {
-                     userProfile.gender === "1" ?
+                     userProfile.gender === "0" ?
                         <Text style={StylesEditProfile.textLabel}>Nam</Text>
                         :
                         <Text style={StylesEditProfile.textLabel}>Nữ</Text>

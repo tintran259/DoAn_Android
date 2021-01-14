@@ -87,7 +87,7 @@ export default function RegisterScreen() {
                   }, 2000)
                   setTimeout(() => {
                      navigation.navigate('Login')
-                  }, 3000)
+                  }, 2500)
                } else {
                   alert(res.err)
                }
@@ -126,6 +126,7 @@ export default function RegisterScreen() {
             <FormRegister {...initialProps} />
          </ScrollView>
          <Modal
+            animationOutTiming={1000}
             isVisible={isShowModal}
             style={{ alignItems: "center" }}
             onBackdropPress={handleHideModalRegister}
@@ -133,12 +134,12 @@ export default function RegisterScreen() {
             <View style={StylesRegisterScreen.modal}>
                <View style={StylesRegisterScreen.headerModal}>
                   <Text style={StylesRegisterScreen.labelHederModal}>
-                     Notification
+                     Thông báo
                   </Text>
                </View>
                <View style={StylesRegisterScreen.content}>
                   <Text style={StylesRegisterScreen.labelContent}>
-                     You register successed !
+                     Bạn đã đăng kí thành công !
                   </Text>
                </View>
                <View style={StylesRegisterScreen.footer}>

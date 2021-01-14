@@ -24,6 +24,10 @@ export default function TestCancer() {
    console.log("formTest:", formTest);
    const dateNow = new Date();
    const dateFormat = getDateByTimeZoneDay(dateNow)
+   const HH = dateNow.getHours()
+   const MM = dateNow.getMinutes()
+
+   const date = `${HH}:${MM} ${dateFormat} `
    const navigation = useNavigation()
    const handleBack = () => {
       navigation.goBack()
@@ -57,10 +61,10 @@ export default function TestCancer() {
       tpttbm: formTest && formTest.tpttbm,
       wbc: formTest && formTest.wbc,
       userId: dataUser && dataUser.id,
-      doctorId: '',
+      doctorId: '1',
       hospitalId: "1",
-      timestamp: dateFormat,
-      test: ShowResult[0].Desc
+      timestamp: date,
+      test: ShowResult[0].Desc,
    })
 
    console.log("dataPostHistory:", dataPostHistory);
@@ -68,20 +72,13 @@ export default function TestCancer() {
    useEffect(() => {
       dispatch(asyncGetListDoctor())
       dispatch(asyncGetListHospital())
-         .then((res) => {
-            if (res.ok) {
-               const { baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp } = dataPostHistory
-               dispatch(asyncPostTestHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp }))
-            }
-         })
    }, [])
-
    useEffect(() => {
-      const { baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp } = dataPostHistory
-      dispatch(asyncPostTestHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp }))
-   }, [handleCall])
-
-
+      setTimeout(() => {
+         const { baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, test } = dataPostHistory
+         dispatch(asyncPostTestHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, test }))
+      }, 1000)
+   }, [])
 
    const handleCall = (doctor) => {
       console.log("doctor:", doctor);
@@ -150,7 +147,6 @@ export default function TestCancer() {
                               </View>
                            )
                         }}
-
                      />
                   </View>
                </View>

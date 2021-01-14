@@ -171,7 +171,7 @@ export default function TestCancerScreen() {
    return (
       <View style={StylesTestCancer.container}>
          <View style={StylesTestCancer.header}>
-            <Text style={StylesTestCancer.titleHeader}>Xét Nghiệm</Text>
+            <Text style={StylesTestCancer.titleHeader}>Tư Vấn</Text>
             <View style={StylesTestCancer.btnSaveView}>
                <TouchableOpacity style={StylesTestCancer.btnSave} onPress={hanleSaveTestCancer}>
                   <Text style={StylesTestCancer.textBtnSave}>Lưu</Text>
@@ -202,20 +202,18 @@ export default function TestCancerScreen() {
                         </TouchableOpacity>
                      </View>
                   }
-                  customMarker={() => {
-                     return (
-                        <View style={StylesTestCancer.markerStyle}>
-                           <View style={StylesTestCancer.linefirst}>
-                              <View style={StylesTestCancer.line1}></View>
-                              <View style={StylesTestCancer.line2}></View>
-                           </View>
-                           <View style={StylesTestCancer.linefirst}>
-                              <View style={StylesTestCancer.line3}></View>
-                              <View style={StylesTestCancer.line4}></View>
-                           </View>
+                  customMarker={
+                     <View style={StylesTestCancer.markerStyle}>
+                        <View style={StylesTestCancer.linefirst}>
+                           <View style={StylesTestCancer.line1}></View>
+                           <View style={StylesTestCancer.line2}></View>
                         </View>
-                     )
-                  }}
+                        <View style={StylesTestCancer.linefirst}>
+                           <View style={StylesTestCancer.line3}></View>
+                           <View style={StylesTestCancer.line4}></View>
+                        </View>
+                     </View>
+                  }
                   markerStyle={StylesLoginScreen.markerQR}
                />
             </View>

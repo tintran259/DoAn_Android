@@ -7,15 +7,25 @@ import { useSelector, useDispatch } from 'react-redux'
 import Modal from 'react-native-modal'
 import { asyncEditInforUser, EditInforSuccessed } from '../Store/User/action'
 import { asyncGetListHistoryUser, actGetListHistoryDetail } from '../Store/History/action'
-
-
+import getDateByTimeZoneDay from '../Contants/FORMAT_DATE'
+import getDateByTimeZoneDayTime from '../Contants/FORMAT_DATETIIME'
 export default function HistoryScreen() {
    const dispatch = useDispatch()
    const navigation = useNavigation()
    const dataUser = useSelector(state => state.User.dataUser)
    const listHistory = useSelector(state => state.History.listHistory)
    console.log("listHistory roi ne", listHistory);
+
+
+   const dayNow = new Date()
+   const dayNowFormat = getDateByTimeZoneDay(dayNow)
    const userId = dataUser && dataUser.id
+   const DayNowAndDayHistory = (dayHistory) => {
+      if (dayNowFormat <= dayHistory) {
+         return true
+      }
+      return false
+   }
    useEffect(() => {
       dispatch(asyncGetListHistoryUser({ userId }))
    }, [])
@@ -116,22 +126,38 @@ export default function HistoryScreen() {
                   <Text style={StylesCVScreen.titleViewHistory}>Lịch sử khám & xét nghiệm</Text>
                   <FlatList
                      data={listHistory}
-                     keyExtractor={item => item.toString()}
+                     contentContainerStyle={{ paddingBottom: 90 }}
+                     keyExtractor={item => item.id.toString()}
                      contentContainerStyle={{ paddingBottom: 200 }}
                      renderItem={({ item, index }) => {
+                        console.log(item.timestamp);
+                        const dateTest = item.timestamp
                         return (
-                           <TouchableOpacity style={StylesCVScreen.cardItem} onPress={() => handleDetailTest(item)}>
-                              <View style={StylesCVScreen.timeHistory}>
-                                 <View style={StylesCVScreen.timeTest}>
-                                    <IconAntd name="clockcircleo" />
-                                    <Text style={StylesCVScreen.textTime}>{item.timestamp}</Text>
+                           <View>
+                              {
+                                 DayNowAndDayHistory(dateTest) &&
+                                 <Image source={require("../Assets/Image/new1.png")} style={{
+                                    position: "absolute",
+                                    top: "7%",
+                                    right: "0%",
+                                    zIndex: 200,
+                                    width: 25,
+                                    height: 25
+                                 }} />
+                              }
+
+                              <TouchableOpacity style={StylesCVScreen.cardItem} onPress={() => handleDetailTest(item)}>
+                                 <View style={StylesCVScreen.timeHistory}>
+                                    <Text style={StylesCVScreen.titleTuVan}>Kết quả tư Vấn</Text>
+
+                                    <View style={StylesCVScreen.timeTest}>
+                                       <IconAntd name="clockcircleo" />
+                                       <Text style={StylesCVScreen.textTime}>{item.timestamp}</Text>
+                                    </View>
+                                    <Text>{item.history}</Text>
                                  </View>
-                                 <Text>{item.history}</Text>
-                              </View>
-                              <View style={StylesCVScreen.textView}>
-                                 <Text style={StylesCVScreen.textLabel}>Benhj</Text>
-                              </View>
-                           </TouchableOpacity>
+                              </TouchableOpacity>
+                           </View>
                         )
                      }}
                      ListEmptyComponent={Empty}

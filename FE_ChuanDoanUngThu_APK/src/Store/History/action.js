@@ -44,11 +44,11 @@ export const asyncGetListHistoryUser = ({ userId }) => {
       }
    }
 }
-export const asyncPostTestHistory = ({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp }) => {
+export const asyncPostTestHistory = ({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, test }) => {
    return async (dispatch) => {
       try {
          dispatch(actShowLoading())
-         const response = await GetListHistory.PostHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp })
+         const response = await GetListHistory.PostHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, test })
          console.log("response getLISThISTORY:", response);
          if (response.status === 200) {
             dispatch(actHideLoading())

@@ -39,11 +39,6 @@ export default function LoginScreen() {
                   setTimeout(() => {
                      setIsShowToast(false)
                   }, 3000)
-               } else {
-                  setIsShowToast(true)
-                  setTimeout(() => {
-                     setIsShowToast(false)
-                  }, 3000)
                }
             })
       }

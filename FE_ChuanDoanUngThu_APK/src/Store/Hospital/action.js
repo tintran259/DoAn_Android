@@ -18,16 +18,16 @@ export const asyncGetListHospital = () => {
          if (response.status === 200) {
             const listHospital = response.data.data
             dispatch(actGetListHospital(listHospital))
-            dispatch(actHideLoading())
             return {
                ok: true
             }
          }
       } catch (error) {
+         console.log("error", error);
+
          return {
             ok: false
          }
-         console.log("error", error);
       }
    }
 }

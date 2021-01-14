@@ -70,8 +70,8 @@ export const asyncLogin = ({ username, password }) => {
          if (response.data.status === 200) {
             const token = response.data.data[0].id;
             const dataUser = response.data.data[0];
-            dispatch(loginSuccess(token, dataUser))
             dispatch(actHideLoading())
+            dispatch(loginSuccess(token, dataUser))
             return {
                ok: true
             }

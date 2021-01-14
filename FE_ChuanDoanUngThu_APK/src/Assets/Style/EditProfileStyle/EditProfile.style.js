@@ -37,7 +37,7 @@ const StylesEditProfile = StyleSheet.create({
       color: "#3498db"
    },
    formEdit: {
-
+      marginTop: 10
    },
    avatar: {
       width: 70,
@@ -77,7 +77,11 @@ const StylesEditProfile = StyleSheet.create({
    },
    itemForm: {
       width: "100%",
-      marginTop: 15
+      marginTop: 15,
+      borderWidth: 1,
+      borderRadius: 10,
+      padding: 10,
+      borderColor: "#ecf0f1"
    },
    inputEdit: {
       width: "100%",
@@ -87,7 +91,7 @@ const StylesEditProfile = StyleSheet.create({
       fontWeight: "bold"
    },
    titleItem: {
-      color: "#7f8c8d"
+      color: "#2d3436"
    },
    iconDown: {
 

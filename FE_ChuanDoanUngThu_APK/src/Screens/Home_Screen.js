@@ -161,6 +161,7 @@ export default function HomeScreen() {
             />
          </View>
          <Modal
+            animationOutTiming={1000}
             onBackdropPress={handleHideLocation}
             isVisible={isShowLocation}
             style={{ margin: 0, alignItems: "center", justifyContent: "flex-end" }} >

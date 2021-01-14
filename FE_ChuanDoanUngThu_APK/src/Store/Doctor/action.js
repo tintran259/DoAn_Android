@@ -14,7 +14,6 @@ export const actGetListDoctor = (listDoctor) => {
 export const asyncGetListDoctor = () => {
    return async (dispatch) => {
       try {
-         dispatch(actShowLoading())
          const response = await GetListDoctor.ListDoctor()
          if (response.status === 200) {
             const listDoctor = response.data.data

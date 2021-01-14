@@ -149,10 +149,11 @@ const StylesLoginScreen = StyleSheet.create({
    },
    topContentQR: {
       width: "100%",
-      height: 35,
+      height: 75,
       backgroundColor: "#ecf0f1",
       alignItems: "flex-end",
-      justifyContent: "center"
+      justifyContent: "flex-end",
+      zIndex: 200
    },
    btnCloseQR: {
       width: 50,

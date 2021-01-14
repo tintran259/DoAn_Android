@@ -44,12 +44,59 @@ const StylesHisToryScreen = StyleSheet.create({
    },
    viewTest: {
       width: "100%",
-      height: 500
+      // height: 500
+      height: 300
    },
    titleBS: {
       fontWeight: "bold",
       fontSize: 19,
       color: "#2d3436"
+   },
+   cardDoctor: {
+      width: "100%",
+      height: 150,
+      backgroundColor: "#fff",
+      marginTop: 20,
+      borderRadius: 10,
+      padding: 10
+   },
+   avatarBS: {
+      width: 80,
+      height: 80,
+      borderRadius: 80,
+   },
+   itemText: {
+      flexDirection: "row",
+      marginBottom: 5,
+      width: "90%"
+   },
+   titleNmae: {
+      fontWeight: "bold",
+      color: "#2d3436",
+      marginLeft: 10,
+      marginRight: 5
+   },
+   headerCard: {
+      flexDirection: "row"
+   },
+   bottom: {
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      marginTop: 5
+   },
+   btnContact: {
+      marginRight: 10,
+      width: 150,
+      height: 35,
+      backgroundColor: "#00cec9",
+      borderRadius: 10,
+      justifyContent: "center",
+      alignItems: "center"
+   },
+   textContact: {
+      color: "#fff",
+      fontWeight: "bold"
    }
 })
 

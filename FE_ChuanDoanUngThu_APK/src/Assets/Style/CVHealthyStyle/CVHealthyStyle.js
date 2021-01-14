@@ -122,8 +122,8 @@ const StylesCVScreen = StyleSheet.create({
    },
    ViewHistory: {
       width: "100%",
-      height: 500,
       marginTop: 120,
+      paddingBottom: 50,
       paddingHorizontal: 20,
    },
    titleViewHistory: {
@@ -162,16 +162,16 @@ const StylesCVScreen = StyleSheet.create({
    },
    cardItem: {
       width: "100%",
-      height: 80,
       backgroundColor: "#fff",
       marginTop: 20,
       borderRadius: 10,
+      padding: 10
    },
    timeHistory: {
       width: "100%",
-      height: 30,
+      height: 40,
       flexDirection: "row",
-      justifyContent: "flex-end",
+      justifyContent: "space-around",
       alignItems: "center",
    },
    textTime: {
@@ -256,7 +256,13 @@ const StylesCVScreen = StyleSheet.create({
    textLabel: {
       fontWeight: "bold",
       marginLeft: 20,
-      width: "90%"
+      width: "90%",
+      fontStyle: "italic"
+   },
+   titleTuVan: {
+      marginLeft: 10,
+      color: "#d63031",
+      marginBottom: 5
    }
 })
 
