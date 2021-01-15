@@ -21,7 +21,9 @@ export default function HistoryScreen() {
    const dayNowFormat = getDateByTimeZoneDay(dayNow)
    const userId = dataUser && dataUser.id
    const DayNowAndDayHistory = (dayHistory) => {
-      if (dayNowFormat <= dayHistory) {
+      const date = dayHistory.slice(6, 16)
+      console.log("date:", date);
+      if (dayNowFormat <= date) {
          return true
       }
       return false

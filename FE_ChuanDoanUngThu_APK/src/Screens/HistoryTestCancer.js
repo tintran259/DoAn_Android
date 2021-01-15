@@ -230,6 +230,10 @@ export default function HistoryTestCancer() {
                </View>
             </View>
             <View style={StylesHisToryScreen.viewTest}>
+               <Text style={StylesHisToryScreen.titleBS}>Kết quả tư vấn</Text>
+               <View style={StylesHisToryScreen.cardHis}>
+                  <Text style={StylesHisToryScreen.textHis}>"{itemDetail.predict}"</Text>
+               </View>
                <Text style={StylesHisToryScreen.titleBS}>Bác sĩ bạn đã tư vấn</Text>
                <View style={StylesHisToryScreen.cardDoctor}>
                   <View style={StylesHisToryScreen.headerCard}>

@@ -45,7 +45,7 @@ const StylesHisToryScreen = StyleSheet.create({
    viewTest: {
       width: "100%",
       // height: 500
-      height: 300
+      height: 600
    },
    titleBS: {
       fontWeight: "bold",
@@ -97,6 +97,22 @@ const StylesHisToryScreen = StyleSheet.create({
    textContact: {
       color: "#fff",
       fontWeight: "bold"
+   },
+   cardHis: {
+      width: "100%",
+      height: 80,
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: 10,
+      borderWidth: 1,
+      marginTop: 10,
+      marginBottom: 10,
+      borderColor: "#00cec9"
+   },
+   textHis: {
+      fontStyle: "italic",
+      fontSize: 17,
+      textAlign: "center"
    }
 })
 

@@ -183,7 +183,8 @@ const StylesCVScreen = StyleSheet.create({
       marginRight: "5%",
       flexDirection: "row",
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
+      marginLeft: 20
    },
    ModalUpdate: {
       width: "100%",
