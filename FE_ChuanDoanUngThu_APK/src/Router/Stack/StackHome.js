@@ -4,6 +4,8 @@ import HomeScreen from '../../Screens/Home_Screen'
 import HistoryScreen from '../../Screens/History_Screen'
 import CVHealthyUser from '../../Screens/CVHealthyUser'
 import HisToryTestCancer from '../../Screens/HistoryTestCancer'
+import CalanderHealthy from '../../Screens/CalanderHealthyScreen'
+import ChangeHealthy from '../../Screens/ChangeHealthyScreen'
 const Stack = createStackNavigator();
 
 export default function StackLoginRegister() {
@@ -13,6 +15,8 @@ export default function StackLoginRegister() {
          <Stack.Screen name="History" component={HistoryScreen} />
          <Stack.Screen name="CVhealthy" component={CVHealthyUser} />
          <Stack.Screen name="HistoryDetail" component={HisToryTestCancer} />
+         <Stack.Screen name="CalanderHealthy" component={CalanderHealthy} />
+         <Stack.Screen name="ChangeHealthy" component={ChangeHealthy} />
       </Stack.Navigator>
    )
 }

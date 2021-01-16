@@ -23,8 +23,6 @@ export const asyncGetListHospital = () => {
             }
          }
       } catch (error) {
-         console.log("error", error);
-
          return {
             ok: false
          }

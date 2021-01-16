@@ -38,8 +38,8 @@ const StylesLoginScreen = StyleSheet.create({
       height: 100
    },
    logo2: {
-      width: 140,
-      height: 80
+      width: 215,
+      height: 120,
    },
    textLogo: {
       fontSize: hp("3%"),
@@ -76,7 +76,7 @@ const StylesLoginScreen = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       borderRadius: 10,
-      backgroundColor: "#00cec9"
+      backgroundColor: "#00bab6"
    },
    btnScan: {
       width: 40,
@@ -113,7 +113,7 @@ const StylesLoginScreen = StyleSheet.create({
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 10,
-      backgroundColor: "#e74c3c"
+      backgroundColor: "#ff4d4d"
    },
    btnRegisterView: {
       width: "100%",
@@ -163,7 +163,7 @@ const StylesLoginScreen = StyleSheet.create({
    },
    validate: {
       position: "absolute",
-      top: "100%",
+      top: "70%",
       right: 0,
       color: "#e74c3c",
       fontWeight: "bold",

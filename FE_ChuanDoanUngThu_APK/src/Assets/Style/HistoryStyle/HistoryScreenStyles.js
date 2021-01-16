@@ -5,8 +5,28 @@ const StylesHisToryScreen = StyleSheet.create({
    container: {
       flex: 1,
       backgroundColor: "#fff",
+   },
+   headerHistory: {
+      height: 70,
+      width: "100%",
+      paddingLeft: 20,
+      justifyContent: "space-around"
+   },
+   bodyContent: {
+      width: "100%",
+      height: "100%",
       justifyContent: "center",
       alignItems: "center"
+   },
+   titleHeaderHst: {
+      fontWeight: "bold",
+      fontSize: 22,
+      color: "#2d3436"
+   },
+   btnBackHistory: {
+      width: 70,
+      height: 40,
+      marginTop: 10
    },
    textSetting: {
       marginTop: 10,

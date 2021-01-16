@@ -20,7 +20,7 @@ const StylesHomeScreen = StyleSheet.create({
       flexDirection: "row",
       width: 180,
       height: 35,
-      backgroundColor: "#fff",
+      backgroundColor: "#ffffff",
       borderRadius: 10,
       alignItems: "center",
       marginLeft: 10,
@@ -52,14 +52,14 @@ const StylesHomeScreen = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       paddingHorizontal: 10,
-      backgroundColor: "#00cec9",
+      backgroundColor: "#00bab6",
       paddingTop: 10,
       marginBottom: 20
    },
    btnIcon: {
       width: 60,
       height: 40,
-      backgroundColor: "#00cec9",
+      backgroundColor: "#00bab6",
       justifyContent: "center",
       alignItems: "center"
    },
@@ -72,7 +72,7 @@ const StylesHomeScreen = StyleSheet.create({
       height: 40,
       flexDirection: "row",
       justifyContent: "space-between",
-      backgroundColor: "#00cec9",
+      backgroundColor: "#00bab6",
       marginTop: 10
    },
    iconBell: {
@@ -167,7 +167,7 @@ const StylesHomeScreen = StyleSheet.create({
    },
    body: {
       flex: 1,
-      backgroundColor: "#00cec9",
+      backgroundColor: "#00bab6",
    },
    card1: {
       width: "100%",
@@ -231,6 +231,100 @@ const StylesHomeScreen = StyleSheet.create({
       fontSize: 16,
       color: "#2d3436",
       fontWeight: "bold"
+   },
+   iconNotifi: {
+      position: "absolute",
+      width: 10,
+      height: 10,
+      backgroundColor: "#e74c3c",
+      borderRadius: 10,
+      right: "5%",
+      top: "20%"
+   },
+   ModalNotification: {
+      alignItems: "flex-start",
+      justifyContent: "flex-start",
+      marginTop: "5%",
+   },
+   ModalNofi: {
+      width: "90%",
+      height: 150,
+      backgroundColor: "#ffff",
+      borderRadius: 7,
+      padding: 10
+   },
+   iconPo: {
+      width: 10,
+      height: 10,
+      position: "absolute",
+      zIndex: 200,
+      right: "7.2%",
+      top: "1%"
+   },
+   titleNotification: {
+      fontWeight: "bold"
+   },
+   contentNotification: {
+      width: "100%",
+      height: "100%",
+      justifyContent: "center",
+      alignItems: "center"
+   },
+   textLabel: {
+      color: "#2d3436",
+      fontSize: 12,
+      marginTop: 10
+   },
+   ViewDoctor: {
+      width: "100%",
+      height: 300
+   },
+   ModalDoctorDetail: {
+      width: "90%",
+      height: 320,
+      borderRadius: 10,
+      backgroundColor: "#fff",
+      alignItems: "center",
+      padding: 10
+   },
+   imgeDoctorDetail: {
+      width: 100,
+      height: 100,
+   },
+   itemText: {
+      width: "100%",
+      flexDirection: "column",
+      marginTop: 10
+   },
+   nameText: {
+      width: "60%",
+      position: "absolute",
+      left: "50%"
+   },
+   titleText: {
+      marginLeft: 20,
+      fontWeight: "bold",
+      color: "#2d3436"
+   },
+   footerModal: {
+      width: "100%",
+      height: 80,
+      justifyContent: "flex-end",
+      alignItems: "flex-end"
+   },
+   btnContact: {
+      width: 100,
+      height: 35,
+      backgroundColor: "#00b894",
+      borderRadius: 10,
+      justifyContent: "center",
+      alignItems: "center"
+   },
+   iconClose: {
+      fontSize: 20,
+      position: "absolute",
+      right: "2%",
+      top: "2%"
    }
 })
 

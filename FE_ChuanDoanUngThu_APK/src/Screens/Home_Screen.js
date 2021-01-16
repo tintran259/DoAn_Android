@@ -4,14 +4,15 @@ import { StylesHomeScreen } from '../Assets/Style/HomeStyle'
 import { useNavigation } from '@react-navigation/native'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import IconFontisto from 'react-native-vector-icons/Fontisto'
-import Swiper from "react-native-web-swiper";
+import IconEntypo from 'react-native-vector-icons/Entypo'
+import Swiper from "react-native-swiper";
 import { useSelector, useDispatch } from 'react-redux'
 import { asyncGetUserById } from '../Store/User/action'
 import { ListDoctor } from '../Components/HomeScreen'
 import Modal from 'react-native-modal'
 import { useState } from 'react'
-
-
+import { Popover, PopoverController } from 'react-native-modal-popover';
+import Communications from 'react-native-communications';
 
 export default function HomeScreen() {
    LogBox.ignoreAllLogs();
@@ -22,6 +23,9 @@ export default function HomeScreen() {
    const dataUser = useSelector(state => state.User.dataUser);
    const EditUserSuccessed = useSelector(state => state.User.isEditUser)
    const [isShowLocation, setIsShowLocation] = useState(false)
+   const [isShowNotification, setIsShowNotification] = useState(false)
+   const [doctorDetail, setIsDoctorDetail] = useState({})
+   const [isShowModalDetailDoctor, setIsShowModalDetailDoctor] = useState(false)
    const [locationSelected, setLocationSelected] = useState('Hồ Chí Minh')
    const listDoctor = [
       {
@@ -63,6 +67,12 @@ export default function HomeScreen() {
    useEffect(() => {
       dispatch(asyncGetUserById({ userId }))
    }, [])
+   const handleShowNotification = () => {
+      setIsShowNotification(true)
+   }
+   const handleHideNotification = () => {
+      setIsShowNotification(false)
+   }
    const handleShowLocation = () => {
       setIsShowLocation(true)
    }
@@ -78,10 +88,25 @@ export default function HomeScreen() {
    const moveCVScreen = () => {
       navigation.navigate('CVhealthy')
    }
+   const moveChangeHealthy = () => {
+      navigation.navigate('ChangeHealthy')
+   }
+   const movecalanderHealthy = () => {
+      navigation.navigate('CalanderHealthy')
+   }
    const handleSelectLocation = (inforLocation) => {
       setLocationSelected(inforLocation)
       setIsShowLocation(false)
    }
+   const handleDoctorDetail = (item) => {
+      console.log(item);
+      setIsShowModalDetailDoctor(true)
+      setIsDoctorDetail(item)
+   }
+   const handleHideModalDocdorDetail = () => {
+      setIsShowModalDetailDoctor(false)
+   }
+   console.log("doctorDetail:", doctorDetail);
    return (
       <ScrollView style={StylesHomeScreen.body}>
          <View style={StylesHomeScreen.notification}>
@@ -90,18 +115,20 @@ export default function HomeScreen() {
                <Text style={StylesHomeScreen.nameLocation}>{locationSelected}</Text>
                <IconAntd name="right" color="#2d3436" style={{ position: "absolute", right: "4%" }} />
             </TouchableOpacity>
-            <TouchableOpacity style={StylesHomeScreen.btnIcon}>
+            <TouchableOpacity style={StylesHomeScreen.btnIcon} onPress={handleShowNotification}>
                <IconFontisto name="bell" style={StylesHomeScreen.iconBell} />
             </TouchableOpacity>
+            {/* <View style={StylesHomeScreen.iconNotifi}>
+            </View> */}
          </View>
          <View style={StylesHomeScreen.header}>
             <TouchableOpacity style={StylesHomeScreen.ViewUser} onPress={moveProfileScreen}>
                <View style={StylesHomeScreen.avatarUser}>
-                  <Image style={StylesHomeScreen.avatarImage} source={{ uri: "https://thethao99.com/wp-content/uploads/2020/05/gai-xinh-372.jpg" }} />
+                  <Image style={StylesHomeScreen.avatarImage} source={{ uri: "https://paramountsprx.com/wp-content/uploads/2017/09/MAN_AVATAR.png" }} />
                </View>
                <View style={StylesHomeScreen.inforUser}>
                   <Text style={StylesHomeScreen.textName}>{dataUser && dataUser.fullname}</Text>
-                  <Text style={StylesHomeScreen.textAddress}>{dataUser && dataUser.address}</Text>
+                  <Text style={StylesHomeScreen.textAddress}>Quản lý thông tin tài khoản</Text>
                </View>
                <View style={StylesHomeScreen.viewBtn}>
                   <TouchableOpacity style={StylesHomeScreen.btnProfile}>
@@ -114,27 +141,27 @@ export default function HomeScreen() {
             <View style={StylesHomeScreen.Control}>
                <View style={StylesHomeScreen.card1}>
                   <View style={StylesHomeScreen.ViewCard}>
-                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#74b9ff" }]} onPress={moveCVScreen}>
+                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#2e86de" }]} onPress={moveCVScreen}>
                         <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/pharmacy1.png')} />
                         <Text style={[StylesHomeScreen.textControl, { color: "#fff" }]}>Hồ sơ sức khỏe</Text>
                      </TouchableOpacity>
                   </View>
                   <View style={StylesHomeScreen.ViewCard}>
-                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#fdcb6e" }]} onPress={moveHistoryScreen}>
+                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#ff4d4d" }]} onPress={moveHistoryScreen}>
                         <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/question.png')} />
-                        <Text style={[StylesHomeScreen.textControl, { color: "#fff" }]}>Lịch sử tư vấn</Text>
+                        <Text style={[StylesHomeScreen.textControl, { color: "#fff" }]}>Lịch sử trao đổi</Text>
                      </TouchableOpacity>
                   </View>
                </View>
                <View style={StylesHomeScreen.card1}>
                   <View style={StylesHomeScreen.ViewCard}>
-                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#54a0ff" }]}>
+                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#ffc048" }]} onPress={moveChangeHealthy}>
                         <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/health.png')} />
                         <Text style={StylesHomeScreen.textControl}>Theo dõi sức khỏe</Text>
                      </TouchableOpacity>
                   </View>
                   <View style={StylesHomeScreen.ViewCard}>
-                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#ff6b6b" }]}>
+                     <TouchableOpacity style={[StylesHomeScreen.card, { backgroundColor: "#2ecc71" }]} onPress={movecalanderHealthy}>
                         <Image style={StylesHomeScreen.iconPharmacy} source={require('../Assets/Image/alar.png')} />
                         <Text style={StylesHomeScreen.textControl}>Lịch nhắc sức khỏe</Text>
                      </TouchableOpacity>
@@ -142,23 +169,30 @@ export default function HomeScreen() {
                </View>
             </View>
             <View style={StylesHomeScreen.bannerView}>
-               <Swiper>
+               <Swiper
+                  autoplay
+               >
                   <Image style={{ width: "100%", height: "100%", borderRadius: 10 }} source={{ uri: "https://i.pinimg.com/originals/dd/77/d2/dd77d2b74cc81a8e61299c35194b0f3b.jpg" }} />
                   <Image style={{ width: "100%", height: "100%", borderRadius: 10 }} source={{ uri: "https://m.media-amazon.com/images/I/61VmeEXjmcL._AC_SY355_.jpg" }} />
                   <Image style={{ width: "100%", height: "100%", borderRadius: 10 }} source={{ uri: "https://www.bhatiahospital.org/storage/app/public/home_banner/2/image/1503411077revised-bhatia-homebanner-03.jpg" }} />
                </Swiper>
             </View>
             <Text style={StylesHomeScreen.titleDanhSach}>Danh sách bác sĩ</Text>
-            <FlatList
-               horizontal
-               data={listDoctor}
-               keyExtractor={item => item.name}
-               renderItem={({ item }) => {
-                  return (
-                     <ListDoctor item={item} />
-                  )
-               }}
-            />
+            <View style={StylesHomeScreen.ViewDoctor}>
+               <FlatList
+                  horizontal
+                  data={listDoctor}
+                  keyExtractor={item => item.name}
+                  renderItem={({ item }) => {
+                     return (
+                        <TouchableOpacity onPress={() => handleDoctorDetail(item)}>
+                           <ListDoctor item={item} />
+                        </TouchableOpacity>
+                     )
+                  }}
+               />
+            </View>
+            <Text style={StylesHomeScreen.titleDanhSach}>Danh sách bệnh viện</Text>
          </View>
          <Modal
             animationOutTiming={1000}
@@ -178,9 +212,59 @@ export default function HomeScreen() {
                         )
                      })
                   }
-
                </View>
-
+            </View>
+         </Modal>
+         <Modal
+            animationOut="fadeOut"
+            animationIn="fadeIn"
+            animationOutTiming={600}
+            backdropOpacity={0.6}
+            backdropTransitionOutTiming={600}
+            onBackdropPress={handleHideNotification}
+            isVisible={isShowNotification}
+            style={StylesHomeScreen.ModalNotification}
+         >
+            <Image style={StylesHomeScreen.iconPo} source={require("../Assets/Image/blech2.png")} />
+            <View style={StylesHomeScreen.ModalNofi}>
+               <Text style={StylesHomeScreen.titleNotification}>Thông báo</Text>
+               <View style={StylesHomeScreen.contentNotification}>
+                  <Image source={require("../Assets/Image/paper.png")} />
+                  <Text style={StylesHomeScreen.textLabel}>Bạn chưa có thông báo nào</Text>
+               </View>
+            </View>
+         </Modal>
+         <Modal
+            isVisible={isShowModalDetailDoctor}
+            style={{ alignItems: "center" }}
+            onBackdropPress={handleHideModalDocdorDetail}
+         >
+            <View style={StylesHomeScreen.ModalDoctorDetail}>
+               <IconAntd name="close" style={StylesHomeScreen.iconClose} onPress={handleHideModalDocdorDetail} />
+               <Image style={StylesHomeScreen.imgeDoctorDetail} source={{ uri: "https://cdn.benhvienthucuc.vn/wp-content/uploads/2012/06/bs-nguyen-hong-nhung.jpg" }} />
+               <View style={StylesHomeScreen.itemText}>
+                  <Text style={StylesHomeScreen.titleText}>Họ tên:</Text>
+                  <Text style={StylesHomeScreen.nameText}>{doctorDetail && doctorDetail.name}</Text>
+               </View>
+               <View style={StylesHomeScreen.itemText}>
+                  <Text style={StylesHomeScreen.titleText}>Chuyên khoa:</Text>
+                  <Text style={StylesHomeScreen.nameText}>{doctorDetail && doctorDetail.option}</Text>
+               </View>
+               <View style={StylesHomeScreen.itemText}>
+                  <Text style={StylesHomeScreen.titleText}>SDT:</Text>
+                  <Text style={StylesHomeScreen.nameText}>0392340456</Text>
+               </View>
+               <View style={StylesHomeScreen.itemText}>
+                  <Text style={StylesHomeScreen.titleText}>Địa chỉ:</Text>
+                  <Text style={StylesHomeScreen.nameText}>Nguyễn đâsdasdasdasdasdasdasThanh Hào</Text>
+               </View>
+               <View style={StylesHomeScreen.footerModal}>
+                  <TouchableOpacity style={StylesHomeScreen.btnContact} onPress={() => {
+                     Communications.phonecall('0392340756', true)
+                  }}>
+                     <Text style={{ color: "#fff", fontWeight: "bold" }}>Liên hệ</Text>
+                  </TouchableOpacity>
+               </View>
             </View>
          </Modal>
       </ScrollView>

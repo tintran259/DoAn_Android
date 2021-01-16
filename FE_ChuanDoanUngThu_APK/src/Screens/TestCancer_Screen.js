@@ -42,7 +42,7 @@ export default function TestCancerScreen() {
       dateTest: dateNow
    })
    const result = useSelector(state => state.Result.ResultTest)
-   console.log("result:", result);
+
    const ShowResult = useMemo(() => {
       if (result !== null) {
          const data = ICD.filter((item) => {
@@ -172,18 +172,21 @@ export default function TestCancerScreen() {
       <View style={StylesTestCancer.container}>
          <View style={StylesTestCancer.header}>
             <Text style={StylesTestCancer.titleHeader}>Tư Vấn</Text>
-            <View style={StylesTestCancer.btnSaveView}>
-               <TouchableOpacity style={StylesTestCancer.btnSave} onPress={hanleSaveTestCancer}>
-                  <Text style={StylesTestCancer.textBtnSave}>Lưu</Text>
-               </TouchableOpacity>
+            <View style={{ flexDirection: "row" }}>
+               <View style={StylesTestCancer.btnQR}>
+                  <TouchableOpacity style={StylesTestCancer.btnShowQr} onPress={handleShowQRCode}>
+                     <Image style={StylesTestCancer.iconQR} source={require("../Assets/Image/qr-code-scan.png")} />
+                  </TouchableOpacity>
+               </View>
+               <View style={StylesTestCancer.btnSaveView}>
+                  <TouchableOpacity style={StylesTestCancer.btnSave} onPress={hanleSaveTestCancer}>
+                     <Text style={StylesTestCancer.textBtnSave}>Lưu</Text>
+                  </TouchableOpacity>
+               </View>
             </View>
          </View>
 
-         <View style={StylesTestCancer.btnQR}>
-            <TouchableOpacity style={StylesTestCancer.btnShowQr} onPress={handleShowQRCode}>
-               <Image style={StylesTestCancer.iconQR} source={require("../Assets/Image/qr-code-scan.png")} />
-            </TouchableOpacity>
-         </View>
+
          <ScrollView style={StylesTestCancer.body}>
             <FormTestCancer  {...initalProps} />
          </ScrollView>

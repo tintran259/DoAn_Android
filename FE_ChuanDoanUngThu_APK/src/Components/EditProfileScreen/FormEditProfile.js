@@ -36,7 +36,7 @@ export default function FormEditProfile({
             )
          }
          <View style={StylesEditProfile.changeAvatar}>
-            <Image style={StylesEditProfile.avatar} source={{ uri: "https://thethao99.com/wp-content/uploads/2020/05/gai-xinh-372.jpg" }} />
+            <Image style={StylesEditProfile.avatar} source={{ uri: "https://paramountsprx.com/wp-content/uploads/2017/09/MAN_AVATAR.png" }} />
             <Text style={StylesEditProfile.nameAvatar}> Ảnh đại diện </Text>
             <TouchableOpacity style={StylesEditProfile.btnChange}>
                <Text style={StylesEditProfile.textChange}> Thay đổi </Text>

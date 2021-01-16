@@ -12,7 +12,7 @@ const StylesCVScreen = StyleSheet.create({
       alignItems: "center",
       width: "100%",
       height: "8%",
-      backgroundColor: "#00cec9"
+      backgroundColor: "#00bab6"
    },
    btnBack: {
       width: 60,
@@ -30,7 +30,7 @@ const StylesCVScreen = StyleSheet.create({
    body: {
       width: "100%",
       height: "92%",
-      backgroundColor: "#00cec9",
+      backgroundColor: "#00bab6",
    },
    bodyHeader: {
       width: "100%",
@@ -242,7 +242,7 @@ const StylesCVScreen = StyleSheet.create({
       height: "100%",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#00cec9",
+      backgroundColor: "#00bab6",
       borderWidth: 1,
       borderColor: "#81ecec",
       borderRadius: 15

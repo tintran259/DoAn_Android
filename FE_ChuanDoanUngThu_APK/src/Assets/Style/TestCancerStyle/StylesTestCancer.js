@@ -20,12 +20,11 @@ const StylesTestCancer = StyleSheet.create({
       width: '100%',
       height: 70,
       flexDirection: "row",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
+      alignItems: "center"
    },
    btnQR: {
-      position: "absolute",
-      top: "2%",
-      right: "20%"
+      marginRight: 20
    },
    titleHeader: {
       color: "#2d3436",
@@ -35,20 +34,17 @@ const StylesTestCancer = StyleSheet.create({
       fontWeight: "bold"
    },
    btnSaveView: {
-      marginTop: 14,
       marginRight: 10,
       width: 50,
       height: 40,
       borderRadius: 10,
-      backgroundColor: "#00cec9",
-      justifyContent: "center",
-      alignItems: "center",
+      backgroundColor: "#00bab6",
       borderColor: "#fff"
    },
    btnShowQr: {
       width: 40,
       height: 40,
-      backgroundColor: "#00cec9",
+      backgroundColor: "#00bab6",
       borderRadius: 10,
       justifyContent: "center",
       alignItems: "center"
@@ -99,7 +95,7 @@ const StylesTestCancer = StyleSheet.create({
       fontSize: wp("5%"),
       fontWeight: "bold",
       marginTop: 10,
-      color: "#00cec9"
+      color: "#00bab6"
    },
    textName: {
       fontWeight: "bold",

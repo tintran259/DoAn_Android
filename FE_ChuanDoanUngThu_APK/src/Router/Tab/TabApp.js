@@ -1,22 +1,21 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from '../../Screens/Home_Screen'
-import ProfileScreen from '../../Screens/Profile_Screen'
-import TestCancer from '../../Screens/TestCancer_Screen'
 import StackHome from '../Stack/StackHome'
+import NewsScreen from '../../Screens/NewsScreen'
 import StackProfile from '../Stack/StackProfile'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import IconFont from 'react-native-vector-icons/FontAwesome5'
 import StackTestCancer from '../Stack/StackTestCancer'
+import IconIon from 'react-native-vector-icons/Ionicons'
 const Tab = createBottomTabNavigator();
 
 export default function TabApp() {
    return (
       <Tab.Navigator
          tabBarOptions={{
-            activeTintColor: '#00cec9',
-            inactiveTintColor: '#bdc3c7',
+            activeTintColor: '#00bab6',
+            inactiveTintColor: '#636e72',
             // activeBackgroundColor: "#00cec9",
             // inactiveBackgroundColor: "#ffff",
             style: {
@@ -37,7 +36,17 @@ export default function TabApp() {
             options={{
                tabBarLabel: 'Trang chủ',
                tabBarIcon: ({ color, size }) => (
-                  <IconAntd name="home" color={color} size={20} />
+                  <IconIon name="home" color={color} size={20} />
+               ),
+            }}
+         />
+         <Tab.Screen
+            name="News"
+            component={NewsScreen}
+            options={{
+               tabBarLabel: 'Tin tức',
+               tabBarIcon: ({ color, size }) => (
+                  <IconIon name="ios-newspaper" color={color} size={20} />
                ),
             }}
          />
@@ -45,7 +54,7 @@ export default function TabApp() {
             name="StackTestCancer"
             component={StackTestCancer}
             options={{
-               tabBarLabel: 'Xét Nghiệm',
+               tabBarLabel: 'Tư vấn',
                tabBarIcon: ({ color, size }) => (
                   <IconFont name="clipboard-list" color={color} size={20} />
                ),
@@ -57,7 +66,7 @@ export default function TabApp() {
             options={{
                tabBarLabel: 'Cá nhân',
                tabBarIcon: ({ color, size }) => (
-                  <IconAntd name="user" color={color} size={20} />
+                  <IconFont name="user" color={color} size={20} />
                ),
             }}
 

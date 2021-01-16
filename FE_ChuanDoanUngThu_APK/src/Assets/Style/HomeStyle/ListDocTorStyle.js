@@ -47,7 +47,7 @@ const StylesListDoctor = StyleSheet.create({
    btnTuVan: {
       width: "100%",
       height: 35,
-      backgroundColor: "#00cec9",
+      backgroundColor: "#00b894",
       justifyContent: "center",
       alignItems: "center",
       borderRadius: 10,

@@ -5,12 +5,11 @@ import IconAntd from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector, useDispatch } from 'react-redux'
 import { ICD } from '../mock'
-import { asyncGetListDoctor } from '../Store/Doctor/action'
-import { asyncGetListHospital } from '../Store/Hospital/action'
 import { FlatList } from 'react-native-gesture-handler'
 import Communications from 'react-native-communications';
 import { asyncPostTestHistory } from '../Store/History/action'
 import getDateByTimeZoneDay from '../Contants/FORMAT_DATE'
+import { ModalHospital } from '../Components/TestCancerDetail'
 
 export default function TestCancer() {
    const dispatch = useDispatch()
@@ -19,9 +18,9 @@ export default function TestCancer() {
    const listDoctor = useSelector(state => state.Doctor.listDoctor)
    const listHospital = useSelector(state => state.Hospital.listHospital)
    const dataUser = useSelector(state => state.User.dataUser)
-   console.log("listDoctor", listDoctor);
-   console.log("listHospital", listHospital);
-   console.log("formTest:", formTest);
+   const [isShowModalHospital, setIsShowModalHospital] = useState(false)
+   const [dataHospitalDetail, setDataHospitalDetail] = useState({})
+
    const dateNow = new Date();
    const dateFormat = getDateByTimeZoneDay(dateNow)
    const HH = dateNow.getHours()
@@ -67,12 +66,6 @@ export default function TestCancer() {
       test: ShowResult[0].Desc,
    })
 
-   console.log("dataPostHistory:", dataPostHistory);
-
-   useEffect(() => {
-      dispatch(asyncGetListDoctor())
-      dispatch(asyncGetListHospital())
-   }, [])
    useEffect(() => {
       setTimeout(() => {
          const { baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, test } = dataPostHistory
@@ -81,10 +74,16 @@ export default function TestCancer() {
    }, [])
 
    const handleCall = (doctor) => {
-      console.log("doctor:", doctor);
       setDataPostHistory({ ...dataPostHistory, doctorId: doctor.id })
       const phoneNumber = doctor.phone
       Communications.phonecall(phoneNumber, true)
+   }
+   const handleHospitalDetail = (item) => {
+      setIsShowModalHospital(true)
+      setDataHospitalDetail(item)
+   }
+   const handleHideModalHospital = () => {
+      setIsShowModalHospital(false)
    }
    return (
       <View style={StylesTestCancerDetail.container}>
@@ -131,7 +130,7 @@ export default function TestCancer() {
                         keyExtractor={item => item.id.toString()}
                         renderItem={({ item }) => {
                            return (
-                              <View style={StylesTestCancerDetail.HospitalView}>
+                              <TouchableOpacity style={StylesTestCancerDetail.HospitalView} onPress={() => handleHospitalDetail(item)}>
                                  <View style={StylesTestCancerDetail.listHospital}>
                                     <Image style={StylesTestCancerDetail.imageHospital} source={{ uri: "https://thuocdantoc.vn/wp-content/uploads/2018/12/benh-vien-tu-du.jpg" }} />
                                     <View style={StylesTestCancerDetail.viewInforHos}>
@@ -144,7 +143,7 @@ export default function TestCancer() {
                                     <Text style={StylesTestCancerDetail.titleAddress}>Địa chỉ:</Text>
                                     <Text>{item.address}</Text>
                                  </View>
-                              </View>
+                              </TouchableOpacity>
                            )
                         }}
                      />
@@ -152,6 +151,11 @@ export default function TestCancer() {
                </View>
             </View>
          </ScrollView>
+         <ModalHospital
+            isVisible={isShowModalHospital}
+            dataHospital={dataHospitalDetail}
+            handleHideModalHospital={handleHideModalHospital}
+         />
       </View>
    )
 }

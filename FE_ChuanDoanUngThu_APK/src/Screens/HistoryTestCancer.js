@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { asyncGetListDoctor } from '../Store/Doctor/action'
 import { asyncGetListHospital } from '../Store/Hospital/action'
 import Communications from 'react-native-communications';
+import { useState } from 'react'
 
 
 export default function HistoryTestCancer() {
@@ -16,17 +17,27 @@ export default function HistoryTestCancer() {
    const itemDetail = useSelector(state => state.History.itemHistory)
    const listDoctor = useSelector(state => state.Doctor.listDoctor)
    const listHospital = useSelector(state => state.Hospital.listHospital)
-   console.log("itemDetail:", itemDetail);
-   console.log("listDoctor:", listDoctor);
-   console.log("listHospital", listHospital);
+   // useEffect(() => {
+   //    dispatch(asyncGetListDoctor()).then((res) => {
+   //       if (res.ok) {
+   //          setListDoctor(res.data)
+   //       }
+   //    })
+   //    //dispatch(asyncGetListHospital())
+   // }, [])
    const handleBack = () => {
       navigation.goBack()
    }
    const inforDoctor = useMemo(() => {
-      return listDoctor.filter((item) => {
-         return item.id === itemDetail.doctor_id
-      })
-   }, [itemDetail])
+      if (listDoctor) {
+         return listDoctor.filter((item) => {
+            return item.id === itemDetail.doctor_id
+         })
+      } else {
+         return null
+      }
+   }, [itemDetail, listDoctor])
+   console.log("inforDoctor:", inforDoctor);
    const handleContact = () => {
       Communications.phonecall("0838995564", true)
    }

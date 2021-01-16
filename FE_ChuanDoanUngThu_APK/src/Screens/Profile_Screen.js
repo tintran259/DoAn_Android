@@ -40,7 +40,7 @@ export default function ProfileScreen() {
          <View style={StylesProfile.body}>
             <TouchableOpacity style={StylesProfile.itemInfor} onPress={moveEditProfile}>
                <View style={StylesProfile.ViewAvatar}>
-                  <Image style={StylesProfile.avatarUser} source={{ uri: "https://thethao99.com/wp-content/uploads/2020/05/gai-xinh-372.jpg" }} />
+                  <Image style={StylesProfile.avatarUser} source={{ uri: "https://paramountsprx.com/wp-content/uploads/2017/09/MAN_AVATAR.png" }} />
                </View>
                <View style={StylesProfile.viewName}>
                   <Text style={StylesProfile.textLabel}>{dataUser && dataUser.fullname}</Text>

@@ -54,7 +54,7 @@ export default function LoginScreen() {
       <View style={StylesLoginScreen.container}>
          <ScrollView >
             <View style={StylesLoginScreen.header}>
-               <Image style={StylesLoginScreen.logo2} resizeMode="cover" source={require("../Assets/Image/logo8.png")} />
+               <Image style={StylesLoginScreen.logo2} resizeMode="cover" source={require("../Assets/Image/logo11.png")} />
             </View>
             {
                isShowToast ?

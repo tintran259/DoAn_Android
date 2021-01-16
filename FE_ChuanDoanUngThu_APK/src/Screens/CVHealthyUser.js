@@ -9,21 +9,20 @@ import { asyncEditInforUser, EditInforSuccessed } from '../Store/User/action'
 import { asyncGetListHistoryUser, actGetListHistoryDetail } from '../Store/History/action'
 import getDateByTimeZoneDay from '../Contants/FORMAT_DATE'
 import getDateByTimeZoneDayTime from '../Contants/FORMAT_DATETIIME'
+
 export default function HistoryScreen() {
    const dispatch = useDispatch()
    const navigation = useNavigation()
    const dataUser = useSelector(state => state.User.dataUser)
    const listHistory = useSelector(state => state.History.listHistory)
-   console.log("listHistory roi ne", listHistory);
+
 
 
    const dayNow = new Date()
    const dayNowFormat = getDateByTimeZoneDay(dayNow)
    const userId = dataUser && dataUser.id
    const DayNowAndDayHistory = (dayHistory) => {
-      const date = dayHistory.slice(6, 16)
-      console.log("date:", date);
-      if (dayNowFormat <= date) {
+      if (dayNowFormat === dayHistory) {
          return true
       }
       return false
@@ -50,7 +49,6 @@ export default function HistoryScreen() {
    }
    const handleDetailTest = (item) => {
       dispatch(actGetListHistoryDetail(item))
-      console.log("Clieckkkkkkk:", item);
       navigation.navigate('HistoryDetail')
    }
    const handleHideModal = () => {
@@ -77,7 +75,7 @@ export default function HistoryScreen() {
             <View style={StylesCVScreen.ViewEmpty}>
                <Image style={StylesCVScreen.iconEmpty} source={require("../Assets/Image/empty2.png")} />
                <Text style={StylesCVScreen.titleEmpty}>Chưa có thông tin kết quả</Text>
-               <Text style={StylesCVScreen.contentEmpty}>Chọn ngay dịch vụ Khám & xét nghiệm để theo dõi và chăm sóc sức khỏe.</Text>
+               <Text style={StylesCVScreen.contentEmpty}>Chọn ngay dịch vụ tư vấn & hổ trợ để theo dõi và chăm sóc sức khỏe.</Text>
             </View>
          </View>
       )
@@ -93,7 +91,7 @@ export default function HistoryScreen() {
          <ScrollView style={StylesCVScreen.body}>
             <View style={StylesCVScreen.bodyHeader}>
                <View style={StylesCVScreen.ViewUser}>
-                  <Image style={StylesCVScreen.avatarUser} source={{ uri: "https://thethao99.com/wp-content/uploads/2020/05/gai-xinh-372.jpg" }} />
+                  <Image style={StylesCVScreen.avatarUser} source={{ uri: "https://paramountsprx.com/wp-content/uploads/2017/09/MAN_AVATAR.png" }} />
                   <View style={StylesCVScreen.inforUser}>
                      <Text style={StylesCVScreen.nameUser}>{dataUser && dataUser.fullname}</Text>
                      <Text style={StylesCVScreen.ageUser}>{dataUser && dataUser.age}</Text>
@@ -125,19 +123,20 @@ export default function HistoryScreen() {
                   </View>
                </View>
                <View style={StylesCVScreen.ViewHistory}>
-                  <Text style={StylesCVScreen.titleViewHistory}>Lịch sử khám & xét nghiệm</Text>
+                  <Text style={StylesCVScreen.titleViewHistory}>Lịch tư vấn & hổ trợ</Text>
                   <FlatList
                      data={listHistory}
                      contentContainerStyle={{ paddingBottom: 90 }}
                      keyExtractor={item => item.id.toString()}
                      contentContainerStyle={{ paddingBottom: 200 }}
                      renderItem={({ item, index }) => {
-                        console.log(item.timestamp);
                         const dateTest = item.timestamp
+                        const dateTestFormat = dateTest.slice(6, 16)
+                        console.log("dateTestFormat:", dateTestFormat);
                         return (
                            <View>
                               {
-                                 DayNowAndDayHistory(dateTest) &&
+                                 DayNowAndDayHistory(dateTestFormat) &&
                                  <Image source={require("../Assets/Image/new1.png")} style={{
                                     position: "absolute",
                                     top: "7%",
@@ -147,6 +146,7 @@ export default function HistoryScreen() {
                                     height: 25
                                  }} />
                               }
+
 
                               <TouchableOpacity style={StylesCVScreen.cardItem} onPress={() => handleDetailTest(item)}>
                                  <View style={StylesCVScreen.timeHistory}>

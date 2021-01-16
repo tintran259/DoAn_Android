@@ -257,6 +257,23 @@ const StylesTestCanCerDetail = StyleSheet.create({
       color: "#2d3436",
       width: "50%",
       fontWeight: "normal"
+   },
+   ModalHospital: {
+      width: "100%",
+      height: 400,
+      backgroundColor: "#fff",
+      borderRadius: 10,
+      padding: 10
+   },
+   ViewMap: {
+      width: "100%",
+      height: 250,
+      backgroundColor: "red"
+   },
+   titleHospital: {
+      fontWeight: "bold",
+      fontSize: 18,
+      width: "100%"
    }
 })
 
