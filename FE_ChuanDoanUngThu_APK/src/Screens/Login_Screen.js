@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, ScrollView, Image } from 'react-native'
+import { View, Text, ScrollView, Image, LogBox } from 'react-native'
 import { StylesLoginScreen } from '../Assets/Style/LoginStyle'
 import { FormLogin } from '../Components/LoginScreen'
 import { asyncLogin } from '../Store/User/action'
@@ -11,6 +11,7 @@ import IconAntd from 'react-native-vector-icons/AntDesign'
 
 
 export default function LoginScreen() {
+   LogBox.ignoreAllLogs();
    const dispatch = useDispatch()
    const [isOnPressLogin, setIsOnPressLogin] = useState(false)
    const [isShowToast, setIsShowToast] = useState(false)

@@ -1,1 +1,5 @@
 export { default as ListDoctor } from './ListDoctor'
+export { default as ModalLocation } from './ModalLocation'
+export { default as ModalNotification } from './ModalNotification'
+export { default as ModalDoctorDetail } from './ModalDoctorDetail'
+export { default as ModalHospitalDetail } from './ModalHospitalDetail'

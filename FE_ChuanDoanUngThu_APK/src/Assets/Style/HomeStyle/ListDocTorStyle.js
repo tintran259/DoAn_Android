@@ -32,7 +32,7 @@ const StylesListDoctor = StyleSheet.create({
       fontWeight: "bold"
    },
    avatarDoctor: {
-      width: "90%",
+      width: 100,
       height: 150,
       resizeMode: "cover",
       borderRadius: 10
@@ -41,7 +41,7 @@ const StylesListDoctor = StyleSheet.create({
       textAlign: "center",
       fontWeight: "bold",
       width: "100%",
-      height: 35,
+      height: 25,
       marginTop: 10
    },
    btnTuVan: {
@@ -59,7 +59,7 @@ const StylesListDoctor = StyleSheet.create({
       fontWeight: "bold"
    },
    optionDoctor: {
-      marginVertical: 5
+      textAlign: "center"
    }
 
 })

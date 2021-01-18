@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux'
 import { actHideSplashScreen } from '../../Store/App/action'
 import { asyncGetListDoctor } from '../../Store/Doctor/action'
 import { asyncGetListHospital } from '../../Store/Hospital/action'
+import { asyncGetListLocation } from '../../Store/Location/action'
 
 export default function SplashScreen() {
    const dispatch = useDispatch();
    useEffect(() => {
       dispatch(asyncGetListDoctor())
       dispatch(asyncGetListHospital())
+      dispatch(asyncGetListLocation())
    }, [])
    setTimeout(() => {
       dispatch(actHideSplashScreen())

@@ -7,6 +7,16 @@ const StylesHomeScreen = StyleSheet.create({
       backgroundColor: "#dcdde1",
       flex: 1,
    },
+   bodyModal: {
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      height: 245
+   },
+   LeftContent: {
+      width: "50%",
+      marginLeft: 20
+   },
    iconRight: {
       fontSize: 16,
       position: "absolute",
@@ -14,17 +24,17 @@ const StylesHomeScreen = StyleSheet.create({
    },
    nameLocation: {
       color: "#2d3436",
-      marginLeft: 20
+      marginLeft: 10
    },
    btnLocation: {
       flexDirection: "row",
-      width: 180,
-      height: 35,
+      width: 150,
+      height: 30,
       backgroundColor: "#ffffff",
       borderRadius: 10,
       alignItems: "center",
       marginLeft: 10,
-      borderColor: "#ecf0f1",
+      borderColor: "#ffffff",
       borderWidth: 1,
       opacity: 0.9,
       shadowColor: "#000",
@@ -130,13 +140,22 @@ const StylesHomeScreen = StyleSheet.create({
       paddingVertical: 10,
       paddingHorizontal: 20,
       justifyContent: "space-around",
+      shadowColor: "#000",
+      shadowOffset: {
+         width: 0,
+         height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
    },
    bannerView: {
       width: "100%",
       height: 180,
       backgroundColor: "red",
       borderRadius: 10,
-      backgroundColor: "#ecf0f1",
+      backgroundColor: "#c7ecee",
       paddingHorizontal: 5
    },
    textName: {
@@ -178,10 +197,10 @@ const StylesHomeScreen = StyleSheet.create({
    bodyContent: {
       width: "100%",
       height: "100%",
-      backgroundColor: "#f1f2f6",
+      backgroundColor: "#c7ecee",
       borderTopLeftRadius: 10,
       borderTopRightRadius: 10,
-      padding: 6
+      padding: 6,
    },
    iconRight: {
       color: "#ecf0f1",
@@ -277,10 +296,11 @@ const StylesHomeScreen = StyleSheet.create({
    },
    ViewDoctor: {
       width: "100%",
-      height: 300
+      height: 300,
+      paddingLeft: 7
    },
    ModalDoctorDetail: {
-      width: "90%",
+      width: "95%",
       height: 320,
       borderRadius: 10,
       backgroundColor: "#fff",
@@ -288,8 +308,9 @@ const StylesHomeScreen = StyleSheet.create({
       padding: 10
    },
    imgeDoctorDetail: {
-      width: 100,
-      height: 100,
+      width: 120,
+      height: "100%",
+      marginTop: 10
    },
    itemText: {
       width: "100%",
@@ -297,34 +318,98 @@ const StylesHomeScreen = StyleSheet.create({
       marginTop: 10
    },
    nameText: {
-      width: "60%",
-      position: "absolute",
-      left: "50%"
+      width: "90%",
    },
    titleText: {
-      marginLeft: 20,
       fontWeight: "bold",
-      color: "#2d3436"
+      color: "#2d3436",
+      textDecorationLine: 'underline',
    },
    footerModal: {
       width: "100%",
       height: 80,
-      justifyContent: "flex-end",
-      alignItems: "flex-end"
+      marginTop: 20
    },
    btnContact: {
-      width: 100,
+      width: "100%",
       height: 35,
       backgroundColor: "#00b894",
       borderRadius: 10,
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
    },
    iconClose: {
       fontSize: 20,
       position: "absolute",
       right: "2%",
       top: "2%"
+   },
+   hospitalCart: {
+      width: "100%",
+      height: 150,
+      borderWidth: 1,
+      marginBottom: 10,
+      borderRadius: 10,
+      backgroundColor: "#fff",
+      borderColor: "#f1f2f6"
+   },
+   ViewHoispital: {
+      width: "100%",
+      height: 200,
+      alignItems: "flex-end",
+      marginBottom: 15
+   },
+   ViewBackgroud: {
+      width: "50%",
+      height: 150,
+      position: "absolute",
+      top: "12%",
+      left: "1%",
+      borderRadius: 10,
+      zIndex: 200,
+      shadowColor: "#000",
+      shadowOffset: {
+         width: 0,
+         height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
+   },
+   imageHos: {
+      width: "100%",
+      height: "100%",
+      borderRadius: 10
+   },
+   ViewContent: {
+      width: "60%",
+      height: "100%",
+      backgroundColor: "#fff",
+      borderRadius: 10,
+      paddingLeft: "14%",
+      paddingTop: 30,
+      shadowColor: "#000",
+      shadowOffset: {
+         width: 0,
+         height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
+   },
+   titleTextHospital: {
+      fontWeight: "bold",
+      color: "#2d3436",
+      marginBottom: 10
+   },
+   itemTextHos: {
+      marginBottom: 10
+   },
+   titleHos: {
+      fontWeight: "bold",
+      color: "#2d3436"
    }
 })
 
