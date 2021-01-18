@@ -214,7 +214,6 @@ const StylesHomeScreen = StyleSheet.create({
    },
    ModalLocation: {
       width: "100%",
-      height: 350,
       backgroundColor: "#fff",
       borderTopLeftRadius: 15,
       borderTopRightRadius: 15,

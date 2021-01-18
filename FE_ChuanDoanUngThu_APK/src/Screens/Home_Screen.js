@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { LogBox, View, Text, ScrollView, Image, FlatList, TouchableOpacity } from 'react-native'
 import { StylesHomeScreen } from '../Assets/Style/HomeStyle'
 import { useNavigation } from '@react-navigation/native'
@@ -10,7 +10,12 @@ import { asyncGetUserById } from '../Store/User/action'
 import { ListDoctor } from '../Components/HomeScreen'
 import Modal from 'react-native-modal'
 import { useState } from 'react'
-import { ModalHospitalDetail, ModalDoctorDetail } from '../Components/HomeScreen'
+import {
+   ModalHospitalDetail,
+   ModalDoctorDetail,
+   ModalLocation,
+   ModalNotification
+} from '../Components/HomeScreen'
 import { URL_SEVER } from '../Contants'
 export default function HomeScreen() {
    LogBox.ignoreAllLogs();
@@ -27,7 +32,10 @@ export default function HomeScreen() {
    const [doctorDetail, setIsDoctorDetail] = useState({})
    const [hospitalDetail, setHospitalDetail] = useState({})
    const [isShowModalDetailDoctor, setIsShowModalDetailDoctor] = useState(false)
-   const [locationSelected, setLocationSelected] = useState('Hồ Chí Minh')
+   const [locationSelected, setLocationSelected] = useState({
+      id: "MN",
+      name: "Miền Nam"
+   })
    const [isShowModalHospital, setIsShowModalHospital] = useState(false)
    console.log("listDoctor:", listDoctor)
    console.log("listHospital:", listHospital);
@@ -36,6 +44,18 @@ export default function HomeScreen() {
    useEffect(() => {
       dispatch(asyncGetUserById({ userId }))
    }, [])
+
+   const listDoctorForLocation = useMemo(() => {
+      return listDoctor.filter((item) => {
+         return item.location_id === locationSelected.id
+      })
+   }, [locationSelected])
+   const listHospitalForLocation = useMemo(() => {
+      return listHospital.filter((item) => {
+         return item.location_id === locationSelected.id
+      })
+   }, [locationSelected])
+
    const handleShowNotification = () => {
       setIsShowNotification(true)
    }
@@ -81,13 +101,12 @@ export default function HomeScreen() {
    const handleHideModalHospital = () => {
       setIsShowModalHospital(false)
    }
-   console.log("doctorDetail:", doctorDetail);
    return (
       <ScrollView style={StylesHomeScreen.body}>
          <View style={StylesHomeScreen.notification}>
             <TouchableOpacity style={StylesHomeScreen.btnLocation} onPress={handleShowLocation}>
                <Image style={StylesHomeScreen.iamgeLocation} source={require("../Assets/Image/location1.png")} />
-               <Text style={StylesHomeScreen.nameLocation}>{locationSelected}</Text>
+               <Text style={StylesHomeScreen.nameLocation}>{locationSelected.name}</Text>
                <IconAntd name="right" color="#2d3436" style={{ position: "absolute", right: "4%" }} />
             </TouchableOpacity>
             <TouchableOpacity style={StylesHomeScreen.btnIcon} onPress={handleShowNotification}>
@@ -157,7 +176,7 @@ export default function HomeScreen() {
 
                <FlatList
                   horizontal
-                  data={listDoctor}
+                  data={listDoctorForLocation}
                   keyExtractor={item => item.name}
                   renderItem={({ item }) => {
                      return (
@@ -171,7 +190,7 @@ export default function HomeScreen() {
             </View>
             <Text style={StylesHomeScreen.titleDanhSach}>Danh sách bệnh viện</Text>
             <FlatList
-               data={listHospital}
+               data={listHospitalForLocation}
                renderItem={({ item }) => {
                   return (
                      <View style={StylesHomeScreen.ViewHoispital}>
@@ -194,46 +213,16 @@ export default function HomeScreen() {
                }}
             />
          </View>
-         <Modal
-            animationOutTiming={1000}
-            onBackdropPress={handleHideLocation}
-            isVisible={isShowLocation}
-            style={{ margin: 0, alignItems: "center", justifyContent: "flex-end" }} >
-            <View style={StylesHomeScreen.ModalLocation}>
-               <Image style={StylesHomeScreen.locationModal} source={require("../Assets/Image/location2.png")} />
-               <Text style={StylesHomeScreen.contentModal}>Hãy chọn tỉnh thành để hiển thị dịch vụ phù hợp với bạn</Text>
-               <View style={StylesHomeScreen.LocationName}>
-                  {
-                     listLocation.map((item, index) => {
-                        return (
-                           <TouchableOpacity key={index} style={StylesHomeScreen.btnSelectLocation} onPress={() => handleSelectLocation(item.name)}>
-                              <Text style={StylesHomeScreen.textNameLocation}>{item.name}</Text>
-                           </TouchableOpacity>
-                        )
-                     })
-                  }
-               </View>
-            </View>
-         </Modal>
-         <Modal
-            animationOut="fadeOut"
-            animationIn="fadeIn"
-            animationOutTiming={600}
-            backdropOpacity={0.6}
-            backdropTransitionOutTiming={600}
-            onBackdropPress={handleHideNotification}
-            isVisible={isShowNotification}
-            style={StylesHomeScreen.ModalNotification}
-         >
-            <Image style={StylesHomeScreen.iconPo} source={require("../Assets/Image/blech2.png")} />
-            <View style={StylesHomeScreen.ModalNofi}>
-               <Text style={StylesHomeScreen.titleNotification}>Thông báo</Text>
-               <View style={StylesHomeScreen.contentNotification}>
-                  <Image source={require("../Assets/Image/paper.png")} />
-                  <Text style={StylesHomeScreen.textLabel}>Bạn chưa có thông báo nào</Text>
-               </View>
-            </View>
-         </Modal>
+         <ModalLocation
+            listLocation={listLocation}
+            isShowLocation={isShowLocation}
+            handleHideLocation={handleHideLocation}
+            handleSelectLocation={handleSelectLocation}
+         />
+         <ModalNotification
+            isShowNotification={isShowNotification}
+            handleHideNotification={handleHideNotification}
+         />
          <ModalDoctorDetail
             doctorDetail={doctorDetail}
             isShowModalDetailDoctor={isShowModalDetailDoctor}
