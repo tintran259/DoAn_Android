@@ -1,0 +1,1 @@
+export { default as StylesNewFeed } from './StylesNewFeed.style'

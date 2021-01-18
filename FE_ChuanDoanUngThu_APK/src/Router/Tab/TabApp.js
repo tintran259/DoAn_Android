@@ -2,7 +2,7 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import StackHome from '../Stack/StackHome'
-import NewsScreen from '../../Screens/NewsScreen'
+import StackNewFeed from '../Stack/StackNewFeed'
 import StackProfile from '../Stack/StackProfile'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import IconFont from 'react-native-vector-icons/FontAwesome5'
@@ -41,8 +41,8 @@ export default function TabApp() {
             }}
          />
          <Tab.Screen
-            name="News"
-            component={NewsScreen}
+            name="StackNewFeed"
+            component={StackNewFeed}
             options={{
                tabBarLabel: 'Tin tức',
                tabBarIcon: ({ color, size }) => (

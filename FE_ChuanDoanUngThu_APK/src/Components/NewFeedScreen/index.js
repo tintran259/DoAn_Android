@@ -1,0 +1,1 @@
+export { default as ListNewFeed } from './listNewFeed'

@@ -61,9 +61,9 @@ const StylesProfile = StyleSheet.create({
    },
    header: {
       width: '100%',
-      height: 80,
+      height: 70,
       backgroundColor: "#fff",
-      alignItems: "center",
+      alignItems: "flex-end",
       flexDirection: "row"
    },
    titleinfor: {
@@ -87,7 +87,8 @@ const StylesProfile = StyleSheet.create({
       color: "#2d3436",
       fontSize: 25,
       fontWeight: "bold",
-      marginLeft: 20
+      marginLeft: 20,
+      marginBottom: 10
    },
    body: {
       width: "100%",

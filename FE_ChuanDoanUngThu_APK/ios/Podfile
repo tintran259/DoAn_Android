@@ -12,6 +12,8 @@ target 'FE_ChuanDoanUngThu_APK' do
 
   pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
 
+  pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
+
   target 'FE_ChuanDoanUngThu_APKTests' do
     inherit! :complete
     # Pods for testing

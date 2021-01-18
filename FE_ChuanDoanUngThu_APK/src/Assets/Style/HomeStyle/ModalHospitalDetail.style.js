@@ -5,7 +5,6 @@ const StylesModalHospital = StyleSheet.create({
 
    ModalHospital: {
       width: "100%",
-      height: 300,
       backgroundColor: "#fff",
       borderRadius: 10
    },
@@ -19,14 +18,14 @@ const StylesModalHospital = StyleSheet.create({
    titleName: {
       fontWeight: "bold",
       color: "#2d3436",
-      fontSize: 19,
+      fontSize: 17,
       marginBottom: 10
    },
    viewConent: {
       padding: 10
    },
    textAddress: {
-      fontSize: 16,
+      fontSize: 14,
       color: "#2d3436"
    },
    imageMap: {
