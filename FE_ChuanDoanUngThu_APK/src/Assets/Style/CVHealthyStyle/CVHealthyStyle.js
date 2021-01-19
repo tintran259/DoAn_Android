@@ -29,24 +29,24 @@ const StylesCVScreen = StyleSheet.create({
    },
    body: {
       width: "100%",
-      height: "92%",
+      height: "100%",
       backgroundColor: "#00bab6",
    },
    bodyHeader: {
       width: "100%",
-      height: "25%",
+      height: 200,
       paddingHorizontal: 20,
    },
    bodyContent: {
       width: "100%",
-      height: "75%",
+      height: "100%",
       backgroundColor: "#f1f2f6",
    },
    inforView: {
       width: "100%",
       height: 150,
       position: "absolute",
-      top: "-12%",
+      top: -70,
       paddingHorizontal: 20,
    },
    inforContent: {

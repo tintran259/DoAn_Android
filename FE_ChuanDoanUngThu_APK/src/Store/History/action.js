@@ -44,20 +44,28 @@ export const asyncGetListHistoryUser = ({ userId }) => {
       }
    }
 }
-export const asyncPostTestHistory = ({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, test }) => {
+export const asyncPostTestHistory = ({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, testResult }) => {
+   console.log("ASNTADSADSDASD:", baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, testResult);
+
+
    return async (dispatch) => {
       try {
-         dispatch(actShowLoading())
-         const response = await GetListHistory.PostHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, test })
+         const response = await GetListHistory.PostHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, testResult })
          console.log("response getLISThISTORY:", response);
          if (response.status === 200) {
-            dispatch(actHideLoading())
+            return {
+               ok: true
+            }
          } else {
-            dispatch(actHideLoading())
+            return {
+               ok: false
+            }
          }
       } catch (error) {
-         dispatch(actHideLoading())
          console.log("error", error);
+         return {
+            ok: false
+         }
       }
    }
 }

@@ -30,7 +30,7 @@ export default function NewFeedDetail() {
                   </View>
                </View>
                <View style={StylesNewFeed.ViewTypeDetail}>
-                  <Text style={StylesNewFeed.textType}>{itemNewFeed && itemNewFeed.type}</Text>
+                  <Text style={[StylesNewFeed.textType, { width: "100%" }]}>{itemNewFeed && itemNewFeed.type}</Text>
                </View>
             </View>
             <View style={StylesNewFeed.contentNewFeed}>

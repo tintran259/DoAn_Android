@@ -128,7 +128,6 @@ export default function HistoryScreen() {
                      data={listHistory}
                      contentContainerStyle={{ paddingBottom: 90 }}
                      keyExtractor={item => item.id.toString()}
-                     contentContainerStyle={{ paddingBottom: 200 }}
                      renderItem={({ item, index }) => {
                         const dateTest = item.timestamp
                         const dateTestFormat = dateTest.slice(6, 16)

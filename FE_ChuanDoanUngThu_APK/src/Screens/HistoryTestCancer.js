@@ -9,7 +9,8 @@ import { asyncGetListDoctor } from '../Store/Doctor/action'
 import { asyncGetListHospital } from '../Store/Hospital/action'
 import Communications from 'react-native-communications';
 import { useState } from 'react'
-
+import { ICD } from '../mock'
+import { URL_SEVER } from '../Contants'
 
 export default function HistoryTestCancer() {
    const navigation = useNavigation()
@@ -17,14 +18,8 @@ export default function HistoryTestCancer() {
    const itemDetail = useSelector(state => state.History.itemHistory)
    const listDoctor = useSelector(state => state.Doctor.listDoctor)
    const listHospital = useSelector(state => state.Hospital.listHospital)
-   // useEffect(() => {
-   //    dispatch(asyncGetListDoctor()).then((res) => {
-   //       if (res.ok) {
-   //          setListDoctor(res.data)
-   //       }
-   //    })
-   //    //dispatch(asyncGetListHospital())
-   // }, [])
+   console.log("itemDetail:", itemDetail);
+
    const handleBack = () => {
       navigation.goBack()
    }
@@ -37,7 +32,17 @@ export default function HistoryTestCancer() {
          return null
       }
    }, [itemDetail, listDoctor])
+   const ShowResult = useMemo(() => {
+      if (itemDetail.predict !== null) {
+         const data = ICD.filter((item) => {
+            return item.Name === itemDetail.predict
+         })
+         return data
+      }
+      return [{ Desc: "" }]
+   }, [itemDetail.predict])
    console.log("inforDoctor:", inforDoctor);
+   console.log("ShowResult:", ShowResult);
    const handleContact = () => {
       Communications.phonecall("0838995564", true)
    }
@@ -243,12 +248,12 @@ export default function HistoryTestCancer() {
             <View style={StylesHisToryScreen.viewTest}>
                <Text style={StylesHisToryScreen.titleBS}>Kết quả tư vấn</Text>
                <View style={StylesHisToryScreen.cardHis}>
-                  <Text style={StylesHisToryScreen.textHis}>"{itemDetail.predict}"</Text>
+                  <Text style={StylesHisToryScreen.textHis}>"{ShowResult[0].Desc}"</Text>
                </View>
                <Text style={StylesHisToryScreen.titleBS}>Bác sĩ bạn đã tư vấn</Text>
                <View style={StylesHisToryScreen.cardDoctor}>
                   <View style={StylesHisToryScreen.headerCard}>
-                     <Image style={StylesHisToryScreen.avatarBS} source={{ uri: "https://cdn.benhvienthucuc.vn/wp-content/uploads/2012/06/bs-nguyen-hong-nhung.jpg" }} />
+                     <Image style={StylesHisToryScreen.avatarBS} source={{ uri: `http://${URL_SEVER}:433${inforDoctor[0].image}` }} />
                      <View>
                         <View style={StylesHisToryScreen.itemText}>
                            <Text style={StylesHisToryScreen.titleNmae}>Ths.</Text>

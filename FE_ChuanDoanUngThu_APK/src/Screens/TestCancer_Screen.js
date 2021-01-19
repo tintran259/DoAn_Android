@@ -11,15 +11,25 @@ import { ICD } from '../mock'
 import { useNavigation } from '@react-navigation/native'
 import Modal from 'react-native-modal'
 import getDateByTimeZoneDay from '../Contants/FORMAT_DATE'
+import { asyncPostTestHistory } from '../Store/History/action'
+
 
 export default function TestCancerScreen() {
    const dispatch = useDispatch()
    const navigation = useNavigation()
-   const dateNow = getDateByTimeZoneDay(new Date());
+   const dateNow = new Date();
+   const dateFormat = getDateByTimeZoneDay(dateNow)
+   const HH = dateNow.getHours()
+   const MM = dateNow.getMinutes()
+   const mm = MM.toString;
+   const date = `${HH}:${mm.length > 1 ? MM : `0${MM}`} ${dateFormat} `
    const [isShowQR, setIsShowQR] = useState(false)
    const [isShowModalResult, setIsShowModalResult] = useState(false)
    const [isSubmit, setIsSubmit] = useState(false)
    const [isShowModalFailQR, setIsShowModalFailQR] = useState(false)
+   const dataUser = useSelector(state => state.User.dataUser)
+   const result = useSelector(state => state.Result.ResultTest)
+
    const [formTestCancer, setFormTestCancer] = useState({
       baso: "",
       eos: "",
@@ -39,10 +49,14 @@ export default function TestCancerScreen() {
       plt: "",
       tpttbm: "",
       pct: "",
-      dateTest: dateNow
+      timestamp: date,
+      userId: dataUser && dataUser.id,
+      doctorId: '1',
+      hospitalId: "1",
+      test: result
    })
-   const result = useSelector(state => state.Result.ResultTest)
-
+   console.log("formTestCancer:", formTestCancer);
+   console.log("result:", result);
    const ShowResult = useMemo(() => {
       if (result !== null) {
          const data = ICD.filter((item) => {
@@ -76,11 +90,12 @@ export default function TestCancerScreen() {
       }
       return true
    }
+
    const hanleSaveTestCancer = () => {
       setIsSubmit(true)
       setTimeout(() => {
          setIsSubmit(false)
-      }, 4000);
+      }, 3000);
       if (validate()) {
          setIsSubmit(false)
          const { baso, eos, mono, neu, lym, wbc, hct, hgb, rbc, mch, mchc, mcv, mpv, rdw, pdw, plt, tpttbm, pct,
@@ -88,10 +103,17 @@ export default function TestCancerScreen() {
          dispatch(asyncGetTestCancer({
             baso, eos, mono, neu, lym, wbc, hct, hgb, rbc, mch, mchc, mcv, mpv, rdw, pdw, plt, tpttbm, pct,
          })).then((res) => {
-            if (res.ok) {
+            const { baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, test
+            } = formTestCancer
+            const testResult = res.data;
+            console.log("testResult:", testResult);
+
+            if (res.ok && testResult) {
                setIsShowModalResult(true)
                dispatch(actGetFormTest(formTestCancer))
+               dispatch(asyncPostTestHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, testResult }))
                setFormTestCancer({
+                  ...formTestCancer,
                   baso: "",
                   eos: "",
                   mono: "",
@@ -137,6 +159,7 @@ export default function TestCancerScreen() {
          const dataR = JSON.parse(valueQR);
          setIsShowQR(false)
          setFormTestCancer({
+            ...formTestCancer,
             baso: dataR.baso,
             eos: dataR.eos,
             mono: dataR.mono,

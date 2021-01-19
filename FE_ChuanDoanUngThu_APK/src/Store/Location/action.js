@@ -10,6 +10,15 @@ export const actGetListLocation = (listLocation) => {
    }
 }
 
+export const actGetLocationNow = (location) => {
+   return {
+      type: TYPE_ACTION.LOCATION_NOW,
+      payload: {
+         location
+      }
+   }
+}
+
 export const asyncGetListLocation = () => {
    return async (dispatch) => {
       try {

@@ -26,7 +26,7 @@ export default function ListNewFeed({ item }) {
                </Text>
                <View style={StylesNewFeed.typeView}>
                   <Text style={StylesNewFeed.textDate}>{item && item.post_date}</Text>
-                  <Text style={StylesNewFeed.textType}>{item && item.type}</Text>
+                  <Text numberOfLines={1} style={StylesNewFeed.textType}>{item && item.type}</Text>
                </View>
             </View>
          </View>

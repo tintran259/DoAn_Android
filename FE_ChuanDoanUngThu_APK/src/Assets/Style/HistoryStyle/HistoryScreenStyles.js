@@ -74,7 +74,6 @@ const StylesHisToryScreen = StyleSheet.create({
    },
    cardDoctor: {
       width: "100%",
-      height: 150,
       backgroundColor: "#fff",
       marginTop: 20,
       borderRadius: 10,

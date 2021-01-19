@@ -12,7 +12,7 @@ export const GetListHistory = {
                })
       )
    },
-   PostHistory: ({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, test }) => {
+   PostHistory: ({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, testResult }) => {
       return (
          api
             .callHisroty()
@@ -40,7 +40,7 @@ export const GetListHistory = {
                   "doctor_id": doctorId,
                   "hospital_id": hospitalId,
                   "timestamp": timestamp,
-                  "predict": test
+                  "predict": testResult
                })
       )
    }

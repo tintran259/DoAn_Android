@@ -17,6 +17,10 @@ import {
    ModalNotification
 } from '../Components/HomeScreen'
 import { URL_SEVER } from '../Contants'
+import { actGetLocationNow } from '../Store/Location/action'
+
+
+
 export default function HomeScreen() {
    LogBox.ignoreAllLogs();
 
@@ -27,15 +31,14 @@ export default function HomeScreen() {
    const listDoctor = useSelector(state => state.Doctor.listDoctor)
    const listHospital = useSelector(state => state.Hospital.listHospital)
    const listLocation = useSelector(state => state.Location.listLocation)
+   const locationNow = useSelector(state => state.Location.locationNow)
    const [isShowLocation, setIsShowLocation] = useState(false)
    const [isShowNotification, setIsShowNotification] = useState(false)
    const [doctorDetail, setIsDoctorDetail] = useState({})
    const [hospitalDetail, setHospitalDetail] = useState({})
    const [isShowModalDetailDoctor, setIsShowModalDetailDoctor] = useState(false)
-   const [locationSelected, setLocationSelected] = useState({
-      id: "MN",
-      name: "Miền Nam"
-   })
+   const [locationSelected, setLocationSelected] = useState(locationNow)
+   console.log("locationNow:", locationNow);
    const [isShowModalHospital, setIsShowModalHospital] = useState(false)
    console.log("listDoctor:", listDoctor)
    console.log("listHospital:", listHospital);
@@ -85,6 +88,7 @@ export default function HomeScreen() {
    }
    const handleSelectLocation = (inforLocation) => {
       setLocationSelected(inforLocation)
+      dispatch(actGetLocationNow(inforLocation))
       setIsShowLocation(false)
    }
    const handleDoctorDetail = (item) => {
@@ -102,6 +106,7 @@ export default function HomeScreen() {
    const handleHideModalHospital = () => {
       setIsShowModalHospital(false)
    }
+
    return (
       <ScrollView style={StylesHomeScreen.body}>
          <View style={StylesHomeScreen.notification}>

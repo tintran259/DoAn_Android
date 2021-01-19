@@ -2,7 +2,11 @@ import { TYPE_ACTION } from '../../Contants'
 
 
 const initialState = {
-   listLocation: []
+   listLocation: [],
+   locationNow: {
+      id: "MN",
+      name: "Miền Nam"
+   },
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,6 +15,11 @@ const reducer = (state = initialState, action) => {
          return {
             ...state,
             listLocation: action.payload.listLocation
+         }
+      case TYPE_ACTION.LOCATION_NOW:
+         return {
+            ...state,
+            locationNow: action.payload.location
          }
 
       default:

@@ -101,7 +101,8 @@ const StylesNewFeed = StyleSheet.create({
    },
    textType: {
       fontWeight: "bold",
-      color: "#FFC312"
+      color: "#FFC312",
+      width: "60%"
    },
    // textType:{
    //    te

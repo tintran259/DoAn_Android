@@ -30,7 +30,8 @@ export const asyncGetTestCancer = ({ baso, eos, mono, neu, lym, wbc, hct, hgb, r
             dispatch(actHideLoading())
             dispatch(actGetResultsTest(resultTest))
             return {
-               ok: true
+               ok: true,
+               data: resultTest
             }
          } else {
             return {

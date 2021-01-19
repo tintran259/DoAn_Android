@@ -10,6 +10,8 @@ import Communications from 'react-native-communications';
 import { asyncPostTestHistory } from '../Store/History/action'
 import getDateByTimeZoneDay from '../Contants/FORMAT_DATE'
 import { ModalHospital } from '../Components/TestCancerDetail'
+import { URL_SEVER } from '../Contants'
+import { ModalHospitalDetail } from '../Components/HomeScreen'
 
 export default function TestCancer() {
    const dispatch = useDispatch()
@@ -17,16 +19,10 @@ export default function TestCancer() {
    const formTest = useSelector(state => state.Result.formTest)
    const listDoctor = useSelector(state => state.Doctor.listDoctor)
    const listHospital = useSelector(state => state.Hospital.listHospital)
-   const dataUser = useSelector(state => state.User.dataUser)
+   const locationNow = useSelector(state => state.Location.locationNow)
    const [isShowModalHospital, setIsShowModalHospital] = useState(false)
    const [dataHospitalDetail, setDataHospitalDetail] = useState({})
 
-   const dateNow = new Date();
-   const dateFormat = getDateByTimeZoneDay(dateNow)
-   const HH = dateNow.getHours()
-   const MM = dateNow.getMinutes()
-
-   const date = `${HH}:${MM} ${dateFormat} `
    const navigation = useNavigation()
    const handleBack = () => {
       navigation.goBack()
@@ -40,41 +36,44 @@ export default function TestCancer() {
       }
       return [{ Desc: "" }]
    }, [result])
-   const [dataPostHistory, setDataPostHistory] = useState({
-      baso: formTest && formTest.baso,
-      eos: formTest && formTest.eos,
-      hct: formTest && formTest.hct,
-      hgb: formTest && formTest.hgb,
-      lym: formTest && formTest.lym,
-      mch: formTest && formTest.mch,
-      mchc: formTest && formTest.mchc,
-      mcv: formTest && formTest.mch,
-      mono: formTest && formTest.mono,
-      mpv: formTest && formTest.mpv,
-      neu: formTest && formTest.neu,
-      pct: formTest && formTest.pct,
-      pdw: formTest && formTest.pdw,
-      plt: formTest && formTest.plt,
-      rbc: formTest && formTest.rbc,
-      rdw: formTest && formTest.rdw,
-      tpttbm: formTest && formTest.tpttbm,
-      wbc: formTest && formTest.wbc,
-      userId: dataUser && dataUser.id,
-      doctorId: '1',
-      hospitalId: "1",
-      timestamp: date,
-      test: ShowResult[0].Desc,
-   })
 
-   useEffect(() => {
-      setTimeout(() => {
-         const { baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, test } = dataPostHistory
-         dispatch(asyncPostTestHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, test }))
-      }, 1000)
-   }, [])
+   const listHospitalSort = useMemo(() => {
+      return listHospital.filter((item) => {
+         return item.location_id === locationNow.id
+      })
+   }, [locationNow])
+   const listDoctorSort = useMemo(() => {
+      return listDoctor.filter((item) => {
+         return item.location_id === locationNow.id
+      })
+   }, [locationNow])
+   // const [dataPostHistory, setDataPostHistory] = useState({
+   //    baso: formTest && formTest.baso,
+   //    eos: formTest && formTest.eos,
+   //    hct: formTest && formTest.hct,
+   //    hgb: formTest && formTest.hgb,
+   //    lym: formTest && formTest.lym,
+   //    mch: formTest && formTest.mch,
+   //    mchc: formTest && formTest.mchc,
+   //    mcv: formTest && formTest.mch,
+   //    mono: formTest && formTest.mono,
+   //    mpv: formTest && formTest.mpv,
+   //    neu: formTest && formTest.neu,
+   //    pct: formTest && formTest.pct,
+   //    pdw: formTest && formTest.pdw,
+   //    plt: formTest && formTest.plt,
+   //    rbc: formTest && formTest.rbc,
+   //    rdw: formTest && formTest.rdw,
+   //    tpttbm: formTest && formTest.tpttbm,
+   //    wbc: formTest && formTest.wbc,
+   //    userId: dataUser && dataUser.id,
+   //    doctorId: '1',
+   //    hospitalId: "1",
+   //    timestamp: date,
+   //    test: ShowResult[0].Desc,
+   // })
 
    const handleCall = (doctor) => {
-      setDataPostHistory({ ...dataPostHistory, doctorId: doctor.id })
       const phoneNumber = doctor.phone
       Communications.phonecall(phoneNumber, true)
    }
@@ -106,12 +105,12 @@ export default function TestCancer() {
                   <Text style={StylesTestCancerDetail.textDoc}>Những bác sĩ liên quan:</Text>
                   <FlatList
                      horizontal
-                     data={listDoctor}
+                     data={listDoctorSort}
                      keyExtractor={item => item.id.toString()}
                      renderItem={({ item }) => {
                         return (
                            <View style={StylesTestCancerDetail.inforDoctor}>
-                              <Image style={StylesTestCancerDetail.iamgeAvatar} source={{ uri: "https://cdn.benhvienthucuc.vn/wp-content/uploads/2012/06/bs-nguyen-hong-nhung.jpg" }} />
+                              <Image style={StylesTestCancerDetail.iamgeAvatar} source={{ uri: `http://${URL_SEVER}:433/${item.image}` }} />
                               <View style={StylesTestCancerDetail.viewInfor}>
                                  <Text style={StylesTestCancerDetail.textNameDoctor}>{`Ths ${item.fullname}`}</Text>
                                  <Text style={[StylesTestCancerDetail.textNameDoctor, { color: "#3498db" }]}>{item.department}</Text>
@@ -126,13 +125,13 @@ export default function TestCancer() {
                   <Text style={StylesTestCancerDetail.textDoc}>Những bệnh viện liên quan:</Text>
                   <View style={StylesTestCancerDetail.ViewHospital}>
                      <FlatList
-                        data={listHospital}
+                        data={listHospitalSort}
                         keyExtractor={item => item.id.toString()}
                         renderItem={({ item }) => {
                            return (
                               <TouchableOpacity style={StylesTestCancerDetail.HospitalView} onPress={() => handleHospitalDetail(item)}>
                                  <View style={StylesTestCancerDetail.listHospital}>
-                                    <Image style={StylesTestCancerDetail.imageHospital} source={{ uri: "https://thuocdantoc.vn/wp-content/uploads/2018/12/benh-vien-tu-du.jpg" }} />
+                                    <Image style={StylesTestCancerDetail.imageHospital} source={{ uri: `http://${URL_SEVER}:433/${item.image}` }} />
                                     <View style={StylesTestCancerDetail.viewInforHos}>
                                        <Text style={StylesTestCancerDetail.textNameHos}>{item.name}</Text>
                                        <Text style={StylesTestCancerDetail.textotLine}>Liên hệ:</Text>
@@ -151,9 +150,9 @@ export default function TestCancer() {
                </View>
             </View>
          </ScrollView>
-         <ModalHospital
-            isVisible={isShowModalHospital}
-            dataHospital={dataHospitalDetail}
+         <ModalHospitalDetail
+            isShowModalHospital={isShowModalHospital}
+            hospitalDetail={dataHospitalDetail}
             handleHideModalHospital={handleHideModalHospital}
          />
       </View>

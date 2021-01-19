@@ -180,7 +180,6 @@ const StylesTestCanCerDetail = StyleSheet.create({
       // borderWidth: 1
    },
    viewInfor: {
-      marginLeft: 10,
       width: "100%",
       height: "100%",
    },
@@ -199,6 +198,7 @@ const StylesTestCanCerDetail = StyleSheet.create({
    btnContact: {
       position: "absolute",
       top: 75,
+      left: "6%",
       width: "90%",
       height: 35,
       backgroundColor: "#00cec9",
@@ -234,7 +234,7 @@ const StylesTestCanCerDetail = StyleSheet.create({
       fontWeight: "bold",
       color: "#3498db",
       fontSize: 17,
-      width: "69%"
+      width: "65%"
    },
    textPhone: {
       marginLeft: 40,
