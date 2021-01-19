@@ -9,6 +9,14 @@ export const actGetListHospital = (listHospital) => {
       }
    }
 }
+export const actGetItemHospitalDetail = (itemHospital) => {
+   return {
+      type: TYPE_ACTION.GET_LIST_HISTORY_DETAIL,
+      payload: {
+         itemHospital
+      }
+   }
+}
 
 
 export const asyncGetListHospital = () => {

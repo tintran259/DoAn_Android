@@ -1,35 +1,33 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { StylesNewFeed } from '../../Assets/Style/NewFeedScreen'
+import { URL_SEVER } from '../../Contants'
+import { actGetListNewFeedDetail } from '../../Store/NewFeed/action'
+import { useDispatch } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
+export default function ListNewFeed({ item }) {
+   const navigation = useNavigation()
+   const dispatch = useDispatch()
+   const handleNewFeedDetail = (item) => {
+      dispatch(actGetListNewFeedDetail(item))
+      navigation.navigate('NewFeedDetail')
+   }
 
-export default function ListNewFeed({ handleNewFeedDetail }) {
    return (
       <View style={StylesNewFeed.ListNewFeed}>
          <View style={StylesNewFeed.ViewAvatar}>
-            <Image style={StylesNewFeed.avatar} source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/CNN_International_logo.svg/1200px-CNN_International_logo.svg.png" }} />
+            <Image style={StylesNewFeed.ImageNews} onPress={() => handleNewFeedDetail(item)} source={{ uri: `http://${URL_SEVER}:433/${item.image}` }} />
          </View>
          <View style={StylesNewFeed.ViewContent}>
             <View style={StylesNewFeed.headerContent}>
-               <View>
-                  <Text style={StylesNewFeed.textName}>Nguyễn Thanh Hào</Text>
-                  <Text style={StylesNewFeed.textDate}>21-12-2020</Text>
+               <Text numberOfLines={2} onPress={() => handleNewFeedDetail(item)} style={[StylesNewFeed.textName, { fontSize: 16, color: "#1dd1a1" }]}>{item && item.title}</Text>
+               <Text numberOfLines={2} style={StylesNewFeed.textContentNewFeed} onPress={() => handleNewFeedDetail(item)}>
+                  {item && item.content}
+               </Text>
+               <View style={StylesNewFeed.typeView}>
+                  <Text style={StylesNewFeed.textDate}>{item && item.post_date}</Text>
+                  <Text style={StylesNewFeed.textType}>{item && item.type}</Text>
                </View>
-               <View>
-                  <Text style={StylesNewFeed.timeText}>12 min</Text>
-               </View>
-            </View>
-            <View style={StylesNewFeed.contentNewFeed}>
-               <Text numberOfLines={5} style={StylesNewFeed.textContentNewFeed} onPress={handleNewFeedDetail}>
-                  In publishing and graphic design,
-                  Lorem ipsum is a placeholder text commonly used to demonstrate the visual
-                  form of a document or a typeface without
-                  relying on meaningful content. Lorem ipsum may
-                  be used before final copy is available, but it
-                  may also be used to temporarily replace copy in
-                  a process called greeking, which allows designers
-                  to consider form without the meaning of the text influencin
-                     </Text>
-               <Image style={StylesNewFeed.imageNewFeed} source={{ uri: "https://etimg.etb2bimg.com/thumb/msid-72818662,width-1200,resizemode-4/.jpg" }} />
             </View>
          </View>
       </View>

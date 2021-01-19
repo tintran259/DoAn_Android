@@ -6,6 +6,7 @@ import CVHealthyUser from '../../Screens/CVHealthyUser'
 import HisToryTestCancer from '../../Screens/HistoryTestCancer'
 import CalanderHealthy from '../../Screens/CalanderHealthyScreen'
 import ChangeHealthy from '../../Screens/ChangeHealthyScreen'
+import HospitalDetailMap from '../../Screens/HospitalDetailMap'
 const Stack = createStackNavigator();
 
 export default function StackLoginRegister() {
@@ -17,6 +18,7 @@ export default function StackLoginRegister() {
          <Stack.Screen name="HistoryDetail" component={HisToryTestCancer} />
          <Stack.Screen name="CalanderHealthy" component={CalanderHealthy} />
          <Stack.Screen name="ChangeHealthy" component={ChangeHealthy} />
+         <Stack.Screen name="MapDetailHospital" component={HospitalDetailMap} />
       </Stack.Navigator>
    )
 }

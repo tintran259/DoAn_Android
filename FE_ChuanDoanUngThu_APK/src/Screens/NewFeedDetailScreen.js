@@ -1,13 +1,17 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import { StylesNewFeed } from '../Assets/Style/NewFeedScreen'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
+import { URL_SEVER } from '../Contants'
 export default function NewFeedDetail() {
+   const itemNewFeed = useSelector(state => state.NewFeed.itemNewFeed)
    const navigation = useNavigation()
    const handleBack = () => {
       navigation.goBack()
    }
+   console.log("itemNewFeed:", itemNewFeed);
    return (
       <View style={StylesNewFeed.container}>
          <View style={StylesNewFeed.headerDetail}>
@@ -15,28 +19,27 @@ export default function NewFeedDetail() {
                <IconAntd style={StylesNewFeed.iconBack} name="arrowleft" />
             </TouchableOpacity>
          </View>
-         <View style={StylesNewFeed.bodyDetail}>
+         <ScrollView style={StylesNewFeed.bodyDetail}>
+            <Text style={StylesNewFeed.title}>{itemNewFeed && itemNewFeed.title}</Text>
             <View style={StylesNewFeed.headerBodyDetail}>
-               <Image style={StylesNewFeed.avatar} source={{ uri: "https://bankimooncentre.org/wp-content/uploads/2020/06/cnn-logo-square.png" }} />
-               <View style={StylesNewFeed.headerText}>
-                  <Text style={StylesNewFeed.titleNAME}>Nguyễn Thanh Hào</Text>
-                  <Text style={StylesNewFeed.titledate}>20-10-1999</Text>
+               <View style={StylesNewFeed.ViewCon}>
+                  <Image style={StylesNewFeed.avatar} source={{ uri: `http://${URL_SEVER}:433/${itemNewFeed.image}` }} />
+                  <View style={StylesNewFeed.headerText}>
+                     <Text style={StylesNewFeed.titleNAME}>{itemNewFeed && itemNewFeed.author}</Text>
+                     <Text style={StylesNewFeed.titledate}>{itemNewFeed && itemNewFeed.post_date}</Text>
+                  </View>
+               </View>
+               <View style={StylesNewFeed.ViewTypeDetail}>
+                  <Text style={StylesNewFeed.textType}>{itemNewFeed && itemNewFeed.type}</Text>
                </View>
             </View>
             <View style={StylesNewFeed.contentNewFeed}>
                <Text style={StylesNewFeed.textContentNewFeed} >
-                  In publishing and graphic design,
-                  Lorem ipsum is a placeholder text commonly used to demonstrate the visual
-                  form of a document or a typeface without
-                  relying on meaningful content. Lorem ipsum may
-                  be used before final copy is available, but it
-                  may also be used to temporarily replace copy in
-                  a process called greeking, which allows designers
-                  to consider form without the meaning of the text influencin
+                  {itemNewFeed && itemNewFeed.content}
                </Text>
-               <Image resizeMode="cover" style={StylesNewFeed.imageNewFeedDetail} source={{ uri: "https://etimg.etb2bimg.com/thumb/msid-72818662,width-1200,resizemode-4/.jpg" }} />
+               <Image resizeMode="cover" style={StylesNewFeed.imageNewFeedDetail} source={{ uri: `http://${URL_SEVER}:433/${itemNewFeed.image}` }} />
             </View>
-         </View>
+         </ScrollView>
       </View>
    )
 }

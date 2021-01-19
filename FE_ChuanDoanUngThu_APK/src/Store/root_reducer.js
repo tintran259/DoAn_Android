@@ -6,6 +6,7 @@ import DoctorReducer from './Doctor/reducer'
 import HospitalReducer from './Hospital/reducer'
 import HistoryReducer from './History/reducer'
 import LocationReducer from './Location/reducer'
+import NewFeedReducer from './NewFeed/reducer'
 
 const MyReducer = combineReducers({
    App: AppReducer,
@@ -14,7 +15,8 @@ const MyReducer = combineReducers({
    Doctor: DoctorReducer,
    Hospital: HospitalReducer,
    History: HistoryReducer,
-   Location: LocationReducer
+   Location: LocationReducer,
+   NewFeed: NewFeedReducer
 })
 
 export default MyReducer

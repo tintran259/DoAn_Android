@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 const StylesNewFeed = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: "#fff"
+      backgroundColor: "#f1f2f6"
    },
    header: {
       width: "100%",
@@ -17,26 +17,33 @@ const StylesNewFeed = StyleSheet.create({
       color: "#2d3436",
       marginBottom: 10
    },
+   title: {
+      fontWeight: "bold",
+      fontSize: 17,
+      marginBottom: 10,
+      color: "#1dd1a1"
+   },
    body: {
       marginHorizontal: 10,
       marginTop: 10
    },
    ListNewFeed: {
       width: "100%",
-      height: 320,
-      borderBottomWidth: 1,
-      borderBottomColor: "#ecf0f1",
+      height: 120,
       flexDirection: "row",
-      marginBottom: 10
+      backgroundColor: "#ffff",
+      marginBottom: 10,
+      padding: 10
    },
    ViewAvatar: {
-      width: "25%",
+      width: "40%",
       height: "100%",
       alignItems: "center"
    },
    ViewContent: {
-      width: "75%",
+      width: "60%",
       height: "100%",
+      paddingHorizontal: 10
    },
    avatar: {
       width: 45,
@@ -45,14 +52,15 @@ const StylesNewFeed = StyleSheet.create({
    },
    textName: {
       color: "#2d3436",
-      fontWeight: "bold"
+      fontWeight: "bold",
+      fontSize: 14
    },
    textDate: {
-      fontSize: 12
+      fontSize: 12,
+      marginRight: 10
    },
    headerContent: {
-      flexDirection: "row",
-      justifyContent: "space-between"
+      justifyContent: "center",
    },
    timeText: {
       color: "#2d3436",
@@ -61,7 +69,9 @@ const StylesNewFeed = StyleSheet.create({
    },
    textContentNewFeed: {
       color: "#2d3436",
-      fontWeight: "bold"
+      fontWeight: "bold",
+      textAlign: "justify",
+      marginTop: 5,
    },
    contentNewFeed: {
       marginTop: 10
@@ -70,13 +80,41 @@ const StylesNewFeed = StyleSheet.create({
       width: "100%",
       height: 150,
       borderRadius: 10,
+      marginTop: 20,
+   },
+   ImageNews: {
+      width: "100%",
+      height: "100%",
+      borderRadius: 10
+   },
+   ViewType: {
+      width: 2,
+      height: 260,
+      backgroundColor: "#1dd1a1",
+      borderRadius: 50,
       marginTop: 10
    },
+   typeView: {
+      marginTop: 0,
+      flexDirection: "row",
+      alignItems: "flex-end"
+   },
+   textType: {
+      fontWeight: "bold",
+      color: "#FFC312"
+   },
+   // textType:{
+   //    te
+   // },
    ////////////////////////////////////////// Detail ////////////////////////
    headerDetail: {
       width: "100%",
       height: 70,
       justifyContent: "center"
+   },
+   ViewCon: {
+      flexDirection: "row",
+      width: "50%"
    },
    btnBack: {
       width: 60,
@@ -89,7 +127,9 @@ const StylesNewFeed = StyleSheet.create({
       color: "#2d3436"
    },
    headerBodyDetail: {
-      flexDirection: "row"
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "space-between"
    },
    titleNAME: {
       fontWeight: "bold",

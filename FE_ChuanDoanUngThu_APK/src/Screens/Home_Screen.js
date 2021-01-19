@@ -8,7 +8,7 @@ import Swiper from "react-native-swiper";
 import { useSelector, useDispatch } from 'react-redux'
 import { asyncGetUserById } from '../Store/User/action'
 import { ListDoctor } from '../Components/HomeScreen'
-import Modal from 'react-native-modal'
+import { actGetItemHospitalDetail } from '../Store/Hospital/action'
 import { useState } from 'react'
 import {
    ModalHospitalDetail,
@@ -96,6 +96,7 @@ export default function HomeScreen() {
    }
    const handleHospitalDetail = (item) => {
       setHospitalDetail(item)
+      dispatch(actGetItemHospitalDetail(item))
       setIsShowModalHospital(true)
    }
    const handleHideModalHospital = () => {

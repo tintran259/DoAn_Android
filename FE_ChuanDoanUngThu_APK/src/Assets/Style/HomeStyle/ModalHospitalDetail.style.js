@@ -33,6 +33,21 @@ const StylesModalHospital = StyleSheet.create({
       height: "100%",
       borderTopLeftRadius: 10,
       borderTopRightRadius: 10
+   },
+   BtnMap: {
+      position: "absolute",
+      right: "5%",
+      bottom: "20%",
+      width: 50,
+      height: 50,
+   },
+   btnMaps: {
+      width: "100%",
+      height: "100%",
+      backgroundColor: "#2e86de",
+      borderRadius: 100,
+      justifyContent: "center",
+      alignItems: "center"
    }
 })
 
