@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, ScrollView, Image, LogBox } from 'react-native'
-import { StylesLoginScreen } from '../Assets/Style/LoginStyle'
-import { FormLogin } from '../Components/LoginScreen'
-import { asyncLogin } from '../Store/User/action'
 import { useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 
+//Style+ Icon
+import { StylesLoginScreen } from '../Assets/Style/LoginStyle'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 
+
+//Action + component
+import { FormLogin } from '../Components/LoginScreen'
+import { asyncLogin } from '../Store/User/action'
 
 
 export default function LoginScreen() {
@@ -15,17 +18,21 @@ export default function LoginScreen() {
    const dispatch = useDispatch()
    const [isOnPressLogin, setIsOnPressLogin] = useState(false)
    const [isShowToast, setIsShowToast] = useState(false)
+
+   //Form Login
    const [formLogin, setFormLogin] = useState({
       username: "",
       password: "",
    })
 
+   //Validate Form Login
    const validateFormLogin = ({ username, password }) => {
       if (username.trim() === "" || password.trim() === "") {
          return false
       }
       return true
    }
+   //SUBMIT lOGIN
    const handleLoginSuccess = () => {
       setIsOnPressLogin(true)
       setTimeout(() => {

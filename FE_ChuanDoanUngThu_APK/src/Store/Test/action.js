@@ -25,13 +25,16 @@ export const asyncGetTestCancer = ({ baso, eos, mono, neu, lym, wbc, hct, hgb, r
       try {
          dispatch(actShowLoading())
          const response = await TestCanncerAI.Test({ baso, eos, mono, neu, lym, wbc, hct, hgb, rbc, mch, mchc, mcv, mpv, rdw, pdw, plt, tpttbm, pct, })
+         console.log("response Result:", response)
+         dispatch(actHideLoading())
          if (response.status === 200) {
             const resultTest = response.data
-            dispatch(actHideLoading())
-            dispatch(actGetResultsTest(resultTest))
+            const [result] = resultTest
+            console.log("result:", result);
+            dispatch(actGetResultsTest(result))
             return {
                ok: true,
-               data: resultTest
+               data: result
             }
          } else {
             return {
@@ -39,6 +42,7 @@ export const asyncGetTestCancer = ({ baso, eos, mono, neu, lym, wbc, hct, hgb, r
             }
          }
       } catch (err) {
+         console.log("err Result:", err);
          dispatch(actHideLoading())
          return {
             ok: false

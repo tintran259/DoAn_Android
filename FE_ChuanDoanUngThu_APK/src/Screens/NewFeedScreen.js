@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react'
 import { View, Text, ScrollView, FlatList } from 'react-native'
-import { StylesNewFeed } from '../Assets/Style/NewFeedScreen'
-import { ListNewFeed } from '../Components/NewFeedScreen'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
+
+//Style + Icon
+import { StylesNewFeed } from '../Assets/Style/NewFeedScreen'
+
+
+//Action + Components
+import { ListNewFeed } from '../Components/NewFeedScreen'
 import { asyncGetListNewFeed } from '../Store/NewFeed/action'
-import { State } from 'react-native-gesture-handler'
 
 
 

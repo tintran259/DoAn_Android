@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
-import { StylesEditProfile } from '../Assets/Style/EditProfileStyle'
-import IconAntd from 'react-native-vector-icons/AntDesign'
+import Modal from 'react-native-modal'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
+
+
+//Style + Icon
+import { StylesEditProfile } from '../Assets/Style/EditProfileStyle'
+import IconAntd from 'react-native-vector-icons/AntDesign'
+
+//Action
 import { asyncChangePassword, logout } from '../Store/User/action'
-import Modal from 'react-native-modal'
 
 export default function HistoryScreen() {
    const dispatch = useDispatch()
@@ -22,14 +27,23 @@ export default function HistoryScreen() {
       new_password: "",
       re_password: ""
    })
+   //Navigation
+   const handleBack = () => {
+      navigation.goBack()
+   }
 
+
+   //Logic
    const validate = () => {
-      if (changePass.old_password == "" || changePass.new_password == "" || changePass.re_password == "") {
+      if (changePass.old_password == "" ||
+         changePass.new_password == "" ||
+         changePass.re_password == "") {
          return false
       }
       return true
    }
 
+   //When Click Btn ChangePassword
    const handleConFirm = () => {
       setIsConfirm(true)
       if (validate()) {
@@ -51,9 +65,9 @@ export default function HistoryScreen() {
             })
       }
    }
-   const handleBack = () => {
-      navigation.goBack()
-   }
+
+
+   //Check Re_Password
    const onChangeRePassword = (text) => {
       setChangePass(
          {
@@ -72,6 +86,7 @@ export default function HistoryScreen() {
       }
    }
 
+   //Check Re_Password When OnBlur
    const onBlurRe_passord = (e) => {
       const repassword = e.nativeEvent.text
       if (repassword !== changePass.new_password) {
@@ -85,6 +100,8 @@ export default function HistoryScreen() {
       }
    }
 
+
+   //Modal
    const handleCanCelModalFail = () => {
       setIsShowFail(false)
    }

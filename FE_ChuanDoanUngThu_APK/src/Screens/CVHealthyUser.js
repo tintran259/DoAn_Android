@@ -1,35 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, TouchableOpacity, Image, ScrollView, FlatList, TextInput } from 'react-native'
-import { StylesCVScreen } from '../Assets/Style/CVHealthyStyle/CVHealthyStyle'
-import IconAntd from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector, useDispatch } from 'react-redux'
 import Modal from 'react-native-modal'
+
+//Style+ Icon
+import { StylesCVScreen } from '../Assets/Style/CVHealthyStyle/CVHealthyStyle'
+import IconAntd from 'react-native-vector-icons/AntDesign'
+
+//Action
 import { asyncEditInforUser, EditInforSuccessed } from '../Store/User/action'
 import { asyncGetListHistoryUser, actGetListHistoryDetail } from '../Store/History/action'
+
+//Format
 import getDateByTimeZoneDay from '../Contants/FORMAT_DATE'
-import getDateByTimeZoneDayTime from '../Contants/FORMAT_DATETIIME'
 
 export default function HistoryScreen() {
+
+
    const dispatch = useDispatch()
    const navigation = useNavigation()
    const dataUser = useSelector(state => state.User.dataUser)
    const listHistory = useSelector(state => state.History.listHistory)
+   const [isShowModal, setIsSHowModal] = useState(false)
 
-
-
+   //Format Date DD-MM-YYYY
    const dayNow = new Date()
    const dayNowFormat = getDateByTimeZoneDay(dayNow)
+
    const userId = dataUser && dataUser.id
-   const DayNowAndDayHistory = (dayHistory) => {
-      if (dayNowFormat === dayHistory) {
-         return true
-      }
-      return false
-   }
    useEffect(() => {
       dispatch(asyncGetListHistoryUser({ userId }))
    }, [])
+   // Form CV
    const [formHealthy, setFormHealthy] = useState({
       userId: dataUser && dataUser.id,
       fullname: dataUser && dataUser.fullname,
@@ -43,7 +46,8 @@ export default function HistoryScreen() {
       weight: dataUser && dataUser.weight,
       blood: dataUser && dataUser.blood_type
    })
-   const [isShowModal, setIsSHowModal] = useState(false)
+
+   //Navigation
    const handleBack = () => {
       navigation.goBack()
    }
@@ -51,12 +55,16 @@ export default function HistoryScreen() {
       dispatch(actGetListHistoryDetail(item))
       navigation.navigate('HistoryDetail')
    }
-   const handleHideModal = () => {
-      setIsSHowModal(false)
+
+   // Check History New or Old
+   const DayNowAndDayHistory = (dayHistory) => {
+      if (dayNowFormat === dayHistory) {
+         return true
+      }
+      return false
    }
-   const handleUpdate = () => {
-      setIsSHowModal(true)
-   }
+
+   // Controller :::::Update CV Healthy
    const handleUpdateNow = () => {
       console.log("formHealthy:", formHealthy);
       let { userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian, blood, height, weight } = formHealthy
@@ -69,6 +77,15 @@ export default function HistoryScreen() {
          })
    }
 
+   //Modal
+   const handleHideModal = () => {
+      setIsSHowModal(false)
+   }
+   const handleUpdate = () => {
+      setIsSHowModal(true)
+   }
+
+   //View
    const Empty = () => {
       return (
          <View style={StylesCVScreen.emptyHistory}>

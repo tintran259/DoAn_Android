@@ -11,6 +11,21 @@ const StylesTestCanCerDetail = StyleSheet.create({
       width: "100%",
       height: 100,
    },
+   formContact: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center"
+   },
+   contactForm: {
+
+   },
+   ranking: {
+      position: "absolute",
+      right: "0%",
+      top: "-7%",
+      width: 30,
+      height: 30
+   },
    btnBack: {
       width: 60,
       height: 50,
@@ -186,9 +201,9 @@ const StylesTestCanCerDetail = StyleSheet.create({
    textDoc: {
       marginLeft: 10,
       marginTop: 20,
-      fontSize: 14,
+      fontSize: 17,
       fontWeight: "bold",
-      color: "#3498db"
+      color: "#3498db",
    },
    textNameDoctor: {
       textAlign: "center",
@@ -211,7 +226,7 @@ const StylesTestCanCerDetail = StyleSheet.create({
       marginTop: 20
    },
    imageHospital: {
-      width: 130,
+      width: "50%",
       height: 100,
       borderRadius: 10
    },
@@ -222,28 +237,29 @@ const StylesTestCanCerDetail = StyleSheet.create({
       borderRadius: 10,
       borderColor: "#ecf0f1",
       backgroundColor: "#fff",
-      marginBottom: 10
+      marginTop: 15
    },
    listHospital: {
       flexDirection: "row",
+      width: "100%"
    },
    viewInforHos: {
-      marginLeft: 10
+      marginLeft: 10,
+      width: "50%"
    },
    textNameHos: {
       fontWeight: "bold",
       color: "#3498db",
       fontSize: 17,
-      width: "65%"
+      width: "90%"
    },
    textPhone: {
-      marginLeft: 40,
       marginTop: 10,
       color: "#2d3436"
    },
    textotLine: {
       fontWeight: "bold",
-      marginTop: 10,
+      marginTop: 8,
       color: "#2d3436"
    },
    viewAdd: {

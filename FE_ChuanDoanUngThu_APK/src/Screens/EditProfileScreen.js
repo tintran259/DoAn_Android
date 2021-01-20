@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
-import { StylesEditProfile } from '../Assets/Style/EditProfileStyle'
-import IconAntd from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
-import { FormEditProfile } from '../Components/EditProfileScreen'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-native-modal'
+
+//Style+ Icon
+import { StylesEditProfile } from '../Assets/Style/EditProfileStyle'
+import IconAntd from 'react-native-vector-icons/AntDesign'
+
+
+//Action + Component
+import { FormEditProfile } from '../Components/EditProfileScreen'
 import { asyncEditInforUser, EditInforSuccessed } from '../Store/User/action'
-
-
 
 
 export default function HistoryScreen() {
    const dispatch = useDispatch()
-   const dataUser = useSelector(state => state.User.dataUser)
-   console.log("dataUser EditProfile:", dataUser);
    const navigation = useNavigation()
+   const dataUser = useSelector(state => state.User.dataUser)
    const [isShowModalGender, setIsShowGender] = useState(false)
    const [userProfile, setUseProfile] = useState({
       userId: dataUser.id,
@@ -30,6 +32,14 @@ export default function HistoryScreen() {
       weight: dataUser.weight,
       blood: dataUser.blood_type
    })
+
+   //Navigation 
+   const handleBackProfile = () => {
+      navigation.goBack()
+   }
+
+
+   //Modal
    const handleOpenGender = () => {
       setIsShowGender(true)
    }
@@ -37,9 +47,7 @@ export default function HistoryScreen() {
       setIsShowGender(false)
    }
 
-   const handleBackProfile = () => {
-      navigation.goBack()
-   }
+   //Controller ::: Edit Profile
    const handleSaveEdit = () => {
       let { userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian, blood, height, weight } = userProfile
       dispatch(asyncEditInforUser({ userId, fullname, address, gender, phone, birthday, nameGuardian, phoneGuardian, blood, height, weight }))

@@ -7,7 +7,7 @@ export const TestCanncerAI = {
       return (
          api
             .callAI()
-            .post('/icd', {
+            .post('/icd/', {
                "baso": baso,
                "eos": eos,
                "mono": mono,

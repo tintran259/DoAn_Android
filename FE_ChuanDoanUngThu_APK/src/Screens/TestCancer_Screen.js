@@ -21,8 +21,8 @@ export default function TestCancerScreen() {
    const dateFormat = getDateByTimeZoneDay(dateNow)
    const HH = dateNow.getHours()
    const MM = dateNow.getMinutes()
-   const mm = MM.toString;
-   const date = `${HH}:${mm.length > 1 ? MM : `0${MM}`} ${dateFormat} `
+   const mm = MM.toString();
+   const datePresent = `${HH}:${mm.length > 1 ? MM : `0${MM}`} ${dateFormat} `
    const [isShowQR, setIsShowQR] = useState(false)
    const [isShowModalResult, setIsShowModalResult] = useState(false)
    const [isSubmit, setIsSubmit] = useState(false)
@@ -49,12 +49,13 @@ export default function TestCancerScreen() {
       plt: "",
       tpttbm: "",
       pct: "",
-      timestamp: date,
+      timestamp: datePresent,
       userId: dataUser && dataUser.id,
       doctorId: '1',
       hospitalId: "1",
       test: result
    })
+   console.log("formTestCancer:", formTestCancer.timestamp);
    console.log("formTestCancer:", formTestCancer);
    console.log("result:", result);
    const ShowResult = useMemo(() => {
@@ -107,8 +108,7 @@ export default function TestCancerScreen() {
             } = formTestCancer
             const testResult = res.data;
             console.log("testResult:", testResult);
-
-            if (res.ok && testResult) {
+            if (res.ok) {
                setIsShowModalResult(true)
                dispatch(actGetFormTest(formTestCancer))
                dispatch(asyncPostTestHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, testResult }))

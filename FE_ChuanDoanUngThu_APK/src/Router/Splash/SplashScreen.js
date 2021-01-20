@@ -15,7 +15,8 @@ export default function SplashScreen() {
    }, [])
    setTimeout(() => {
       dispatch(actHideSplashScreen())
-   }, 4000)
+   }, 1000)
+
    return (
       <>
          <View style={stylesSplash.container}>

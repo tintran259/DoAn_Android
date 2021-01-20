@@ -1,7 +1,9 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import { StylesChangeHealthy } from '../Assets/Style/ChangeHealthyStyle'
 import IconAntd from 'react-native-vector-icons/AntDesign'
+
+//Style + Icon
+import { StylesChangeHealthy } from '../Assets/Style/ChangeHealthyStyle'
 import { useNavigation } from '@react-navigation/native'
 
 

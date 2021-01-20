@@ -1,16 +1,26 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { useSelector } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
+
+//Style+ Icon
 import { StylesNewFeed } from '../Assets/Style/NewFeedScreen'
 import IconAntd from 'react-native-vector-icons/AntDesign'
-import { useNavigation } from '@react-navigation/native'
-import { useSelector } from 'react-redux'
+
+//Data + Contants
 import { URL_SEVER } from '../Contants'
+
+
 export default function NewFeedDetail() {
    const itemNewFeed = useSelector(state => state.NewFeed.itemNewFeed)
    const navigation = useNavigation()
+
+   //Navigation
    const handleBack = () => {
       navigation.goBack()
    }
+
+
    console.log("itemNewFeed:", itemNewFeed);
    return (
       <View style={StylesNewFeed.container}>

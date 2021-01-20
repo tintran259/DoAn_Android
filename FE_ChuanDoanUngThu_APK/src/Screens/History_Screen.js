@@ -1,8 +1,10 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity, BackHandler } from 'react-native'
-import { StylesHisToryScreen } from '../Assets/Style/HistoryStyle/HistoryScreenStyles'
-import IconAntd from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
+
+//Style + Icon
+import IconAntd from 'react-native-vector-icons/AntDesign'
+import { StylesHisToryScreen } from '../Assets/Style/HistoryStyle/HistoryScreenStyles'
 
 export default function HistoryScreen() {
    const navigation = useNavigation()

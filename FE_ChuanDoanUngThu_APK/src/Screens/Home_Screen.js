@@ -1,23 +1,29 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { LogBox, View, Text, ScrollView, Image, FlatList, TouchableOpacity } from 'react-native'
-import { StylesHomeScreen } from '../Assets/Style/HomeStyle'
 import { useNavigation } from '@react-navigation/native'
-import IconAntd from 'react-native-vector-icons/AntDesign'
-import IconFontisto from 'react-native-vector-icons/Fontisto'
 import Swiper from "react-native-swiper";
 import { useSelector, useDispatch } from 'react-redux'
+
+//Style + Icon
+import { StylesHomeScreen } from '../Assets/Style/HomeStyle'
+import IconAntd from 'react-native-vector-icons/AntDesign'
+import IconFontisto from 'react-native-vector-icons/Fontisto'
+
+
+//Action + component
 import { asyncGetUserById } from '../Store/User/action'
 import { ListDoctor } from '../Components/HomeScreen'
 import { actGetItemHospitalDetail } from '../Store/Hospital/action'
-import { useState } from 'react'
 import {
    ModalHospitalDetail,
    ModalDoctorDetail,
    ModalLocation,
    ModalNotification
 } from '../Components/HomeScreen'
-import { URL_SEVER } from '../Contants'
 import { actGetLocationNow } from '../Store/Location/action'
+
+//Contants +Data
+import { URL_SEVER } from '../Contants'
 
 
 
@@ -38,8 +44,9 @@ export default function HomeScreen() {
    const [hospitalDetail, setHospitalDetail] = useState({})
    const [isShowModalDetailDoctor, setIsShowModalDetailDoctor] = useState(false)
    const [locationSelected, setLocationSelected] = useState(locationNow)
-   console.log("locationNow:", locationNow);
    const [isShowModalHospital, setIsShowModalHospital] = useState(false)
+
+   console.log("locationNow:", locationNow);
    console.log("listDoctor:", listDoctor)
    console.log("listHospital:", listHospital);
    console.log("listLocation:", listLocation);
@@ -48,29 +55,7 @@ export default function HomeScreen() {
       dispatch(asyncGetUserById({ userId }))
    }, [])
 
-   const listDoctorForLocation = useMemo(() => {
-      return listDoctor.filter((item) => {
-         return item.location_id === locationSelected.id
-      })
-   }, [locationSelected])
-   const listHospitalForLocation = useMemo(() => {
-      return listHospital.filter((item) => {
-         return item.location_id === locationSelected.id
-      })
-   }, [locationSelected])
-
-   const handleShowNotification = () => {
-      setIsShowNotification(true)
-   }
-   const handleHideNotification = () => {
-      setIsShowNotification(false)
-   }
-   const handleShowLocation = () => {
-      setIsShowLocation(true)
-   }
-   const handleHideLocation = () => {
-      setIsShowLocation(false)
-   }
+   //Navigation 
    const moveProfileScreen = () => {
       navigation.navigate('StackProfile')
    }
@@ -86,26 +71,61 @@ export default function HomeScreen() {
    const movecalanderHealthy = () => {
       navigation.navigate('CalanderHealthy')
    }
+
+   //Sort ListDoctor forllow Location
+   const listDoctorForLocation = useMemo(() => {
+      return listDoctor.filter((item) => {
+         return item.location_id === locationSelected.id
+      })
+   }, [locationSelected])
+
+   //Sort ListHospital follow Location
+   const listHospitalForLocation = useMemo(() => {
+      return listHospital.filter((item) => {
+         return item.location_id === locationSelected.id
+      })
+   }, [locationSelected])
+
+
+   //Modal
+   const handleShowNotification = () => {
+      setIsShowNotification(true)
+   }
+   const handleHideNotification = () => {
+      setIsShowNotification(false)
+   }
+   const handleShowLocation = () => {
+      setIsShowLocation(true)
+   }
+   const handleHideLocation = () => {
+      setIsShowLocation(false)
+   }
+   const handleHideModalDocdorDetail = () => {
+      setIsShowModalDetailDoctor(false)
+   }
+   const handleHideModalHospital = () => {
+      setIsShowModalHospital(false)
+   }
+
+   //Select Location ++ North or Earth
    const handleSelectLocation = (inforLocation) => {
       setLocationSelected(inforLocation)
       dispatch(actGetLocationNow(inforLocation))
       setIsShowLocation(false)
    }
+   //DoctorDetail
    const handleDoctorDetail = (item) => {
       setIsShowModalDetailDoctor(true)
       setIsDoctorDetail(item)
    }
-   const handleHideModalDocdorDetail = () => {
-      setIsShowModalDetailDoctor(false)
-   }
+
+   //HospitalDetail
    const handleHospitalDetail = (item) => {
       setHospitalDetail(item)
       dispatch(actGetItemHospitalDetail(item))
       setIsShowModalHospital(true)
    }
-   const handleHideModalHospital = () => {
-      setIsShowModalHospital(false)
-   }
+
 
    return (
       <ScrollView style={StylesHomeScreen.body}>

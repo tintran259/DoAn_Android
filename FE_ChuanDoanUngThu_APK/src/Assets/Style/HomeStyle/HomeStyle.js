@@ -317,7 +317,7 @@ const StylesHomeScreen = StyleSheet.create({
       marginTop: 10
    },
    nameText: {
-      width: "90%",
+      width: "80%",
    },
    titleText: {
       fontWeight: "bold",
@@ -409,6 +409,17 @@ const StylesHomeScreen = StyleSheet.create({
    titleHos: {
       fontWeight: "bold",
       color: "#2d3436"
+   },
+   btnLocationDoctor: {
+      position: "absolute",
+      right: "2%",
+      top: "70%",
+      width: 40,
+      height: 40,
+      borderRadius: 100,
+      backgroundColor: "#3498db",
+      justifyContent: "center",
+      alignItems: "center"
    }
 })
 

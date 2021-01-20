@@ -1,28 +1,35 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux'
+import Communications from 'react-native-communications';
+
+//Style+Icon
 import { StylesTestCancerDetail } from '../Assets/Style/TestCancerDetail/'
 import { StylesHisToryScreen } from '../Assets/Style/HistoryStyle/HistoryScreenStyles'
 import IconAntd from 'react-native-vector-icons/AntDesign'
-import { useNavigation } from '@react-navigation/native'
-import { useDispatch, useSelector } from 'react-redux'
-import { asyncGetListDoctor } from '../Store/Doctor/action'
-import { asyncGetListHospital } from '../Store/Hospital/action'
-import Communications from 'react-native-communications';
-import { useState } from 'react'
+
+//Data
 import { ICD } from '../mock'
 import { URL_SEVER } from '../Contants'
 
 export default function HistoryTestCancer() {
    const navigation = useNavigation()
-   const dispatch = useDispatch()
    const itemDetail = useSelector(state => state.History.itemHistory)
    const listDoctor = useSelector(state => state.Doctor.listDoctor)
    const listHospital = useSelector(state => state.Hospital.listHospital)
    console.log("itemDetail:", itemDetail);
 
+
+   //Navigation
    const handleBack = () => {
       navigation.goBack()
    }
+
+
+
+
+   //Controller ::: SortItemDoctor :::: ID
    const inforDoctor = useMemo(() => {
       if (listDoctor) {
          return listDoctor.filter((item) => {
@@ -32,6 +39,8 @@ export default function HistoryTestCancer() {
          return null
       }
    }, [itemDetail, listDoctor])
+
+   //Sort Result WITH DATA ICD
    const ShowResult = useMemo(() => {
       if (itemDetail.predict !== null) {
          const data = ICD.filter((item) => {
@@ -43,6 +52,8 @@ export default function HistoryTestCancer() {
    }, [itemDetail.predict])
    console.log("inforDoctor:", inforDoctor);
    console.log("ShowResult:", ShowResult);
+
+   //Contact
    const handleContact = () => {
       Communications.phonecall("0838995564", true)
    }

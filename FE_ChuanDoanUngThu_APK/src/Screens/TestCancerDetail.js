@@ -7,11 +7,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { ICD } from '../mock'
 import { FlatList } from 'react-native-gesture-handler'
 import Communications from 'react-native-communications';
-import { asyncPostTestHistory } from '../Store/History/action'
-import getDateByTimeZoneDay from '../Contants/FORMAT_DATE'
-import { ModalHospital } from '../Components/TestCancerDetail'
+import getDistance from 'geolib/es/getDistance';
+import Geolocation from '@react-native-community/geolocation';
+
 import { URL_SEVER } from '../Contants'
 import { ModalHospitalDetail } from '../Components/HomeScreen'
+import { ModalDoctorDetail } from '../Components/HomeScreen'
 
 export default function TestCancer() {
    const dispatch = useDispatch()
@@ -22,6 +23,25 @@ export default function TestCancer() {
    const locationNow = useSelector(state => state.Location.locationNow)
    const [isShowModalHospital, setIsShowModalHospital] = useState(false)
    const [dataHospitalDetail, setDataHospitalDetail] = useState({})
+   const [isShowModalDoctor, setIsShowModalDoctor] = useState(false)
+   const [dataDoctorDetail, setDataDoctorDetail] = useState({})
+   const [location, setLocation] = useState({
+      latitude: '',
+      longitude: ''
+   })
+
+   useEffect(() => {
+      Geolocation.getCurrentPosition(info => {
+         const latitude = info.coords.latitude
+         const longitude = info.coords.longitude
+         setLocation({
+            latitude,
+            longitude
+         })
+      })
+   }, [])
+
+   console.log("Location:", location);
 
    const navigation = useNavigation()
    const handleBack = () => {
@@ -42,36 +62,19 @@ export default function TestCancer() {
          return item.location_id === locationNow.id
       })
    }, [locationNow])
+   const listHospitalSortRanking = useMemo(() => {
+      return listHospitalSort.sort((a, b) => {
+         if (a.ranking > b.ranking) {
+            return 1
+         }
+      })
+   }, [listHospitalSort])
+   console.log("listHospitalSortRanking:", listHospitalSortRanking);
    const listDoctorSort = useMemo(() => {
       return listDoctor.filter((item) => {
          return item.location_id === locationNow.id
       })
    }, [locationNow])
-   // const [dataPostHistory, setDataPostHistory] = useState({
-   //    baso: formTest && formTest.baso,
-   //    eos: formTest && formTest.eos,
-   //    hct: formTest && formTest.hct,
-   //    hgb: formTest && formTest.hgb,
-   //    lym: formTest && formTest.lym,
-   //    mch: formTest && formTest.mch,
-   //    mchc: formTest && formTest.mchc,
-   //    mcv: formTest && formTest.mch,
-   //    mono: formTest && formTest.mono,
-   //    mpv: formTest && formTest.mpv,
-   //    neu: formTest && formTest.neu,
-   //    pct: formTest && formTest.pct,
-   //    pdw: formTest && formTest.pdw,
-   //    plt: formTest && formTest.plt,
-   //    rbc: formTest && formTest.rbc,
-   //    rdw: formTest && formTest.rdw,
-   //    tpttbm: formTest && formTest.tpttbm,
-   //    wbc: formTest && formTest.wbc,
-   //    userId: dataUser && dataUser.id,
-   //    doctorId: '1',
-   //    hospitalId: "1",
-   //    timestamp: date,
-   //    test: ShowResult[0].Desc,
-   // })
 
    const handleCall = (doctor) => {
       const phoneNumber = doctor.phone
@@ -84,6 +87,49 @@ export default function TestCancer() {
    const handleHideModalHospital = () => {
       setIsShowModalHospital(false)
    }
+   const handleDoctorDetail = (item) => {
+      setDataDoctorDetail(item)
+      setIsShowModalDoctor(true)
+   }
+   const handleHideModalDocdorDetail = () => {
+      setIsShowModalDoctor(false)
+   }
+
+   let arrKM = listHospitalSortRanking.map((item) => {
+      return (
+         {
+            address: item.address,
+            hotline: item.hotline,
+            id: item.id,
+            image: item.image,
+            latitude: item.latitude,
+            location_id: item.location_id,
+            longitude: item.longitude,
+            name: item.name,
+            ranking: item.ranking,
+            km: getDistance(
+               location,
+               {
+                  latitude: parseFloat(item.latitude.replace(",", ".")),
+                  longitude: parseFloat(item.longitude.replace(",", "."))
+               }
+            )
+         }
+      )
+   })
+
+   const listHospitalSortRankingAndDirection = useMemo(() => {
+      return (
+         arrKM.sort((a, b) => {
+            return a.km - b.km
+         })
+      )
+   }, [listHospitalSortRanking, arrKM])
+
+   console.log("listHospitalSortRankingAnd:", listHospitalSortRankingAndDirection);
+   console.log("arrKM:", arrKM);
+
+
    return (
       <View style={StylesTestCancerDetail.container}>
          <View style={StylesTestCancerDetail.header}>
@@ -109,7 +155,7 @@ export default function TestCancer() {
                      keyExtractor={item => item.id.toString()}
                      renderItem={({ item }) => {
                         return (
-                           <View style={StylesTestCancerDetail.inforDoctor}>
+                           <TouchableOpacity style={StylesTestCancerDetail.inforDoctor} onPress={() => handleDoctorDetail(item)}>
                               <Image style={StylesTestCancerDetail.iamgeAvatar} source={{ uri: `http://${URL_SEVER}:433/${item.image}` }} />
                               <View style={StylesTestCancerDetail.viewInfor}>
                                  <Text style={StylesTestCancerDetail.textNameDoctor}>{`Ths ${item.fullname}`}</Text>
@@ -118,24 +164,32 @@ export default function TestCancer() {
                                     <Text style={[StylesTestCancerDetail.textNameDoctor, { color: "#ffff", marginTop: 0 }]}>Liên hệ bác sĩ</Text>
                                  </TouchableOpacity>
                               </View>
-                           </View>
+                           </TouchableOpacity>
                         )
                      }}
                   />
                   <Text style={StylesTestCancerDetail.textDoc}>Những bệnh viện liên quan:</Text>
                   <View style={StylesTestCancerDetail.ViewHospital}>
                      <FlatList
-                        data={listHospitalSort}
+                        data={listHospitalSortRankingAndDirection}
                         keyExtractor={item => item.id.toString()}
+                        contentContainerStyle={{ paddingBottom: 10 }}
                         renderItem={({ item }) => {
                            return (
                               <TouchableOpacity style={StylesTestCancerDetail.HospitalView} onPress={() => handleHospitalDetail(item)}>
+                                 {
+                                    item.ranking === "1" && <Image style={StylesTestCancerDetail.ranking} source={require("../Assets/Image/top1.png")} />
+                                 }
                                  <View style={StylesTestCancerDetail.listHospital}>
                                     <Image style={StylesTestCancerDetail.imageHospital} source={{ uri: `http://${URL_SEVER}:433/${item.image}` }} />
                                     <View style={StylesTestCancerDetail.viewInforHos}>
                                        <Text style={StylesTestCancerDetail.textNameHos}>{item.name}</Text>
-                                       <Text style={StylesTestCancerDetail.textotLine}>Liên hệ:</Text>
-                                       <Text style={StylesTestCancerDetail.textPhone}>{item.hotline}</Text>
+                                       <View style={StylesTestCancerDetail.formContact}>
+                                          <View style={StylesTestCancerDetail.contactForm}>
+                                             <Text style={StylesTestCancerDetail.textotLine}>Liên hệ:</Text>
+                                             <Text style={StylesTestCancerDetail.textPhone}>{item.hotline}</Text>
+                                          </View>
+                                       </View>
                                     </View>
                                  </View>
                                  <View style={StylesTestCancerDetail.viewAdd}>
@@ -154,6 +208,11 @@ export default function TestCancer() {
             isShowModalHospital={isShowModalHospital}
             hospitalDetail={dataHospitalDetail}
             handleHideModalHospital={handleHideModalHospital}
+         />
+         <ModalDoctorDetail
+            doctorDetail={dataDoctorDetail}
+            isShowModalDetailDoctor={isShowModalDoctor}
+            handleHideModalDocdorDetail={handleHideModalDocdorDetail}
          />
       </View>
    )

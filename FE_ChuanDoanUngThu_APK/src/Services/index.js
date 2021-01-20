@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { URL_SEVER } from '../Contants'
 const BASE_URL = `http://${URL_SEVER}:433/intelcons-api/v1/user/`;
-const BASE_URLAI = `http://${URL_SEVER}:8080/api`;
+//const BASE_URLAI = `http://${URL_SEVER}:8080/api`;
+const BASE_URLAI = `http://${URL_SEVER}:8000/api`;
 const BASE_URL_DOCTOR = `http://${URL_SEVER}:433/intelcons-api/v1/doctor/`
 const BASE_URL_HOSPITAL = `http://${URL_SEVER}:433/intelcons-api/v1/hospital/`
 const BASE_URL_HISTORY = `http://${URL_SEVER}:433/intelcons-api/v1/predict_record/`
@@ -21,8 +22,7 @@ const api = {
       return axios.create({
          baseURL: BASE_URLAI,
          headers: {
-            "Accept": "application/json",
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json',
          }
       })
    },

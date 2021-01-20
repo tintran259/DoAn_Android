@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import { View, Text, StatusBar, ScrollView, TouchableOpacity, Image } from 'react-native'
-import { StylesProfile } from '../Assets/Style/ProfileStyle'
-import IconEntyno from 'react-native-vector-icons/Entypo'
-import IconAntd from 'react-native-vector-icons/AntDesign'
-import Modal from 'react-native-modal'
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { TextInput } from 'react-native-gesture-handler'
 import { useSelector, useDispatch } from 'react-redux'
-import { logout } from '../Store/User/action'
 import Communications from 'react-native-communications';
+
+//Style + Icon
+import { StylesProfile } from '../Assets/Style/ProfileStyle'
+import IconAntd from 'react-native-vector-icons/AntDesign'
+
+//Action + component
+import { logout } from '../Store/User/action'
 
 export default function ProfileScreen() {
    const dispatch = useDispatch()
@@ -16,15 +17,21 @@ export default function ProfileScreen() {
    const dataUser = useSelector(state => state.User.dataUser);
    console.log("dataUser Profile:", dataUser);
 
+   //Navigation
    const moveEditProfile = () => {
       navigation.navigate('EditProfile')
    }
    const moveChangePassword = () => {
       navigation.navigate('ChangePass')
    }
+
+
+
    const handleLogout = () => {
       dispatch(logout())
    }
+
+   //Contact
    const callHotLine = () => {
       Communications.phonecall('0392340756', true)
    }

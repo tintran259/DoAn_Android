@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import Modal from 'react-native-modal'
-import { StylesModalHospital } from '../../Assets/Style/HomeStyle'
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import IconFont from 'react-native-vector-icons/FontAwesome5'
+import Communications from 'react-native-communications';
 import Geolocation from '@react-native-community/geolocation';
 import getDirections from 'react-native-google-maps-directions'
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+
+
+import { StylesModalHospital } from '../../Assets/Style/HomeStyle'
+import IconFont from 'react-native-vector-icons/FontAwesome5'
+import IconFeather from 'react-native-vector-icons/Feather'
 
 export default function ModalHospitalDetail({
    isShowModalHospital,
@@ -64,10 +68,15 @@ export default function ModalHospitalDetail({
       getDirections(data)
       handleHideModalHospital()
    }
+
+   const handleCallHospital = () => {
+      Communications.phonecall(hospitalDetail.hotline, true)
+   }
    return (
       <Modal
          isVisible={isShowModalHospital}
          onBackdropPress={handleHideModalHospital}
+         backdropOpacity={0.6}
       >
          <View style={StylesModalHospital.ModalHospital}>
             <View style={StylesModalHospital.viewMap}>
@@ -87,13 +96,17 @@ export default function ModalHospitalDetail({
                         longitude: hospitalDetail.latitude && parseFloat(hospitalDetail.longitude.replace(",", ".")),
                      }}
                      title="Hospital"
-
                   />
                </MapView>
             </View>
             <View style={StylesModalHospital.BtnMap}>
                <TouchableOpacity style={StylesModalHospital.btnMaps} onPress={handleGetDirections}>
                   <IconFont name="location-arrow" size={18} color="#fff" />
+               </TouchableOpacity>
+            </View>
+            <View style={StylesModalHospital.BtnCall}>
+               <TouchableOpacity style={StylesModalHospital.btnCalls} onPress={handleCallHospital}>
+                  <IconFeather name="phone-call" size={18} color="#fff" />
                </TouchableOpacity>
             </View>
             <View style={StylesModalHospital.viewConent}>
