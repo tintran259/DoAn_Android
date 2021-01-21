@@ -5,7 +5,7 @@ import StackHome from '../Stack/StackHome'
 import StackNewFeed from '../Stack/StackNewFeed'
 import StackProfile from '../Stack/StackProfile'
 import IconAntd from 'react-native-vector-icons/AntDesign'
-import IconFont from 'react-native-vector-icons/FontAwesome5'
+import IconFont from 'react-native-vector-icons/FontAwesome'
 import StackTestCancer from '../Stack/StackTestCancer'
 import IconIon from 'react-native-vector-icons/Ionicons'
 const Tab = createBottomTabNavigator();

@@ -10,10 +10,11 @@ const StylesModalHospital = StyleSheet.create({
    },
    viewMap: {
       width: "100%",
-      height: 200,
+      height: 350,
       backgroundColor: "red",
       borderTopLeftRadius: 10,
-      borderTopRightRadius: 10
+      borderTopRightRadius: 10,
+      marginTop: 10
    },
    titleName: {
       fontWeight: "bold",
@@ -37,14 +38,14 @@ const StylesModalHospital = StyleSheet.create({
    BtnMap: {
       position: "absolute",
       right: "18%",
-      top: "-7%",
+      top: "2%",
       width: 40,
       height: 40,
    },
    BtnCall: {
       position: "absolute",
       right: "3%",
-      top: "-7%",
+      top: "2%",
       width: 40,
       height: 40,
    },

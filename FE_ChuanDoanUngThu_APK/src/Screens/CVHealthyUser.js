@@ -10,8 +10,12 @@ import IconAntd from 'react-native-vector-icons/AntDesign'
 
 //Action
 import { asyncEditInforUser, EditInforSuccessed } from '../Store/User/action'
-import { asyncGetListHistoryUser, actGetListHistoryDetail } from '../Store/History/action'
-
+import {
+   asyncGetListHistoryUser,
+   actGetListHistoryDetail,
+   asyncGetListDoctorFlowPredictId,
+   asyncGetListHospitalFlowPredictId
+} from '../Store/History/action'
 //Format
 import getDateByTimeZoneDay from '../Contants/FORMAT_DATE'
 

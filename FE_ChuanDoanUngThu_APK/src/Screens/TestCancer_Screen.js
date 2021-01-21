@@ -11,7 +11,7 @@ import { ICD } from '../mock'
 import { useNavigation } from '@react-navigation/native'
 import Modal from 'react-native-modal'
 import getDateByTimeZoneDay from '../Contants/FORMAT_DATE'
-import { asyncPostTestHistory } from '../Store/History/action'
+import { asyncPostTestHistory, asyncGetListDoctorHistory, asyncGetListHospitalHistory } from '../Store/History/action'
 
 
 export default function TestCancerScreen() {
@@ -29,7 +29,12 @@ export default function TestCancerScreen() {
    const [isShowModalFailQR, setIsShowModalFailQR] = useState(false)
    const dataUser = useSelector(state => state.User.dataUser)
    const result = useSelector(state => state.Result.ResultTest)
-
+   const listDoctor = useSelector(state => state.Doctor.listDoctor)
+   const listHospital = useSelector(state => state.Hospital.listHospital)
+   const locationNow = useSelector(state => state.Location.locationNow)
+   console.log("listDoctor:", listDoctor);
+   console.log("listHospital:", listHospital);
+   console.log("locationNow:", locationNow);
    const [formTestCancer, setFormTestCancer] = useState({
       baso: "",
       eos: "",
@@ -58,6 +63,8 @@ export default function TestCancerScreen() {
    console.log("formTestCancer:", formTestCancer.timestamp);
    console.log("formTestCancer:", formTestCancer);
    console.log("result:", result);
+
+
    const ShowResult = useMemo(() => {
       if (result !== null) {
          const data = ICD.filter((item) => {
@@ -67,6 +74,23 @@ export default function TestCancerScreen() {
       }
       return [{ Desc: "" }]
    }, [result])
+
+   const ListDoctorSortLocation = useMemo(() => {
+      return listDoctor.filter((item) => {
+         return item.location_id === locationNow.id
+      })
+   }, [listDoctor, locationNow])
+
+   const ListHostPitalSortLocation = useMemo(() => {
+      return listHospital.filter((item) => {
+         return item.location_id === locationNow.id
+      })
+   }, [listHospital, locationNow])
+
+   console.log("ListDoctorSortLocation:", ListDoctorSortLocation);
+   console.log("ListHostPitalSortLocation:", ListHostPitalSortLocation);
+
+
    const validate = () => {
       if (formTestCancer.baso === "" ||
          formTestCancer.eos === "" ||
@@ -111,7 +135,32 @@ export default function TestCancerScreen() {
             if (res.ok) {
                setIsShowModalResult(true)
                dispatch(actGetFormTest(formTestCancer))
-               dispatch(asyncPostTestHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, doctorId, hospitalId, timestamp, testResult }))
+
+
+               // Post Test History into Profile History
+
+               dispatch(asyncPostTestHistory({ baso, eos, hct, hgb, lym, mch, mchc, mcv, mono, mpv, neu, pct, pdw, plt, rbc, rdw, tpttbm, wbc, userId, timestamp, testResult }))
+                  .then((res) => {
+                     if (res.ok) {
+                        const predictId = res.data;
+                        console.log("predictId:", predictId);
+                        ListDoctorSortLocation && ListDoctorSortLocation.map((item) => {
+                           const doctorId = item.id
+                           return (
+                              dispatch(asyncGetListDoctorHistory({ predictId, doctorId }))
+                           )
+                        })
+                        ListHostPitalSortLocation.map((item) => {
+                           const hospitalId = item.id
+                           return (
+                              dispatch(asyncGetListHospitalHistory({ predictId, hospitalId }))
+                           )
+                        })
+                     }
+                  })
+
+
+               //====================================
                setFormTestCancer({
                   ...formTestCancer,
                   baso: "",
@@ -256,7 +305,7 @@ export default function TestCancerScreen() {
                      <Text style={StylesTestCancer.textRe}>{ShowResult && ShowResult[0].Desc}</Text>
                      <Text style={StylesTestCancer.textUseful}>Hãy đến các bệnh viện để chuẩn đoán chính xác hơn. </Text>
                   </View>
-                  <Image style={StylesTestCancer.iamgeModal} source={{ uri: "https://freepngimg.com/thumb/hammer/80451-physician-product-khan-attock-ismail-urdu-dera.png" }} />
+                  <Image style={StylesTestCancer.iamgeModal} source={require("../Assets/Image/dera.png")} />
                </View>
                <View style={StylesTestCancer.ViewBtn}>
                   <TouchableOpacity style={StylesTestCancer.btn} onPress={handleHideModal}>

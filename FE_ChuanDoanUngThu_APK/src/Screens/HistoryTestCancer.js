@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,32 +13,62 @@ import IconAntd from 'react-native-vector-icons/AntDesign'
 import { ICD } from '../mock'
 import { URL_SEVER } from '../Contants'
 
+//Action + Components
+import { asyncGetListHospitalFlowPredictId, asyncGetListDoctorFlowPredictId } from '../Store/History/action'
+import { FlatList } from 'react-native-gesture-handler';
+import { ModalDoctorDetail, ModalHospitalDetail } from '../Components/HomeScreen'
+
 export default function HistoryTestCancer() {
+   const dispatch = useDispatch()
    const navigation = useNavigation()
    const itemDetail = useSelector(state => state.History.itemHistory)
-   const listDoctor = useSelector(state => state.Doctor.listDoctor)
-   const listHospital = useSelector(state => state.Hospital.listHospital)
+   const [listDoctor, setListDoctor] = useState([])
+   const [listHospital, setListHospital] = useState([])
+   const [doctorDetail, setDoctordetail] = useState({})
+   const [hospitalDetail, setHospitaldetail] = useState({})
+   const [isShowModalDoctor, setIsShowModalDoctor] = useState(false)
+   const [isShowModalHospital, setIsShowModalHospital] = useState(false)
+   useEffect(() => {
+      const predictId = itemDetail.id
+      dispatch(asyncGetListHospitalFlowPredictId({ predictId }))
+         .then((res) => {
+            if (res.ok) {
+               const listHospital = res.data
+               setListHospital(listHospital)
+            }
+         })
+      dispatch(asyncGetListDoctorFlowPredictId({ predictId }))
+         .then((res) => {
+            if (res.ok) {
+               const listDoctor = res.data
+               setListDoctor(listDoctor)
+            }
+         })
+   }, [])
    console.log("itemDetail:", itemDetail);
-
-
+   console.log("listDoctor:", listDoctor);
+   console.log("listHospital:", listHospital);
    //Navigation
    const handleBack = () => {
       navigation.goBack()
    }
 
+   const handleDoctorDetail = (item) => {
+      setDoctordetail(item)
+      setIsShowModalDoctor(true)
+   }
+   const handleHideModalDocdorDetail = () => {
+      setIsShowModalDoctor(false)
+   }
 
+   const handleHospitalDetail = (item) => {
+      setHospitaldetail(item)
+      setIsShowModalHospital(true)
+   }
+   const handleHideModalHospitalDetail = () => {
+      setIsShowModalHospital(false)
+   }
 
-
-   //Controller ::: SortItemDoctor :::: ID
-   const inforDoctor = useMemo(() => {
-      if (listDoctor) {
-         return listDoctor.filter((item) => {
-            return item.id === itemDetail.doctor_id
-         })
-      } else {
-         return null
-      }
-   }, [itemDetail, listDoctor])
 
    //Sort Result WITH DATA ICD
    const ShowResult = useMemo(() => {
@@ -50,7 +80,6 @@ export default function HistoryTestCancer() {
       }
       return [{ Desc: "" }]
    }, [itemDetail.predict])
-   console.log("inforDoctor:", inforDoctor);
    console.log("ShowResult:", ShowResult);
 
    //Contact
@@ -261,32 +290,50 @@ export default function HistoryTestCancer() {
                <View style={StylesHisToryScreen.cardHis}>
                   <Text style={StylesHisToryScreen.textHis}>"{ShowResult[0].Desc}"</Text>
                </View>
-               <Text style={StylesHisToryScreen.titleBS}>Bác sĩ bạn đã tư vấn</Text>
-               <View style={StylesHisToryScreen.cardDoctor}>
-                  <View style={StylesHisToryScreen.headerCard}>
-                     <Image style={StylesHisToryScreen.avatarBS} source={{ uri: `http://${URL_SEVER}:433${inforDoctor[0].image}` }} />
-                     <View>
-                        <View style={StylesHisToryScreen.itemText}>
-                           <Text style={StylesHisToryScreen.titleNmae}>Ths.</Text>
-                           <Text style={StylesTestCancerDetail.labelNmae}>{inforDoctor && inforDoctor[0].fullname}</Text>
-                        </View>
-                        <View style={StylesHisToryScreen.itemText}>
-                           <Text style={StylesHisToryScreen.titleNmae}>Chuyên khoa:</Text>
-                           <Text style={StylesTestCancerDetail.labelNmae}>{inforDoctor && inforDoctor[0].department}</Text>
-                        </View>
-                        <View style={StylesHisToryScreen.itemText}>
-                           <Text style={StylesHisToryScreen.titleNmae}>Địa chỉ:<Text style={StylesTestCancerDetail.labelNmae}>{inforDoctor && inforDoctor[0].address}</Text></Text>
-                        </View>
-                     </View>
-                  </View>
-                  <View style={StylesHisToryScreen.bottom}>
-                     <TouchableOpacity style={StylesHisToryScreen.btnContact} onPress={handleContact}>
-                        <Text style={StylesHisToryScreen.textContact}>Liên hệ lại</Text>
-                     </TouchableOpacity>
-                  </View>
-               </View>
+               <Text style={StylesHisToryScreen.titleBS}>Danh sách bác sĩ chuyên môn: </Text>
+               <FlatList
+                  data={listDoctor}
+                  renderItem={({ item }) => {
+                     return (
+                        <TouchableOpacity style={StylesHisToryScreen.cardDoctor} onPress={() => handleDoctorDetail(item)}>
+                           <View style={StylesHisToryScreen.headerCard}>
+                              <Image style={StylesHisToryScreen.avatarBS} source={{ uri: `http://${URL_SEVER}:433${item.image}` }} />
+                              <View>
+                                 <View style={StylesHisToryScreen.itemText}>
+                                    <Text style={StylesHisToryScreen.titleNmae}>Ths.</Text>
+                                    <Text style={StylesTestCancerDetail.labelNmae}>{item.fullname}</Text>
+                                 </View>
+                                 <View style={StylesHisToryScreen.itemText}>
+                                    <Text style={StylesHisToryScreen.titleNmae}>Chuyên khoa:</Text>
+                                    <Text style={StylesTestCancerDetail.labelNmae}>{item.department}</Text>
+                                 </View>
+                                 <View style={StylesHisToryScreen.itemText}>
+                                    <Text style={StylesHisToryScreen.titleNmae}>Địa chỉ:<Text style={StylesTestCancerDetail.labelNmae}>{item.address}</Text></Text>
+                                 </View>
+                              </View>
+                           </View>
+                           <View style={StylesHisToryScreen.bottom}>
+                              <TouchableOpacity style={StylesHisToryScreen.btnContact} onPress={handleContact}>
+                                 <Text style={StylesHisToryScreen.textContact}>Liên hệ lại</Text>
+                              </TouchableOpacity>
+                           </View>
+                        </TouchableOpacity>
+                     )
+                  }}
+
+               />
             </View>
          </ScrollView>
+         <ModalDoctorDetail
+            doctorDetail={doctorDetail}
+            isShowModalDetailDoctor={isShowModalDoctor}
+            handleHideModalDocdorDetail={handleHideModalDocdorDetail}
+         />
+         {/* <ModalHospitalDetail
+            isShowModalHospital={isShowModalHospital}
+            hospitalDetail={hospitalDetail}
+            handleHideModalHospital={handleHideModalHospital}
+         /> */}
       </View>
 
    )
