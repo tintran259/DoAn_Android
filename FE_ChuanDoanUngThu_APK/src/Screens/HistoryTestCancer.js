@@ -3,6 +3,8 @@ import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import Communications from 'react-native-communications';
+import { StylesHomeScreen } from '../Assets/Style/HomeStyle'
+import { StylesListDoctor } from '../Assets/Style/HomeStyle'
 
 //Style+Icon
 import { StylesTestCancerDetail } from '../Assets/Style/TestCancerDetail/'
@@ -17,6 +19,7 @@ import { URL_SEVER } from '../Contants'
 import { asyncGetListHospitalFlowPredictId, asyncGetListDoctorFlowPredictId } from '../Store/History/action'
 import { FlatList } from 'react-native-gesture-handler';
 import { ModalDoctorDetail, ModalHospitalDetail } from '../Components/HomeScreen'
+import { ListDoctor } from '../Components/HomeScreen'
 
 export default function HistoryTestCancer() {
    const dispatch = useDispatch()
@@ -290,39 +293,62 @@ export default function HistoryTestCancer() {
                <View style={StylesHisToryScreen.cardHis}>
                   <Text style={StylesHisToryScreen.textHis}>"{ShowResult[0].Desc}"</Text>
                </View>
-               <Text style={StylesHisToryScreen.titleBS}>Danh sách bác sĩ chuyên môn: </Text>
+               <Text style={StylesHisToryScreen.titleBS}>Danh sách bác sĩ chuyên khoa: </Text>
+               {/* <View style={[StylesHomeScreen.ViewDoctor, { height: 300, marginTop: 20, paddingLeft: 0 }]} > */}
                <FlatList
+                  style={{ width: "100%", height: 320 }}
+                  horizontal
                   data={listDoctor}
+                  keyExtractor={item => item.name}
+                  contentContainerStyle={{ paddingBottom: 10 }}
                   renderItem={({ item }) => {
                      return (
-                        <TouchableOpacity style={StylesHisToryScreen.cardDoctor} onPress={() => handleDoctorDetail(item)}>
-                           <View style={StylesHisToryScreen.headerCard}>
-                              <Image style={StylesHisToryScreen.avatarBS} source={{ uri: `http://${URL_SEVER}:433${item.image}` }} />
-                              <View>
-                                 <View style={StylesHisToryScreen.itemText}>
-                                    <Text style={StylesHisToryScreen.titleNmae}>Ths.</Text>
-                                    <Text style={StylesTestCancerDetail.labelNmae}>{item.fullname}</Text>
-                                 </View>
-                                 <View style={StylesHisToryScreen.itemText}>
-                                    <Text style={StylesHisToryScreen.titleNmae}>Chuyên khoa:</Text>
-                                    <Text style={StylesTestCancerDetail.labelNmae}>{item.department}</Text>
-                                 </View>
-                                 <View style={StylesHisToryScreen.itemText}>
-                                    <Text style={StylesHisToryScreen.titleNmae}>Địa chỉ:<Text style={StylesTestCancerDetail.labelNmae}>{item.address}</Text></Text>
-                                 </View>
+                        <TouchableOpacity onPress={() => handleDoctorDetail(item)}>
+                           <View style={[StylesListDoctor.listDoctor]}>
+                              <View style={StylesListDoctor.cardDoctor}>
+                                 <Image resizeMode="cover" style={StylesListDoctor.avatarDoctor} source={{ uri: `http://${URL_SEVER}:433${item.image}` }} />
+                                 <Text style={StylesListDoctor.naemDoctor}>Bs. {item.fullname}</Text>
+                                 <Text style={StylesListDoctor.optionDoctor}>{item.department}</Text>
+                                 <TouchableOpacity style={StylesListDoctor.btnTuVan} onPress={
+                                    () => Communications.phonecall(item.phone, true)
+                                 }>
+                                    <Text style={StylesListDoctor.textBtnDoctor}>Tư vấn với bác sĩ</Text>
+                                 </TouchableOpacity>
                               </View>
-                           </View>
-                           <View style={StylesHisToryScreen.bottom}>
-                              <TouchableOpacity style={StylesHisToryScreen.btnContact} onPress={handleContact}>
-                                 <Text style={StylesHisToryScreen.textContact}>Liên hệ lại</Text>
-                              </TouchableOpacity>
                            </View>
                         </TouchableOpacity>
                      )
                   }}
-
+               />
+               {/* </View> */}
+               <Text style={StylesHisToryScreen.titleBS}>Danh sách bệnh viện chuyên khoa: </Text>
+               <FlatList
+                  data={listHospital}
+                  keyExtractor={item => item}
+                  contentContainerStyle={{ paddingBottom: 100 }}
+                  renderItem={({ item }) => {
+                     return (
+                        <View style={[StylesHomeScreen.ViewHoispital]}>
+                           <TouchableOpacity style={StylesHomeScreen.ViewBackgroud} onPress={() => handleHospitalDetail(item)}>
+                              <Image resizeMode="cover" style={StylesHomeScreen.imageHos} source={{ uri: `http://${URL_SEVER}:433/${item.image}` }} />
+                           </TouchableOpacity>
+                           <TouchableOpacity style={StylesHomeScreen.ViewContent} onPress={() => handleHospitalDetail(item)}>
+                              <Text style={StylesHomeScreen.titleTextHospital}>{item.name}</Text>
+                              <View style={StylesHomeScreen.itemTextHos}>
+                                 <Text style={StylesHomeScreen.titleHos}>Hotline:</Text>
+                                 <Text>{item.hotline}</Text>
+                              </View>
+                              <View style={StylesHomeScreen.itemTextHos}>
+                                 <Text style={StylesHomeScreen.titleHos}>Địa chỉ:</Text>
+                                 <Text numberOfLines={3}>{item.address}</Text>
+                              </View>
+                           </TouchableOpacity>
+                        </View>
+                     )
+                  }}
                />
             </View>
+            <Text style={StylesHisToryScreen.titleBS}>Danh sách bệnh viện chuyên khoa: </Text>
          </ScrollView>
          <ModalDoctorDetail
             doctorDetail={doctorDetail}

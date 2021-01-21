@@ -295,7 +295,7 @@ export default function TestCancerScreen() {
          }
          <Modal
             isVisible={isShowModalResult}
-            animationOutTiming={1000}
+            animationOutTiming={500}
          >
             <View style={StylesTestCancer.ViewModal}>
                <Text style={StylesTestCancer.titleHeaderModal}>Kết Quả</Text>

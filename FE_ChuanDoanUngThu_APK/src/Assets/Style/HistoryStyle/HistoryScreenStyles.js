@@ -64,13 +64,12 @@ const StylesHisToryScreen = StyleSheet.create({
    },
    viewTest: {
       width: "100%",
-      // height: 500
-      height: 600
    },
    titleBS: {
       fontWeight: "bold",
       fontSize: 19,
-      color: "#2d3436"
+      color: "#2d3436",
+      marginBottom: 20
    },
    cardDoctor: {
       width: "100%",
@@ -123,7 +122,7 @@ const StylesHisToryScreen = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       borderRadius: 10,
-      borderWidth: 1,
+      borderWidth: 3,
       marginTop: 10,
       marginBottom: 10,
       borderColor: "#00cec9"

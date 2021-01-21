@@ -166,18 +166,18 @@ const StylesTestCanCerDetail = StyleSheet.create({
       marginTop: 10,
       width: "100%",
       padding: 10,
-      borderWidth: 1,
+      borderWidth: 3,
       borderColor: "#00cec9",
       borderRadius: 10,
       shadowColor: "#000",
    },
    textCancer: {
       color: "#2d3436",
-      fontSize: 16
+      fontSize: 16,
+      textAlign: "center"
    },
    inforDoctor: {
       width: 160,
-      height: 230,
       marginTop: 10,
       backgroundColor: "#fff",
       borderRadius: 10,
@@ -212,7 +212,7 @@ const StylesTestCanCerDetail = StyleSheet.create({
    },
    btnContact: {
       position: "absolute",
-      top: 75,
+      bottom: "45%",
       left: "6%",
       width: "90%",
       height: 35,
@@ -223,7 +223,6 @@ const StylesTestCanCerDetail = StyleSheet.create({
    },
    ViewHospital: {
       width: "100%",
-      marginTop: 20
    },
    imageHospital: {
       width: "50%",
@@ -289,7 +288,23 @@ const StylesTestCanCerDetail = StyleSheet.create({
    titleHospital: {
       fontWeight: "bold",
       fontSize: 18,
-      width: "100%"
+      width: "100%",
+      color: "#2d3436"
+   },
+   TabViewHeader: {
+      width: "100%",
+      marginTop: 15,
+      flexDirection: "row",
+      marginBottom: 10
+   },
+   titleTab: {
+      fontWeight: "bold",
+      fontSize: 14,
+      color: "#000"
+   },
+   btnNaer: {
+      marginRight: 10,
+      height: 40,
    }
 })
 

@@ -6,6 +6,7 @@ import StackNewFeed from '../Stack/StackNewFeed'
 import StackProfile from '../Stack/StackProfile'
 import IconAntd from 'react-native-vector-icons/AntDesign'
 import IconFont from 'react-native-vector-icons/FontAwesome'
+import IconFont5 from 'react-native-vector-icons/FontAwesome5'
 import StackTestCancer from '../Stack/StackTestCancer'
 import IconIon from 'react-native-vector-icons/Ionicons'
 const Tab = createBottomTabNavigator();
@@ -56,7 +57,7 @@ export default function TabApp() {
             options={{
                tabBarLabel: 'Tư vấn',
                tabBarIcon: ({ color, size }) => (
-                  <IconFont name="clipboard-list" color={color} size={20} />
+                  <IconFont5 name="clipboard-list" color={color} size={20} />
                ),
             }}
          />
